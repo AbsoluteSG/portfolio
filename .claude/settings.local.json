@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r /z/Programming/NextJS/portfolio-temp/* /z/Programming/NextJS/Portfolio/)",
+      "Bash(cp -r /z/Programming/NextJS/portfolio-temp/.* /z/Programming/NextJS/Portfolio/)",
+      "Bash(rm -rf /z/Programming/NextJS/portfolio-temp)",
+      "Bash(npm install @next/mdx @mdx-js/mdx @mdx-js/react gray-matter reading-time)",
+      "Bash(npm install -D @types/mdx prettier prettier-plugin-tailwindcss)"
+    ]
+  }
+}
