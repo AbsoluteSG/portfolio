@@ -33,15 +33,16 @@ export const projects: Project[] = [
   },
   {
     id: "vrox",
-    title: "Vrox — Server-Authoritative Shooter",
+    title: "Vrox",
     description:
-      "A multiplayer prototype where the server owns all state: clients send intent at 20 Hz and render server truth. Projectiles are written once and positioned analytically, so a bullet costs one insert and one delete.",
+      "A server-authoritative bullet-hell MMO prototype on SpacetimeDB + Unity. Clients send intent at 20 Hz and render server truth; projectiles are written once and positioned analytically, so a bullet costs one insert and one delete.",
     longDescription:
-      "Vrox is a deliberately small multiplayer shooter built on SpacetimeDB and Unity. The server is authoritative with no client prediction — what you see is the truth. A shot's row is written once and never updated; its position is a function of time (origin + dir · speed · t) evaluated independently by every client. Rate of fire is enforced server-side. Bullet patterns (spread, ring, parallel, helix) compose with spin and wave modifiers derived from spawn timestamps, so they need no per-player state and survive disconnects.",
-    image: "/assets/projects/vrox.png",
+      "Started as the smallest thing that could be played — a player that moves and shoots, on a server — and grew into ~7,900 lines of C# server module: seeded realm generation with a reachability check, biomes, enemies with phases, loot pools and bag tiers, backpack and vault, character slots. Every layer was played before the next was added; the rules that came out of it are in the repo's CLAUDE.md.",
+    image: "/assets/projects/vrox.jpg",
     tags: ["C#", "Unity", "SpacetimeDB", "Multiplayer", "Netcode"],
     category: "game",
     github: "https://github.com/AbsoluteSG/vrox",
+    page: "/projects/vrox",
     featured: false,
   },
   {

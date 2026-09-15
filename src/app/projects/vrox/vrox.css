@@ -1,0 +1,69 @@
+/* Vrox — pixel-art page, RotMG-inspired. Self-contained. */
+.vx-root {
+  --vx-bg: #0a0a0c;
+  --vx-panel: #1c1c22;
+  --vx-panel-2: #26262e;
+  --vx-edge: #3a3a46;
+  --vx-edge-hi: #55556a;
+  --vx-text: #e8e6df;
+  --vx-dim: #a09f98;
+  --vx-gold: #f8d84a;
+  --vx-red: #e34234;
+  --vx-blue: #4f8cff;
+  --vx-green: #35d461;
+  --vx-purple: #b06cff;
+  font-family: var(--font-vx-body), "Courier New", monospace;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--vx-text);
+  background: var(--vx-bg);
+  color-scheme: dark;
+  image-rendering: pixelated;
+}
+.vx-pixel { font-family: var(--font-vx-pixel), monospace; line-height: 1.6; }
+.vx-body { font-family: var(--font-vx-body), monospace; }
+
+/* Bevelled panel like the game's UI frames. */
+.vx-panel {
+  background: var(--vx-panel);
+  border: 3px solid var(--vx-edge);
+  box-shadow: inset 2px 2px 0 var(--vx-edge-hi), inset -2px -2px 0 #0e0e12, 0 0 0 1px #000;
+}
+.vx-panel-gold { border-color: #8a7420; box-shadow: inset 2px 2px 0 #d9bb35, inset -2px -2px 0 #4a3e10, 0 0 0 1px #000; }
+
+.vx-eyebrow { font-family: var(--font-vx-pixel), monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--vx-gold); }
+
+.vx-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-vx-pixel), monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.85rem 1.1rem; background: var(--vx-panel-2); color: var(--vx-text); border: 3px solid var(--vx-edge);
+  box-shadow: inset 2px 2px 0 var(--vx-edge-hi), inset -2px -2px 0 #0e0e12; cursor: pointer;
+}
+.vx-btn:hover { background: #30303a; }
+.vx-btn:active, .vx-btn[aria-pressed="true"] { box-shadow: inset -2px -2px 0 var(--vx-edge-hi), inset 2px 2px 0 #0e0e12; background: #17171c; color: var(--vx-gold); }
+.vx-btn-gold { background: var(--vx-gold); color: #1a1400; border-color: #8a7420; box-shadow: inset 2px 2px 0 #fff2a8, inset -2px -2px 0 #9c8a2a; }
+.vx-btn-gold:hover { background: #ffe66a; }
+
+/* Stat bar like HP/MP */
+.vx-bar { position: relative; height: 18px; background: #101014; border: 2px solid var(--vx-edge); }
+.vx-bar > i { position: absolute; inset: 0; width: var(--w); }
+.vx-bar > span { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-vx-pixel), monospace; font-size: 0.5rem; color: #fff; text-shadow: 1px 1px 0 #000; }
+
+/* Canvas hero */
+.vx-stage { position: relative; background: #000; border: 3px solid var(--vx-edge); box-shadow: 0 0 0 1px #000; }
+.vx-stage canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* Diagonal hatch background, like a dungeon floor edge */
+.vx-hatch {
+  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 12px);
+}
+
+.vx-kbd { display: inline-block; padding: 0.1rem 0.45rem; border: 2px solid var(--vx-edge); background: #101014; font-family: var(--font-vx-pixel), monospace; font-size: 0.55rem; color: var(--vx-text); }
+
+.vx-table { width: 100%; border-collapse: collapse; }
+.vx-table th, .vx-table td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 2px solid #111; vertical-align: top; }
+.vx-table th { font-family: var(--font-vx-pixel), monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--vx-gold); }
+.vx-table td:first-child { color: var(--vx-blue); white-space: nowrap; }
+
+blockquote.vx-quote { border-left: 4px solid var(--vx-gold); padding-left: 1rem; }
+blockquote.vx-quote small { display: block; margin-top: 0.4rem; font-family: var(--font-vx-pixel), monospace; font-size: 0.5rem; color: var(--vx-dim); text-transform: uppercase; }
