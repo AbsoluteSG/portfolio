@@ -1,0 +1,92 @@
+/* No Dogs Allowed landing page — self-contained, independent of the portfolio theme. */
+.nda-root {
+  --nda-navy: #121a33;
+  --nda-navy-2: #1b2547;
+  --nda-navy-3: #26325e;
+  --nda-gold: #f5b400;
+  --nda-gold-2: #ffd766;
+  --nda-red: #d8322f;
+  --nda-cream: #f4e9d2;
+  --nda-cream-dim: rgba(244, 233, 210, 0.72);
+  --nda-teal: #3aa7c9;
+  --nda-green: #7cbf5a;
+  font-family: var(--font-nda-body), ui-rounded, system-ui, sans-serif;
+  color: var(--nda-cream);
+  background: var(--nda-navy);
+  color-scheme: dark;
+}
+.nda-display {
+  font-family: var(--font-nda-display), "Trebuchet MS", sans-serif;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.nda-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-nda-display), sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nda-gold);
+}
+.nda-eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 3px;
+  background: var(--nda-gold);
+  border-radius: 2px;
+}
+.nda-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.9rem 1.6rem;
+  font-family: var(--font-nda-display), sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  border: 2px solid transparent;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+.nda-btn:hover { transform: translateY(-2px); }
+.nda-btn-gold { background: var(--nda-gold); color: var(--nda-navy); box-shadow: 0 10px 30px -10px rgba(245, 180, 0, 0.7); }
+.nda-btn-gold:hover { background: var(--nda-gold-2); }
+.nda-btn-ghost { border-color: rgba(244, 233, 210, 0.35); color: var(--nda-cream); }
+.nda-btn-ghost:hover { border-color: var(--nda-cream); background: rgba(244, 233, 210, 0.06); }
+
+.nda-card {
+  background: var(--nda-navy-2);
+  border: 1px solid rgba(244, 233, 210, 0.1);
+  border-radius: 20px;
+}
+.nda-glow { box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7); }
+
+/* Sparkle texture from the key art, very faint. */
+.nda-stars {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 215, 102, 0.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 32%, rgba(255, 215, 102, 0.1) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 40% 76%, rgba(255, 215, 102, 0.09) 0 2px, transparent 3px),
+    radial-gradient(circle at 88% 84%, rgba(255, 215, 102, 0.08) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 60% 10%, rgba(255, 215, 102, 0.08) 0 1px, transparent 2px);
+}
+
+/* Parallax stage */
+.nda-stage { position: relative; overflow: hidden; aspect-ratio: 2400 / 1130; width: 100%; background: #87ceeb; }
+.nda-stage img { position: absolute; inset: -6% -4%; width: 108%; height: 112%; object-fit: cover; will-change: transform; }
+
+/* Districts rail */
+.nda-rail { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: thin; }
+.nda-rail > * { scroll-snap-align: start; flex: 0 0 min(78vw, 340px); }
+
+/* Cast card */
+.nda-cast { position: relative; overflow: hidden; border-radius: 20px; background: var(--nda-navy-2); border: 1px solid rgba(244, 233, 210, 0.1); }
+.nda-cast::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18, 26, 51, 0.96) 22%, rgba(18, 26, 51, 0) 60%); pointer-events: none; }
+.nda-cast img { transition: transform 500ms ease; }
+.nda-cast:hover img { transform: translateY(-6px) scale(1.03); }
+
+@media (prefers-reduced-motion: reduce) { .nda-stage img { transform: none !important; } }

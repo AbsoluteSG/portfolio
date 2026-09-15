@@ -58,17 +58,18 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    id: "metroidvania",
-    title: "2D Metroidvania (in development)",
+    id: "no-dogs-allowed",
+    title: "No Dogs Allowed",
     description:
-      "A large-scope Metroidvania in development as the debut title for Siphon Games. Hand-crafted movement and combat, interconnected level logic, and custom in-editor content tools.",
+      "A cooking Metroidvania in development at Siphon Games. Fifteen-year-old Whiskers walks out of a burning kitchen with no plan; the Dog Mafia has his parents; the restaurant has to open. Cook, fight, grow, fish, roam.",
     longDescription:
-      "An ambitious 2D Metroidvania built from the ground up in Unity, featuring tightly-tuned movement and combat systems, interconnected level design, and in-house tooling for efficient content creation. As lead developer, I'm responsible for all core gameplay programming, systems architecture, and technical direction, plus the Git workflow and documentation for a distributed team of artists, composers, and contractors.",
-    image: "/assets/projects/metroidvania.png",
-    tags: ["Unity", "C#", "Systems Architecture", "Tools Dev"],
+      "A 2D open-world Metroidvania built in Unity 6 (URP 2D): ~55k lines of C# across nine assembly definitions with a strict one-directional dependency graph, data-driven items/recipes/crops/quests, GOAP enemy AI, FMOD audio, Yarn Spinner dialogue, and a separate Next.js tool that draws the branching plot graph and cast. As lead engineer I own the gameplay programming, systems architecture, in-editor content tools, and the Git workflow for a distributed team of artists and composers.",
+    image: "/assets/projects/no-dogs-allowed.jpg",
+    tags: ["Unity", "C#", "Systems Architecture", "Tools Dev", "Metroidvania"],
     category: "game",
     liveUrl: "https://siphongames.vercel.app",
     slug: "metroidvania",
+    page: "/projects/no-dogs-allowed",
     featured: false,
   },
   {

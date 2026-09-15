@@ -32,7 +32,7 @@ export function About() {
                 and the founder of a small indie studio, Siphon Games. I&apos;ve shipped
                 a commercial game on Steam, built a production payroll app that a
                 tutoring business runs on every day, and I&apos;m leading engineering
-                on a 2D Metroidvania.
+                on No Dogs Allowed, a 2D cooking Metroidvania.
               </p>
               <p>
                 What I like most is owning a system end to end — requirements, data

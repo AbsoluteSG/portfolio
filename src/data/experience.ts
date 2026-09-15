@@ -9,7 +9,7 @@ export const experiences: Experience[] = [
     endDate: "Present",
     description: [
       "Founded an independent game studio and architected production pipelines for sustainable long-term development",
-      "Leading end-to-end design and programming of a 2D Metroidvania, engineering core movement, combat systems, level logic, and custom in-house content creation tools",
+      "Leading end-to-end design and programming of No Dogs Allowed, a 2D cooking Metroidvania, engineering core movement, combat systems, level logic, and custom in-house content creation tools",
       "Established documentation standards, development schedules, and Git workflows to coordinate a distributed collaborative team",
       "Directing cross-disciplinary collaboration with artists, composers, and contractors to ensure gameplay vision aligns with visual and audio direction",
     ],
