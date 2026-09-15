@@ -13,8 +13,8 @@ const decisions = [
 
 const rules = [
   ["One layer at a time, played before the next", "The previous build accumulated prediction, reconciliation, interpolation, interest management, weapons and a level pipeline before anyone pressed Play once. When it finally felt wrong, six untested layers were candidates and it had to be scrapped. Add one thing. Play it. Then add the next. Never say a feature “works” when what was verified is that it compiles."],
-  ["A schema change is three edits, not one", "A table nobody subscribed to is not an error — it is permanently empty, and code reading it concludes the rows do not exist. A column the client does not know about is worse: rows decode with every field after it shifted. The table, the regenerated bindings, and the client query — all three, every time."],
-  ["Never let the client decide what the server knows", "A cache of the id we last asked to equip remembered success when the request had failed, and never retried. “Not found” and “not told yet” are indistinguishable client-side. Reconcile against replicated server state, not a local record of intent."],
+  ["Never let the client decide what the server knows", "_equipped cached the id we last asked to equip. The request failed, the cache remembered success, and it never retried. WeaponDef.Find(id) is null was read as “no such weapon”. It also means “the client has not been told yet”, and the two are indistinguishable client-side. Reconcile against replicated server state, not a local record of intent."],
+  ["A fallback that hides a failure is worse than a crash", "The server fired a default weapon when nothing was equipped. So “my weapon did not equip” and “my weapon fires one bullet” looked identical, and the real failure was invisible for three rounds of debugging. Prefer doing nothing loudly. Unarmed now fires nothing, which makes a bullet proof that equipping worked."],
 ];
 
 const tables: [string, string[]][] = [
@@ -55,7 +55,7 @@ export default function VroxPage() {
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1fr_1fr]">
           <div>
             <span className="vx-eyebrow">Shooting</span>
-            <h2 className="vx-pixel mt-4 text-[clamp(1rem,2.6vw,1.6rem)] leading-relaxed">Written once. Never updated.</h2>
+            <h2 className="vx-pixel mt-4 text-[clamp(1rem,2.6vw,1.6rem)] leading-relaxed">How a shot works</h2>
             <p className="mt-4 text-[var(--vx-dim)]">
               A shot&apos;s row is written once and never updated. Position is a function of how long it has been alive —
               <code className="vx-panel mx-1 px-2 py-0.5 text-[var(--vx-gold)]">origin + dir · speed · t</code>
@@ -104,10 +104,10 @@ export default function VroxPage() {
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
           <span className="vx-eyebrow">What the server holds now</span>
-          <h2 className="vx-pixel mt-4 text-[clamp(1rem,2.6vw,1.6rem)] leading-relaxed">It stopped being small.</h2>
+          <h2 className="vx-pixel mt-4 text-[clamp(1rem,2.6vw,1.6rem)] leading-relaxed">What the module holds now</h2>
           <p className="mt-4 max-w-3xl text-[var(--vx-dim)]">
-            The README above describes the first layer. The module and its realm generator are now ~7,900 lines of C# with around fifty reducers,
-            all still behind the same rule: the client asks, the server decides, the client draws the rows.
+            The README describes the first layer. Since then the module and its realm generator have grown to about 7,900
+            lines of C# and around fifty reducers. The rule has not changed: the client asks, the server decides, the client draws the rows.
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-4">
@@ -123,18 +123,19 @@ export default function VroxPage() {
             <div className="vx-panel p-5">
               <div className="vx-pixel text-[0.5rem] text-[var(--vx-gold)] uppercase">Realm generation</div>
               <p className="mt-3 text-[1.1rem] text-[var(--vx-dim)]">
-                The server generates the map and the client draws the rows that come out. The seed and every knob live
-                on the server, so two clients cannot disagree about what the world looks like, and the ground the server
-                collides against is by construction the ground you can see. Plain C# — no Unity, no System.Random, no clock —
-                because a seed has to reproduce its realm exactly or “regenerate with the same seed” is not a debugging tool.
-                Seeds whose open ground is less than 80% reachable from spawn are rejected and the count is recorded.
+                The server generates the map and the client draws the rows that come out. That split is the whole point:
+                the seed and every knob live on the server, so two clients cannot disagree about what the world looks like,
+                and the ground the server collides against is by construction the ground you can see. Plain C# on purpose —
+                no Unity, no System.Random, no clock. A seed has to reproduce its realm exactly or “regenerate with the same seed”
+                is not a debugging tool. A seed whose open ground is less than 80% reachable from the spawn point is rejected,
+                and the realm row records how many were rejected before one was accepted.
               </p>
             </div>
             <div className="vx-panel p-5">
               <div className="vx-pixel text-[0.5rem] text-[var(--vx-gold)] uppercase">Loot</div>
               <p className="mt-3 text-[1.1rem] text-[var(--vx-dim)]">
-                Enemies roll loot pools into bags on death. Bags live two minutes, open within pickup range, and hand items
-                to a six-slot backpack, three equipped slots, or the vault. Four character slots per account.
+                An enemy rolls its loot pool into a bag when it dies. A bag lasts 120 seconds and opens within two tiles.
+                Items go to a six-slot backpack, three equipped slots, or the vault. An account has four character slots.
               </p>
               <div className="mt-4 flex flex-wrap gap-4">
                 {bags.map(([id, name]) => (
@@ -147,22 +148,14 @@ export default function VroxPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {[["HP", 100, "var(--vx-red)", "PlayerMaxHp"], ["Tick", 50, "var(--vx-blue)", "50 ms server tick"], ["Bag", 120, "var(--vx-purple)", "seconds a bag lives"]].map(([k, v, c, label]) => (
-              <div key={k as string} className="vx-panel p-4">
-                <div className="flex items-baseline justify-between"><span className="vx-pixel text-[0.5rem] text-[var(--vx-dim)] uppercase">{label}</span><span className="vx-pixel text-[0.7rem]" style={{ color: c as string }}>{v}</span></div>
-                <div className="vx-bar mt-2" style={{ ["--w" as string]: k === "HP" ? "100%" : k === "Tick" ? "25%" : "60%" }}><i style={{ background: c as string }} /></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* WORKING RULES */}
       <section className="vx-hatch border-y-4 border-[var(--vx-edge)] py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <span className="vx-eyebrow">Working rules this project earned the hard way</span>
-          <p className="mt-3 max-w-3xl text-[var(--vx-dim)]">From the repo&apos;s CLAUDE.md. Every rule comes from a real bug, named so it is checkable rather than a platitude.</p>
+          <span className="vx-eyebrow">Working rules</span>
+          <p className="mt-3 max-w-3xl text-[var(--vx-dim)]">Three of the rules in the project&apos;s working notes. Every rule there comes from a real bug in this project, named so it is checkable rather than a platitude.</p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {rules.map(([k, v]) => (
               <blockquote key={k} className="vx-quote">
@@ -177,14 +170,15 @@ export default function VroxPage() {
       {/* KNOWN LIMITS */}
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <span className="vx-eyebrow">Known limits, written down</span>
+          <span className="vx-eyebrow">Known limits</span>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             <li className="vx-panel p-5 text-[1.1rem] text-[var(--vx-dim)]">Only the client evaluates the wave — the server stores its parameters but never computes a projectile&apos;s position, because nothing can be hit yet. When collision arrives, the server must use the same formula or the two will disagree about where a bullet is.</li>
             <li className="vx-panel p-5 text-[1.1rem] text-[var(--vx-dim)]">Shot age is measured against the server&apos;s timestamp but compared to the local clock. That is only correct while both are on the same machine. A real server needs clock-offset estimation, and that is the next layer, not this one.</li>
           </ul>
           <p className="mt-6 text-[var(--vx-dim)]">
-            Next, one at a time: other players rendered from the same table; a camera that follows rather than being parented;
-            client prediction, then reconciliation — and only with a way to <em>measure</em> disagreement, because that is what rubber-banding is.
+            What to add next, one at a time: other players rendered from the same table (it is already subscribed); a camera that
+            follows rather than being parented; client prediction, then reconciliation — and only with a way to <em>measure</em>
+            disagreement, because that is what rubber-banding is. Add one, play it, keep it or throw it away.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={CODE} target="_blank" rel="noopener noreferrer" className="vx-btn vx-btn-gold">Read the code</a>
@@ -194,7 +188,7 @@ export default function VroxPage() {
       </section>
 
       <footer className="vx-pixel border-t-4 border-[var(--vx-edge)] px-6 py-6 text-center text-[0.45rem] text-[var(--vx-dim)]">
-        © {new Date().getFullYear()} ALEX ZAALISHVILI · PLACEHOLDER ART · REAL MATH
+        © {new Date().getFullYear()} ALEX ZAALISHVILI · PLACEHOLDER ART
       </footer>
     </main>
   );

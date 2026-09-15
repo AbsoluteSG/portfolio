@@ -54,7 +54,9 @@ export function Playground({ pattern, spin, wave }: { pattern: Pattern; spin: bo
     const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
     for (let i = 0; i < (W / TILE) * (H / TILE); i++) tiles.push(rnd());
 
-    const px = W / 2, py = H / 2;
+    const cx = W / 2, cy = H / 2;
+    let px = cx, py = cy;
+    const keys = new Set<string>();
     let aim = { x: W * 0.8, y: H * 0.35 };
     const shots: Shot[] = []; const drops: Bag[] = [];
     const enemies: Enemy[] = [0, 1, 2].map((i) => ({ x: 0, y: 0, a: (i / 3) * Math.PI * 2, r: 60 + i * 8, hp: 6, flash: 0 }));
@@ -63,6 +65,9 @@ export function Playground({ pattern, spin, wave }: { pattern: Pattern; spin: bo
 
     const onMove = (e: PointerEvent) => { const r = cv.getBoundingClientRect(); aim = { x: ((e.clientX - r.left) / r.width) * W, y: ((e.clientY - r.top) / r.height) * H }; };
     cv.addEventListener("pointermove", onMove);
+    const onKey = (down: boolean) => (e: KeyboardEvent) => { const k = e.key.toLowerCase(); if ("wasd".includes(k) || k.startsWith("arrow")) { if (down) keys.add(k); else keys.delete(k); if (running) e.preventDefault(); } };
+    const kd = onKey(true), ku = onKey(false);
+    window.addEventListener("keydown", kd); window.addEventListener("keyup", ku);
     const io = new IntersectionObserver(([en]) => { running = en.isIntersecting; if (running && !raf) raf = requestAnimationFrame(frame); });
     io.observe(cv);
 
@@ -81,8 +86,12 @@ export function Playground({ pattern, spin, wave }: { pattern: Pattern; spin: bo
     const frame = (now: number) => {
       raf = 0; if (!running) return;
       const t = (now - t0) / 1000;
+      // movement: a fixed step per input, direction normalised — the same two rules the server applies
+      let mx = (keys.has("d") || keys.has("arrowright") ? 1 : 0) - (keys.has("a") || keys.has("arrowleft") ? 1 : 0);
+      let my = (keys.has("s") || keys.has("arrowdown") ? 1 : 0) - (keys.has("w") || keys.has("arrowup") ? 1 : 0);
+      if (mx || my) { const len = Math.hypot(mx, my); mx /= len; my /= len; px = Math.min(W - TILE - 4, Math.max(TILE + 4, px + mx * 1.4)); py = Math.min(H - TILE - 4, Math.max(TILE + 4, py + my * 1.4)); }
       // enemies orbit; hit test against analytic shot positions
-      for (const e of enemies) { e.a += 0.004; e.x = px + Math.cos(e.a) * e.r; e.y = py + Math.sin(e.a) * (e.r * 0.55); e.flash = Math.max(0, e.flash - 1); }
+      for (const e of enemies) { e.a += 0.004; e.x = cx + Math.cos(e.a) * e.r; e.y = cy + Math.sin(e.a) * (e.r * 0.55); e.flash = Math.max(0, e.flash - 1); }
 
       if (now - lastShot > 280) { fire(now); lastShot = now; }
 
@@ -127,12 +136,12 @@ export function Playground({ pattern, spin, wave }: { pattern: Pattern; spin: bo
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
-    return () => { running = false; if (raf) cancelAnimationFrame(raf); cv.removeEventListener("pointermove", onMove); io.disconnect(); };
+    return () => { running = false; if (raf) cancelAnimationFrame(raf); cv.removeEventListener("pointermove", onMove); window.removeEventListener("keydown", kd); window.removeEventListener("keyup", ku); io.disconnect(); };
   }, []);
 
   return (
     <div className="vx-stage">
-      <canvas ref={ref} width={W} height={H} aria-label="Pixel-art demo of Vrox's projectile patterns. Move the pointer to aim." />
+      <canvas ref={ref} width={W} height={H} aria-label="Pixel-art demo of Vrox's projectile patterns. WASD to move, pointer to aim." />
       <div className="vx-pixel pointer-events-none absolute right-2 bottom-2 text-[0.45rem] text-[var(--vx-dim)]">
         {stats.alive} live · {stats.inserts} inserts · {stats.deletes} deletes
       </div>

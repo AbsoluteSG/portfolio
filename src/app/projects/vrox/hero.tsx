@@ -22,9 +22,9 @@ export function Hero() {
       </div>
       <p className="vx-body text-[var(--vx-dim)]">
         <span className="text-[var(--vx-text)]">{current.label}:</span> {current.blurb}
-        {pattern === "helix" && !wave && " With zero wave amplitude every strand draws on the same straight line — turn Wave on."}
-        {pattern === "ring" && spin && " Ring + spin is the classic spiral."}
-        {" "}Move the pointer to aim. Placeholder art; the projectile math is the real thing.
+        {pattern === "helix" && !wave && " With zero wave amplitude every strand draws on the same straight line; turn Wave on."}
+        {pattern === "ring" && spin && " Ring plus spin is the classic spiral."}
+        {" "}<span className="vx-kbd">W</span> <span className="vx-kbd">A</span> <span className="vx-kbd">S</span> <span className="vx-kbd">D</span> to move, pointer to aim. The art is placeholder. The projectile maths is the game&apos;s.
       </p>
     </div>
   );
