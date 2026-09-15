@@ -3,9 +3,9 @@ import type { Project } from "@/types";
 export const projects: Project[] = [
   {
     id: "tutor-payroll",
-    title: "Tutor Payroll",
+    title: "Borough Prep — Tutor Payroll",
     description:
-      "Full-stack bookkeeping app that replaced a tutoring business's shared spreadsheet. In production with real tutors, one-click Stripe Connect payouts, and a live-chat queue.",
+      "Marketing site + full-stack bookkeeping app for Borough Prep, an independent tutoring studio. Replaced their shared spreadsheet; in production with real tutors, one-click Stripe Connect payouts, and a live-chat queue.",
     longDescription:
       "Tutors log classes, the manager sets per-client rates, and balances come from an append-only ledger — each class snapshots its rate so changing a rate later never rewrites history. Payouts go out through Stripe Connect. The public site carries a live-chat queue where staff availability is a heartbeat rather than a setting, plus a rate-limited AI assistant locked to a closed brief so it never invents a price.",
     image: "/assets/projects/tutor-payroll.png",
