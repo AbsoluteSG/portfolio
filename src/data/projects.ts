@@ -25,7 +25,7 @@ export const projects: Project[] = [
     image: "/assets/projects/banana-clicker.jpg",
     tags: ["Unity", "C#", "Steam", "Game Design"],
     category: "game",
-    github: "https://github.com/AbsoluteSG/Banana-Clicker",
+    github: "https://github.com/AbsoluteSG/banana-clicker-source",
     liveUrl: "https://store.steampowered.com/app/2322080/Banana_Clicker/",
     slug: "banana-clicker",
     featured: false,
