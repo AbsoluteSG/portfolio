@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     description: "An absurdist idle/clicker RPG on Steam. Factions, gacha, Banana Storms, and a lore that goes way too hard.",
     url,
     siteName: "Siphon Games",
-    images: [{ url: "/projects/banana-clicker/capsule_616x353.jpg", width: 616, height: 353 }],
+    images: [{ url: "/projects/banana-clicker/capsule-final.jpg", width: 1200, height: 688 }],
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Banana Clicker", images: ["/projects/banana-clicker/capsule_616x353.jpg"] },
+  twitter: { card: "summary_large_image", title: "Banana Clicker", images: ["/projects/banana-clicker/capsule-final.jpg"] },
 };
 
 export default function BananaClickerLayout({ children }: { children: React.ReactNode }) {
