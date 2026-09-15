@@ -40,6 +40,9 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                {...(/^https?:\/\//.test(link.href) || /\.[a-z0-9]{2,4}$/i.test(link.href)
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
                 className={cn(
                   "relative px-3 py-2 text-sm font-medium transition-colors",
                   isActive

@@ -28,6 +28,7 @@ export const projects: Project[] = [
     github: "https://github.com/AbsoluteSG/banana-clicker-source",
     liveUrl: "https://store.steampowered.com/app/2322080/Banana_Clicker/",
     slug: "banana-clicker",
+    page: "/projects/banana-clicker",
     featured: false,
   },
   {

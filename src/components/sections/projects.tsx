@@ -100,9 +100,9 @@ export function Projects() {
                       </p>
 
                       <div className="mt-8 flex flex-wrap items-center gap-3">
-                        {featured.slug && (
+                        {(featured.page || featured.slug) && (
                           <Link
-                            href={`/blog/${featured.slug}`}
+                            href={featured.page ?? `/blog/${featured.slug}`}
                             className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90"
                           >
                             View Case Study

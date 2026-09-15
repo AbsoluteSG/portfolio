@@ -14,6 +14,7 @@ interface ProjectCardProps {
 
 /** Image + title + description. Links to the write-up when the project has one. */
 function CardBody({ project }: { project: Project }) {
+  const detailHref = project.page ?? (project.slug ? `/blog/${project.slug}` : undefined);
   const body = (
     <>
       <div className="relative aspect-video overflow-hidden bg-muted">
@@ -24,10 +25,10 @@ function CardBody({ project }: { project: Project }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        {project.slug && (
+        {detailHref && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/40">
             <span className="rounded-lg bg-white/90 px-4 py-2 text-sm font-medium text-black opacity-0 transition-opacity group-hover:opacity-100">
-              Read More
+              {project.page ? "Visit Site" : "Read More"}
             </span>
           </div>
         )}
@@ -42,8 +43,8 @@ function CardBody({ project }: { project: Project }) {
     </>
   );
 
-  return project.slug ? (
-    <Link href={`/blog/${project.slug}`} className="block">
+  return detailHref ? (
+    <Link href={detailHref} className="block">
       {body}
     </Link>
   ) : (

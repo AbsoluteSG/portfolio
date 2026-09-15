@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { mdxComponents } from "@/components/mdx/mdx-components";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,6 +32,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const { content } = await compileMDX({
     source: post.content,
+    components: mdxComponents,
     options: { parseFrontmatter: false },
   });
 

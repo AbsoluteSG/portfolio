@@ -9,6 +9,8 @@ export interface Project {
   github?: string;
   liveUrl?: string;
   slug?: string;
+  /** Standalone landing page route; takes precedence over the blog post link. */
+  page?: string;
   featured: boolean;
 }
 

@@ -38,6 +38,9 @@ export function MagneticButton({
   };
 
   const Component = as === "a" ? motion.a : motion.button;
+  // Anything that leaves the SPA (http(s) or a file like /resume.pdf) opens in a new tab.
+  const external = !!href && (/^https?:\/\//.test(href) || /\.[a-z0-9]{2,4}$/i.test(href));
+  const linkProps = as === "a" && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
     <motion.div
@@ -47,7 +50,7 @@ export function MagneticButton({
       onMouseLeave={handleMouseLeave}
       className="inline-block"
     >
-      <Component href={href} className={className}>
+      <Component href={href} className={className} {...linkProps}>
         {children}
       </Component>
     </motion.div>
