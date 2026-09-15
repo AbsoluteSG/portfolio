@@ -74,16 +74,16 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    id: "cv-automation",
-    title: "Computer Vision Automation Tool",
+    id: "vision-bots",
+    title: "Vision Bots",
     description:
-      "A C++ tool using OpenCV for real-time template matching and automated input simulation, achieving a ~5x throughput gain over manual play.",
+      "Two studies in playing games from pixels alone: YOLOv8 detectors and a landmark-graph navigator for Celtic Heroes, then a PPO agent that learns to survive Rocket Rats through screen capture and synthetic input.",
     longDescription:
-      "A lightweight computer vision tool built in C++ with OpenCV that detects on-screen objects in real time and automates an in-game action loop. Integrates template matching with Win32 input simulation to achieve a 5x efficiency increase in item collection tasks.",
-    image: "/assets/projects/cv-automation.png",
-    tags: ["C++", "OpenCV", "Win32 API", "Computer Vision"],
+      "No game API — the bots only ever see the window. A perception toolkit (Win32 capture, calibrated regions, HSV readers, OCR, template matching, two fine-tuned YOLOv8 detectors on 340 hand-labelled frames) feeds either a scripted strategy, a graph planner with belief state and recovery behaviours, or a Gymnasium env for PPO. The second study ports the infrastructure to a new game and measures everything before assuming it.",
+    image: "/assets/projects/vision-bots.jpg",
+    tags: ["Python", "YOLOv8", "OpenCV", "Reinforcement Learning", "PPO"],
     category: "tool",
-    slug: "cv-automation",
+    page: "/projects/vision-bots",
     featured: false,
   },
 ];
