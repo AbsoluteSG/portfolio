@@ -13,7 +13,7 @@ export const projects: Project[] = [
     category: "web",
     github: "https://github.com/AbsoluteSG/tutor-payroll",
     liveUrl: "https://tutor-payroll-absolutez.vercel.app",
-    featured: true,
+    featured: false,
   },
   {
     id: "banana-clicker",
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     liveUrl: "https://store.steampowered.com/app/2322080/Banana_Clicker/",
     slug: "banana-clicker",
     page: "/projects/banana-clicker",
-    featured: false,
+    featured: true,
   },
   {
     id: "vrox",
@@ -45,16 +45,17 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    id: "cmd-zoo",
-    title: "cmd_zoo",
+    id: "critter-cove",
+    title: "Critter Cove",
     description:
-      "An open-world idle zoo sim in Rust: chunk-streamed world, biome-driven procedural spawns, breeding with 100+ hybrid species, post-process shaders, and optional online visiting over a Steam relay.",
+      "A cozy co-op zoo builder with bite, written in Rust. Explore a procedurally generated wilderness, catch critters that fight back, breed hybrids from 100+ species, and open your cove to friends over Steam.",
     longDescription:
-      "cmd_zoo is a hands-on study in building a complete game in Rust with Macroquad rather than following a tutorial. Each module explores a different area: camera/projection and billboard rendering, chunk load/cull with hysteresis, per-species evasion AI, a breeding and hybrid recipe system, save persistence via the platform app-data directory, five fullscreen post-process shaders, and a session/avatar layer that supports visiting a friend's zoo over a Steam relay transport (feature-gated so the project always builds without the SDK). Tested with cargo test.",
-    image: "/assets/projects/cmd-zoo.png",
-    tags: ["Rust", "Macroquad", "Procedural Generation", "Steamworks", "Shaders"],
+      "Critter Cove started as cmd_zoo, a way to learn Rust by shipping a complete game. ~30k lines across a game crate, a core crate, and a SpacetimeDB module; 200+ tests on the engine-free domain; chunk streaming with hysteresis, noise-driven biomes with weighted spawn tables, versioned saves with forward migrations, a Steam relay transport behind a cargo feature, and a SpacetimeDB online hub.",
+    image: "/assets/projects/critter-cove.jpg",
+    tags: ["Rust", "Macroquad", "Procedural Generation", "SpacetimeDB", "Steamworks"],
     category: "game",
     github: "https://github.com/AbsoluteSG/cmd_zoo",
+    page: "/projects/critter-cove",
     featured: false,
   },
   {

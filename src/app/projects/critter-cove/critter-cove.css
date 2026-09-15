@@ -1,0 +1,72 @@
+/* Critter Cove landing page — self-contained, independent of the portfolio theme. */
+.cc-root {
+  --cc-cream: #fbf4e4;
+  --cc-cream-2: #f3e9d2;
+  --cc-ink: #1f3324;
+  --cc-ink-soft: rgba(31, 51, 36, 0.72);
+  --cc-green: #2f6b3a;
+  --cc-green-deep: #1d4a2a;
+  --cc-leaf: #7cc043;
+  --cc-sky: #8fd3f4;
+  --cc-coral: #e8783f;
+  --cc-sun: #ffd166;
+  --cc-night: #16233a;
+  font-family: var(--font-cc-body), ui-rounded, system-ui, sans-serif;
+  color: var(--cc-ink);
+  background: var(--cc-cream);
+  color-scheme: light;
+}
+.cc-display {
+  font-family: var(--font-cc-display), "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.cc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-cc-display), sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cc-green);
+}
+.cc-eyebrow::before { content: ""; width: 1.4rem; height: 3px; border-radius: 2px; background: var(--cc-leaf); }
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.9rem 1.6rem;
+  font-family: var(--font-cc-display), sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: 2px solid transparent;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+.cc-btn:hover { transform: translateY(-2px); }
+.cc-btn-green { background: var(--cc-green); color: var(--cc-cream); box-shadow: 0 12px 30px -12px rgba(47, 107, 58, 0.7); }
+.cc-btn-green:hover { background: var(--cc-green-deep); }
+.cc-btn-ghost { border-color: rgba(31, 51, 36, 0.25); color: var(--cc-ink); }
+.cc-btn-ghost:hover { border-color: var(--cc-ink); }
+.cc-btn-cream { background: var(--cc-cream); color: var(--cc-ink); }
+
+.cc-card { background: #fff; border: 1px solid rgba(31, 51, 36, 0.1); border-radius: 22px; box-shadow: 0 20px 50px -30px rgba(31, 51, 36, 0.35); }
+
+/* Soft polka texture like the game's terrain dots. */
+.cc-dots { background-image: radial-gradient(rgba(31, 51, 36, 0.06) 1.5px, transparent 1.7px); background-size: 18px 18px; }
+
+/* Critter parade */
+.cc-parade { display: flex; gap: 2.5rem; width: max-content; animation: cc-scroll 60s linear infinite; }
+.cc-parade img { height: 120px; width: auto; filter: drop-shadow(0 10px 14px rgba(31, 51, 36, 0.25)); }
+@keyframes cc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.cc-parade-wrap:hover .cc-parade { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .cc-parade { animation: none; } }
+
+/* Biome chips */
+.cc-chip { display: inline-block; border-radius: 999px; padding: 0.4rem 0.9rem; font-family: var(--font-cc-display), sans-serif; font-weight: 600; font-size: 0.95rem; }
+
+/* Sprite in a card */
+.cc-sprite { filter: drop-shadow(0 12px 16px rgba(31, 51, 36, 0.25)); }
