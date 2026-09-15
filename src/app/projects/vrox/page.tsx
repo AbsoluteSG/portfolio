@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Hero } from "./hero";
+
+/** Unlisted until the art is real. Flip to false to publish. */
+const HIDDEN = true;
 
 const A = "/projects/vrox";
 const CODE = "https://github.com/AbsoluteSG/vrox";
@@ -27,6 +31,7 @@ const tables: [string, string[]][] = [
 const bags = [["common", "Common"], ["uncommon", "Uncommon"], ["rare", "Rare"], ["epic", "Epic"], ["legendary", "Legendary"], ["boss", "Boss"]];
 
 export default function VroxPage() {
+  if (HIDDEN) notFound();
   return (
     <main className="vx-root overflow-x-hidden">
       {/* top bar */}

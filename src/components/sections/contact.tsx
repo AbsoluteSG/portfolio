@@ -50,22 +50,17 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-muted/30 py-28 md:py-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <SectionHeading
-          title="Get In Touch"
-          subtitle="Have a question or want to work together?"
-        />
+    <section id="contact" className="border-t border-border px-6 py-24 md:py-32 lg:px-10">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading eyebrow="Contact" title="Get in touch." />
 
         <div className="grid gap-14 md:grid-cols-2 md:gap-20">
           {/* Info */}
           <ScrollReveal>
             <div className="space-y-8">
               <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
-                I&apos;m always interested in connecting with fellow developers,
-                studios, and anyone passionate about games. Whether you have a
-                collaboration idea, a question about my work, or just want to say
-                hi — I&apos;d love to hear from you.
+                Hiring, or want to talk about any of the projects above? Email is fastest.
+                I reply to everything.
               </p>
 
               <div className="space-y-5">

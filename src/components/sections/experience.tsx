@@ -1,42 +1,39 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { TimelineItem } from "@/components/shared/timeline-item";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { experiences } from "@/data/experience";
 
 export function Experience() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
   return (
-    <section id="experience" className="py-28 md:py-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <SectionHeading
-          title="Experience"
-          subtitle="Where I've worked and what I've done"
-        />
+    <section id="experience" className="border-t border-border px-6 py-24 md:py-32 lg:px-10">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading eyebrow="Experience" title="Where I have worked." />
 
-        <div ref={containerRef} className="relative">
-          {/* Animated timeline line (desktop only) */}
-          <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-border md:block">
-            <motion.div
-              style={{ height: lineHeight }}
-              className="w-full bg-primary"
-            />
-          </div>
-
-          <div className="space-y-16">
-            {experiences.map((exp, index) => (
-              <TimelineItem key={exp.id} experience={exp} index={index} />
-            ))}
-          </div>
-        </div>
+        <ol className="divide-y divide-border">
+          {experiences.map((exp) => (
+            <li key={exp.id}>
+              <ScrollReveal className="grid gap-4 py-10 md:grid-cols-[220px_1fr] md:gap-10">
+                <p className="text-sm font-medium text-muted-foreground md:pt-1.5">
+                  {exp.startDate} — {exp.endDate}
+                </p>
+                <div>
+                  <h3 className="font-display text-3xl">{exp.role}</h3>
+                  <p className="mt-1 text-base font-medium text-primary">{exp.company}</p>
+                  <ul className="mt-4 space-y-2 text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {exp.description.map((d, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="mt-[0.7em] size-1.5 shrink-0 rounded-full bg-primary/60" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 text-sm text-muted-foreground/80">{exp.technologies.join(" · ")}</p>
+                </div>
+              </ScrollReveal>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

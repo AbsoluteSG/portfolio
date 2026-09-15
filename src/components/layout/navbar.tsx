@@ -11,6 +11,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/constants";
 
 const sectionIds = ["about", "projects", "experience", "contact"];
 
@@ -28,7 +29,9 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-10">
+        <Link href="/" className="font-display text-xl">{siteConfig.name}</Link>
+
         {/* Desktop navigation */}
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => {

@@ -15,7 +15,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
           <div>
-            <p className="text-lg font-bold tracking-tight">{siteConfig.name}</p>
+            <p className="font-display text-2xl">{siteConfig.name}</p>
             <p className="text-sm text-muted-foreground">{siteConfig.title}</p>
           </div>
 
@@ -41,8 +41,7 @@ export function Footer() {
         <Separator className="my-6" />
 
         <p className="text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} {siteConfig.name}. Built with Next.js
-          &amp; Tailwind CSS.
+          &copy; {new Date().getFullYear()} {siteConfig.name}
         </p>
       </div>
     </footer>

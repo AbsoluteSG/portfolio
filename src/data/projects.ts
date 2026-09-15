@@ -3,7 +3,7 @@ import type { Project } from "@/types";
 export const projects: Project[] = [
   {
     id: "tutor-payroll",
-    title: "Borough Prep — Tutor Payroll",
+    title: "Borough Prep",
     description:
       "Marketing site + full-stack bookkeeping app for Borough Prep, an independent tutoring studio. Replaced their shared spreadsheet; in production with real tutors, one-click Stripe Connect payouts, and a live-chat queue.",
     longDescription:
@@ -30,20 +30,6 @@ export const projects: Project[] = [
     slug: "banana-clicker",
     page: "/projects/banana-clicker",
     featured: true,
-  },
-  {
-    id: "vrox",
-    title: "Vrox",
-    description:
-      "A server-authoritative bullet-hell MMO prototype on SpacetimeDB + Unity. Clients send intent at 20 Hz and render server truth; projectiles are written once and positioned analytically, so a bullet costs one insert and one delete.",
-    longDescription:
-      "It began as a player that moves and shoots, on a server, and nothing else. The server module and its realm generator are now about 7,900 lines of C#: seeded realm generation with a reachability check, biomes, enemies with phases, loot pools and bag tiers, a backpack and a vault, character slots. Each layer was played before the next one went in.",
-    image: "/assets/projects/vrox.jpg",
-    tags: ["C#", "Unity", "SpacetimeDB", "Multiplayer", "Netcode"],
-    category: "game",
-    github: "https://github.com/AbsoluteSG/vrox",
-    page: "/projects/vrox",
-    featured: false,
   },
   {
     id: "critter-cove",
