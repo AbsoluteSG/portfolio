@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { contactSchema } from "@/lib/validators";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -25,9 +23,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Constructed per request: the Resend constructor throws without a key,
+    // which would fail the build when the env var isn't set.
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const { error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL!,
+      to: process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: subject || `Portfolio Contact from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
