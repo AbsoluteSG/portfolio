@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax } from "./parallax";
+import { AutoVideo } from "./auto-video";
 
 const A = "/projects/no-dogs-allowed";
 const WIKI = "https://siphongames.vercel.app";
@@ -17,8 +18,8 @@ const pillars = [
   {
     n: "02",
     title: "Fight",
-    lead: "Edged tools from a vendor who won't discuss previous owners.",
-    body: "Hitbox-driven combat with attack chaining, a parry that ripples the whole screen, and bosses with a point of view — an old warthog who fights on all fours, a Marshal with a Seat at the Table.",
+    lead: "Two stances, one cat. Swap between them mid-fight.",
+    body: "Bipedal for weapons and reach, quadruped for speed and pounces. Craft weapons from what you cook with — cleavers, pans, oven mitts — and chain attacks into a parry that ripples the whole screen. Bosses have a point of view: an old warthog who fights on all fours, a Marshal with a Seat at the Table.",
     color: "var(--nda-red)",
     image: "splash.jpg",
     alt: "Whiskers caught in chains, teeth gritted",
@@ -52,7 +53,7 @@ const districts = [
 
 const cast = [
   { id: "whiskers", name: "Whiskers", who: "Cat, fifteen. The player.", bio: "The only child of a restaurant. Small, fast, and possessed of a stubbornness that reads as bravery from a distance and as a problem up close. He starts with no weapon, no money, no plan, and one piece of cloth.", accent: "#e8e2d8", tall: true },
-  { id: "slick", name: "Slick", who: "Cat. Weapons vendor.", bio: "Deals in edged tools out of the Claypot cargo depots, where a great deal of paperwork changes hands and very little of it is read twice.", accent: "#f5a623", tall: true },
+  { id: "slick", name: "Slick", who: "Cat. Weapons vendor. Mentor.", bio: "Deals in edged tools out of the Claypot cargo depots, where a great deal of paperwork changes hands and very little of it is read twice.", accent: "#f5a623", tall: true },
   { id: "pipette", name: "Pipette", who: "Rat. Jester of Claypot Ward.", bio: "Motley, bells and all. Plays the kilns and workshops for whoever is coming off a shift — quick, warm, a little chaotic, and never once mean with it.", accent: "#c0603a", tall: true },
   { id: "maya", name: "Maya", who: "Cat. Seed and gardening vendor.", bio: "Sells seed out of a stall in Milliden Hollow, in a sun hat considerably wider than she is. Gentle, unhurried, and genuinely interested.", accent: "#f2a7c3", tall: false },
   { id: "gristle", name: "Gristle", who: "Warthog. Boss, then NPC.", bio: "An old warthog gone thick through the shoulders, tusks dulled and scarred. Runs his crew out of a dead pickling plant. A subcontractor who does not know he is a subcontractor.", accent: "#8a5a3c", tall: false },
@@ -104,7 +105,7 @@ export default function NoDogsAllowedPage() {
               <a href="#story" className="nda-btn nda-btn-ghost">The story so far ↓</a>
             </div>
             <p className="mt-6 text-xs font-bold tracking-[0.2em] text-[var(--nda-cream-dim)] uppercase">
-              2D open-world Metroidvania · Unity · PC · controller &amp; keyboard
+              2D open-world Metroidvania · PC first, consoles to follow · controller &amp; keyboard
             </p>
           </div>
         </div>
@@ -136,9 +137,37 @@ export default function NoDogsAllowedPage() {
               &ldquo;He starts with no weapon, no money, no plan and one piece of cloth.&rdquo;
             </blockquote>
           </div>
-          <div className="relative mx-auto w-[min(60vw,300px)] md:mx-0 md:ml-auto md:w-[300px]">
-            <div aria-hidden className="absolute inset-x-8 top-8 bottom-0 rounded-full bg-[radial-gradient(closest-side,rgba(245,180,0,0.28),transparent)] blur-2xl" />
-            <Image src={`${A}/cast-whiskers.png`} alt="Whiskers" width={597} height={900} sizes="(max-width: 768px) 70vw, 40vw" className="relative h-auto w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" />
+          <figure className="relative">
+            <div aria-hidden className="absolute -inset-6 rounded-[32px] bg-[radial-gradient(closest-side,rgba(245,180,0,0.18),transparent)] blur-2xl" />
+            <Image src={`${A}/story-tree.jpg`} alt="The Great Tree, with the restaurant on a deck partway up it" width={1280} height={990} sizes="(max-width: 768px) 100vw, 45vw" className="nda-glow relative h-auto w-full rounded-3xl" />
+            <figcaption className="mt-3 text-sm font-bold text-[var(--nda-cream-dim)]">The Great Tree — home, and the hub the whole game returns to.</figcaption>
+          </figure>
+        </div>
+
+        {/* The Dog Mafia */}
+        <div className="mx-auto mt-20 max-w-6xl px-6">
+          <figure className="nda-glow relative overflow-hidden rounded-3xl">
+            <Image src={`${A}/mafia.jpg`} alt="Two dogs in suits and sunglasses at a café table while a cat waiter brings their drinks" width={2400} height={775} sizes="(max-width: 1200px) 100vw, 1152px" className="h-auto w-full" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(18,26,51,0.92),rgba(18,26,51,0))] px-6 pt-16 pb-5 md:px-8">
+              <span className="nda-display text-2xl text-[var(--nda-cream)] md:text-3xl">The Dog Mafia.</span>
+              <span className="ml-3 text-sm font-bold text-[var(--nda-cream-dim)] md:text-base">They have his parents. They also have a table by the window.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* INTRO CUTSCENE */}
+      <section className="border-y border-white/10 bg-[#0e1429] py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="nda-eyebrow">Watch the intro</span>
+              <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">The kitchen was our home. Then it wasn&apos;t.</h2>
+            </div>
+            <p className="max-w-sm text-sm font-bold text-[var(--nda-cream-dim)]">Hand-illustrated opening cutscene, 30 seconds. Silent here by design — the subtitles are burned in.</p>
+          </div>
+          <div className="nda-glow mt-8 overflow-hidden rounded-3xl border border-white/10 bg-black">
+            <AutoVideo src={`${A}/intro.mp4`} poster={`${A}/intro-poster.jpg`} controls label="No Dogs Allowed intro cutscene" className="aspect-video h-auto w-full" />
           </div>
         </div>
       </section>
@@ -157,6 +186,24 @@ export default function NoDogsAllowedPage() {
         <p className="mx-auto max-w-6xl px-6 pt-4 text-sm font-bold text-[var(--nda-cream-dim)]">
           The town below the Great Tree, with Whiskers&apos; restaurant. Ten hand-painted layers; move your pointer.
         </p>
+      </section>
+
+      {/* IN-GAME */}
+      <section className="py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <span className="nda-eyebrow">In-game</span>
+          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">A lived-in restaurant, and the world outside its door.</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <figure className="nda-glow overflow-hidden rounded-3xl border border-white/10">
+              <Image src={`${A}/ingame-dining.jpg`} alt="The restaurant's dining room: shelves of bottles, a red-curtained alcove, an upright piano, and Whiskers on the floorboards" width={1190} height={669} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
+              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">Dining with depth.</span> Seat and serve customers with dishes crafted upstairs in the kitchen.</figcaption>
+            </figure>
+            <figure className="nda-glow overflow-hidden rounded-3xl border border-white/10">
+              <Image src={`${A}/ingame-exterior.jpg`} alt="Outside the restaurant: a blue-tiled roof, a lantern on a carved bracket, a flower box, and Whiskers on the boardwalk" width={1150} height={647} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
+              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">Step outside.</span> Leave the restaurant and lose track of time in the scenery.</figcaption>
+            </figure>
+          </div>
+        </div>
       </section>
 
       {/* PILLARS */}
@@ -181,6 +228,21 @@ export default function NoDogsAllowedPage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CINEMATIC SUPERS */}
+      <section className="pb-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-6 md:grid-cols-[1.25fr_1fr]">
+          <div className="nda-glow overflow-hidden rounded-3xl border border-white/10 bg-black">
+            <AutoVideo src={`${A}/slick-splash.mp4`} label="Slick's cinematic super: guns drawn, pepper bandolier" className="aspect-video h-auto w-full" />
+          </div>
+          <div>
+            <span className="nda-eyebrow">Cinematic supers</span>
+            <h3 className="nda-display mt-4 text-[clamp(1.8rem,3.5vw,2.75rem)]">Moments of pure spectacle.</h3>
+            <p className="mt-4 font-semibold leading-relaxed text-[var(--nda-cream-dim)]">Allies and enemies alike wield hand-animated signature supers that turn the tide of a fight. Slick&apos;s involves both barrels and a pepper bandolier.</p>
+            <Image src={`${A}/super-slick.jpg`} alt="Slick mid-roar, eyepatch and fangs" width={1360} height={960} sizes="(max-width: 768px) 100vw, 33vw" className="mt-6 h-auto w-full rounded-2xl border border-white/10" />
           </div>
         </div>
       </section>
@@ -252,8 +314,8 @@ export default function NoDogsAllowedPage() {
 
       {/* CTA */}
       <section className="relative overflow-hidden py-28 text-center">
-        <Image src={`${A}/hero.jpg`} alt="" fill sizes="100vw" className="object-cover object-[70%_center] opacity-20 blur-sm" />
-        <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(18,26,51,0.2),var(--nda-navy))]" />
+        <Image src={`${A}/cta-moon.jpg`} alt="" fill sizes="100vw" className="object-cover opacity-45" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_bottom,var(--nda-navy),rgba(18,26,51,0.35)_30%,rgba(18,26,51,0.35)_70%,var(--nda-navy))]" />
         <div className="relative mx-auto max-w-3xl px-6">
           <Image src={`${A}/logo.png`} alt="No Dogs Allowed" width={1400} height={1388} sizes="(max-width: 640px) 60vw, 300px" className="mx-auto h-auto w-[min(60vw,300px)] drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]" />
           <h2 className="nda-display mt-8 text-[clamp(2.2rem,6vw,4.5rem)]">Follow the road to Highspice Row.</h2>
