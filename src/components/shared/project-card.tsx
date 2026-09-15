@@ -15,7 +15,7 @@ interface ProjectCardProps {
 const externalProps = (href: string) => (href.startsWith("/") ? {} : { target: "_blank", rel: "noopener noreferrer" });
 
 export function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
-  const detailHref = project.page ?? (project.slug ? `/blog/${project.slug}` : undefined);
+  const detailHref = project.page;
   const liveLabel = project.liveUrl?.includes("steampowered") ? "Steam" : project.liveUrl?.startsWith("/") ? "Site" : "Live";
 
   const image = (
@@ -49,7 +49,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
         <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
           {detailHref && (
             <Link href={detailHref} className="inline-flex items-center gap-1 underline-offset-4 hover:underline">
-              {project.page ? "Visit" : "Read more"} <ArrowUpRight className="size-4" />
+              Visit <ArrowUpRight className="size-4" />
             </Link>
           )}
           {project.liveUrl && (

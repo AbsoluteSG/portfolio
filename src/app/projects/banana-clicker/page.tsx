@@ -218,9 +218,6 @@ export default function BananaClickerPage() {
               <a href={SOURCE} target="_blank" rel="noopener noreferrer" className="bc-btn bc-btn-ink">
                 Read the source
               </a>
-              <Link href="/blog/banana-clicker" className="bc-btn bc-btn-white">
-                How it was built
-              </Link>
             </div>
           </div>
           <ul className="grid gap-3 self-center font-mono text-sm">

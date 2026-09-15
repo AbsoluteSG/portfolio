@@ -91,6 +91,7 @@ export default function VisionBotsPage() {
               landmark map and a planner; the second learns to survive an arena with reinforcement
               learning.
             </p>
+            <p className="vb-mono mt-4 text-xs text-[var(--vb-dim)]">A learning project. Run on my own accounts in private sessions; never distributed.</p>
             <div className="mt-7 flex flex-wrap gap-2">
               {["screen capture", "YOLOv8", "OpenCV", "Tesseract", "Gymnasium", "Stable-Baselines3", "PyTorch"].map((t) => (
                 <span key={t} className="vb-chip">{t}</span>

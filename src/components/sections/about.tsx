@@ -31,8 +31,8 @@ export function About() {
                 half on a university help desk, which taught me to triage fast and write things down.
               </p>
               <p>
-                I&apos;m looking for an entry-level software engineering role starting January 2027,
-                open to earlier, remote, or relocation.
+                I&apos;m looking for an entry-level software engineering role: full-time from January 2027,
+                internship or part-time work now. Open to remote and relocation.
               </p>
             </div>
           </ScrollReveal>

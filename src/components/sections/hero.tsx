@@ -27,7 +27,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-display mt-6 max-w-4xl text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem]"
         >
-          I make games, and the software around them.
+          Software engineer. I make games, and the software around them.
         </motion.h1>
 
         <motion.p
@@ -38,8 +38,8 @@ export function Hero() {
         >
           I shipped Banana Clicker on Steam, run a small studio called Siphon Games, and built the
           bookkeeping app a tutoring studio uses every day. I write C# and TypeScript most days, Rust
-          and C++ when the problem calls for it. I&apos;m looking for an entry-level engineering role
-          from January 2027, earlier if it fits.
+          and C++ when the problem calls for it. I&apos;m looking for an entry-level software engineering role: full-time from
+          January 2027, and internship or part-time work now.
         </motion.p>
 
         <motion.div

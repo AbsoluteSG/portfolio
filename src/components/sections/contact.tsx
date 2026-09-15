@@ -75,7 +75,7 @@ export function Contact() {
                       className="flex items-center gap-4 text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {Icon && <Icon className="size-6" />}
-                      <span className="text-lg font-medium">{link.name}</span>
+                      <span className="text-lg font-medium">{link.name === "Email" ? link.url.replace("mailto:", "") : link.name}</span>
                     </a>
                   );
                 })}

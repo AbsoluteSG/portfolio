@@ -53,7 +53,7 @@ export const projects: Project[] = [
     longDescription:
       "A 2D open-world Metroidvania built in Unity 6 (URP 2D): ~55k lines of C# across nine assembly definitions with a strict one-directional dependency graph, data-driven items/recipes/crops/quests, GOAP enemy AI, FMOD audio, Yarn Spinner dialogue, and a separate Next.js tool that draws the branching plot graph and cast. As lead engineer I own the gameplay programming, systems architecture, in-editor content tools, and the Git workflow for a distributed team of artists and composers.",
     image: "/assets/projects/no-dogs-allowed.jpg",
-    tags: ["Unity", "C#", "Systems Architecture", "Tools Dev", "Metroidvania"],
+    tags: ["Unity", "C#", "Systems Architecture", "Editor Tooling", "Metroidvania"],
     category: "game",
     liveUrl: "/projects/no-dogs-allowed",
     slug: "metroidvania",
