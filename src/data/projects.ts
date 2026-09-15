@@ -67,7 +67,7 @@ export const projects: Project[] = [
     image: "/assets/projects/no-dogs-allowed.jpg",
     tags: ["Unity", "C#", "Systems Architecture", "Tools Dev", "Metroidvania"],
     category: "game",
-    liveUrl: "https://siphongames.vercel.app",
+    liveUrl: "/projects/no-dogs-allowed",
     slug: "metroidvania",
     page: "/projects/no-dogs-allowed",
     featured: false,

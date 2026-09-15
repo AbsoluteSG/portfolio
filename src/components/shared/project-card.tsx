@@ -81,13 +81,12 @@ function CardFooter({ project }: { project: Project }) {
           {project.liveUrl && (
             <a
               href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(project.liveUrl.startsWith("/") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
               className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
               aria-label={`${project.title} live`}
             >
               <ExternalLink className="size-5" />
-              {project.liveUrl.includes("steampowered") ? "Steam" : "Live"}
+              {project.liveUrl.includes("steampowered") ? "Steam" : project.liveUrl.startsWith("/") ? "Site" : "Live"}
             </a>
           )}
         </div>

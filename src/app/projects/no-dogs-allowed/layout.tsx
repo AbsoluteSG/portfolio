@@ -10,10 +10,10 @@ const url = "https://alex-zaalishvili.vercel.app/projects/no-dogs-allowed";
 export const metadata: Metadata = {
   title: { absolute: "No Dogs Allowed — a cooking Metroidvania" },
   description:
-    "Fifteen-year-old Whiskers walks out of a burning kitchen with his father's handkerchief and no plan. The Dog Mafia has his parents. The restaurant has to open. A 2D open-world Metroidvania in development by Siphon Games.",
+    "Whiskers is fifteen. He walks out of a burning kitchen with his father's handkerchief and nothing else. The Dog Mafia has his parents. A 2D Metroidvania about cooking, fighting, and a supply chain, in development at Siphon Games.",
   openGraph: {
     title: "No Dogs Allowed",
-    description: "A cooking Metroidvania. Cook, fight, grow, fish, and pull on a supply chain that would rather you didn't.",
+    description: "A 2D Metroidvania about cooking, fighting, and a supply chain. In development at Siphon Games.",
     url,
     siteName: "Siphon Games",
     images: [{ url: "/projects/no-dogs-allowed/hero.jpg", width: 1920, height: 1080 }],

@@ -4,22 +4,21 @@ import { Parallax } from "./parallax";
 import { AutoVideo } from "./auto-video";
 
 const A = "/projects/no-dogs-allowed";
-const WIKI = "https://siphongames.vercel.app";
 const CONTACT = "mailto:alex.zvili01@gmail.com?subject=No%20Dogs%20Allowed";
 
 const pillars = [
   {
     n: "01",
     title: "Cook",
-    lead: "The restaurant is the hub, and the reason for everything.",
-    body: "Ingredients come in from the districts; recipes turn them into dishes; dishes are how a kitchen finds people. Every system in the game eventually feeds the kitchen — literally.",
+    lead: "A working kitchen is how you find people.",
+    body: "Ingredients come in from the districts. Recipes turn them into dishes. Dishes get served in the dining room downstairs, to whoever walks in. Every other system in the game ends up feeding the kitchen.",
     color: "var(--nda-gold)",
   },
   {
     n: "02",
     title: "Fight",
-    lead: "Two stances, one cat. Swap between them mid-fight.",
-    body: "Bipedal for weapons and reach, quadruped for speed and pounces. Craft weapons from what you cook with — cleavers, pans, oven mitts — and chain attacks into a parry that ripples the whole screen. Bosses have a point of view: an old warthog who fights on all fours, a Marshal with a Seat at the Table.",
+    lead: "A weapons system paired with stance swapping.",
+    body: "Bipedal for weapons and reach; quadruped for speed and pounces. Weapons are crafted from their materials and themed to them: cleaver, frying pan, oven mitts. A parry ripples the whole screen. Bosses so far: an old warthog who fights on all fours, and a Marshal with a Seat at the Table.",
     color: "var(--nda-red)",
     image: "splash.jpg",
     alt: "Whiskers caught in chains, teeth gritted",
@@ -28,7 +27,7 @@ const pillars = [
     n: "03",
     title: "Grow & fish",
     lead: "Forty cultivars, and Maya knows which will sulk on which terrace.",
-    body: "Crop plots, seeds, tree crops, and fishing regions with their own catch tables. Wandering is allowed in Milliden Hollow; it asks nothing of you.",
+    body: "Crop plots and tree crops, seed from Maya's stall, fishing regions with their own catch tables. Milliden Hollow asks nothing of the player; this is where wandering is allowed.",
     color: "var(--nda-green)",
     image: "backyard.jpg",
     alt: "A backyard garden behind the restaurant",
@@ -37,7 +36,7 @@ const pillars = [
     n: "04",
     title: "Roam",
     lead: "Six districts, west to east, defined by what they do to an ingredient.",
-    body: "An interconnected 2D world with mounts from the Wilds, fast travel, weather, and gates run by two armadillos who have the regulations by heart. Controller and keyboard are both first-class.",
+    body: "Mounts come from the Wilds. Fast travel, weather, and a gate into Highspice run by two armadillos who have the entry regulations by heart, including the parts nobody thinks to ask about. Controller and keyboard are both first-class.",
     color: "var(--nda-teal)",
   },
 ];
@@ -63,12 +62,12 @@ const cast = [
 const tech = [
   ["Unity 6 · URP 2D", "Cinemachine, the new Input System, DOTween, Odin"],
   ["55k lines of C#", "nine assembly definitions with a strict one-directional dependency graph: Core → Data → Systems → Gameplay → UI"],
-  ["Data-driven everything", "items, recipes, crops, fish, combat profiles, loot, and quests are inert ScriptableObjects; services act on them through a ServiceLocator"],
+  ["Data is inert", "items, recipes, crops, fish, combat profiles, loot, and quests are ScriptableObjects that do nothing on their own; services act on them through a ServiceLocator"],
   ["Quests as conditions", "typed conditions evaluated against an event bus — success, failure, gate, branch, modifier"],
-  ["GOAP enemy AI", "goal-oriented planners for the things that hunt you"],
+  ["GOAP enemy AI", "enemies plan toward goals instead of running a script"],
   ["FMOD + Yarn Spinner", "adaptive audio; dialogue as scripts the writers own"],
-  ["A story tool", "a separate Next.js app that draws the branching plot graph and the cast, so the writing and the game stay in sync"],
-  ["A team", "I lead engineering and direct a distributed group of artists and composers, with the Git workflow and docs to match"],
+  ["A story tool", "a separate app that draws the plot graph and the cast from the same documents the writing lives in"],
+  ["A team", "engineering is me; art and music are a distributed team I direct, and the Git workflow and the docs are mine too"],
 ];
 
 export default function NoDogsAllowedPage() {
@@ -79,8 +78,8 @@ export default function NoDogsAllowedPage() {
         <Link href="/" className="pointer-events-auto rounded-full border border-white/20 bg-[rgba(18,26,51,0.75)] px-3 py-1 text-[var(--nda-cream)] backdrop-blur hover:bg-[rgba(18,26,51,0.95)]">
           ← alex-zaalishvili
         </Link>
-        <a href={WIKI} target="_blank" rel="noopener noreferrer" className="pointer-events-auto rounded-full border border-white/20 bg-[rgba(18,26,51,0.75)] px-3 py-1 text-[var(--nda-cream)] backdrop-blur hover:bg-[rgba(18,26,51,0.95)]">
-          Lore wiki ↗
+        <a href={CONTACT} className="pointer-events-auto rounded-full border border-white/20 bg-[rgba(18,26,51,0.75)] px-3 py-1 text-[var(--nda-cream)] backdrop-blur hover:bg-[rgba(18,26,51,0.95)]">
+          Contact
         </a>
       </div>
 
@@ -96,13 +95,13 @@ export default function NoDogsAllowedPage() {
               The restaurant <span className="text-[var(--nda-gold)]">has to open.</span>
             </h1>
             <p className="mt-5 text-lg font-semibold leading-relaxed text-[var(--nda-cream-dim)] sm:text-xl">
-              Fifteen-year-old Whiskers walks out of a burning kitchen with his father&apos;s
-              handkerchief and no plan. The Dog Mafia has his parents. A cooking Metroidvania about
-              pulling on a supply chain that would rather you didn&apos;t.
+              Whiskers is fifteen. He walks out of a burning kitchen with his father&apos;s
+              handkerchief and nothing else. The Dog Mafia has his parents. A 2D Metroidvania
+              about cooking, fighting, and a supply chain.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={WIKI} target="_blank" rel="noopener noreferrer" className="nda-btn nda-btn-gold">Explore the world</a>
-              <a href="#story" className="nda-btn nda-btn-ghost">The story so far ↓</a>
+              <a href="#story" className="nda-btn nda-btn-gold">The story so far</a>
+              <a href="#cast" className="nda-btn nda-btn-ghost">Meet the cast</a>
             </div>
             <p className="mt-6 text-xs font-bold tracking-[0.2em] text-[var(--nda-cream-dim)] uppercase">
               2D open-world Metroidvania · PC first, consoles to follow · controller &amp; keyboard
@@ -126,11 +125,11 @@ export default function NoDogsAllowedPage() {
                 an ingredient: grow it, process it, cook it, or sell it. Status is culinary. So is law.
               </p>
               <p>
-                Whiskers grew up underfoot in a working kitchen thirty tiles up the Great Tree, which
-                is why he can cook and why a room full of adults doesn&apos;t frighten him. The Butler
-                has convinced him that a working kitchen is how you find people. So the restaurant
-                has to open — and somewhere around Claypot Ward, the question of who the Dog Mafia
-                actually are starts mattering for its own sake.
+                Whiskers grew up underfoot in a working kitchen on a deck thirty tiles up the Great
+                Tree, which is why he can cook and why a room full of adults does not frighten him.
+                The Butler has convinced him that a working kitchen is how you find people, so the
+                restaurant has to open. He wants to know who the Dog Mafia are for that reason, and
+                then, somewhere around Claypot, starts wanting to know for its own sake.
               </p>
             </div>
             <blockquote className="mt-8 border-l-4 border-[var(--nda-gold)] pl-5 text-xl font-bold text-[var(--nda-cream)]">
@@ -150,7 +149,7 @@ export default function NoDogsAllowedPage() {
             <Image src={`${A}/mafia.jpg`} alt="Two dogs in suits and sunglasses at a café table while a cat waiter brings their drinks" width={2400} height={775} sizes="(max-width: 1200px) 100vw, 1152px" className="h-auto w-full" />
             <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(18,26,51,0.92),rgba(18,26,51,0))] px-6 pt-16 pb-5 md:px-8">
               <span className="nda-display text-2xl text-[var(--nda-cream)] md:text-3xl">The Dog Mafia.</span>
-              <span className="ml-3 text-sm font-bold text-[var(--nda-cream-dim)] md:text-base">They have his parents. They also have a table by the window.</span>
+              <span className="ml-3 text-sm font-bold text-[var(--nda-cream-dim)] md:text-base">They took his parents.</span>
             </figcaption>
           </figure>
         </div>
@@ -162,9 +161,9 @@ export default function NoDogsAllowedPage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="nda-eyebrow">Watch the intro</span>
-              <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">The kitchen was our home. Then it wasn&apos;t.</h2>
+              <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">&ldquo;The kitchen was our home, the kitchen was our world, and life was good.&rdquo;</h2>
             </div>
-            <p className="max-w-sm text-sm font-bold text-[var(--nda-cream-dim)]">Hand-illustrated opening cutscene, 30 seconds. Silent here by design — the subtitles are burned in.</p>
+            <p className="max-w-sm text-sm font-bold text-[var(--nda-cream-dim)]">The opening. Thirty seconds, hand-illustrated. No voice track on this cut; the subtitles carry it.</p>
           </div>
           <div className="nda-glow mt-8 overflow-hidden rounded-3xl border border-white/10 bg-black">
             <AutoVideo src={`${A}/intro.mp4`} poster={`${A}/intro-poster.jpg`} controls label="No Dogs Allowed intro cutscene" className="aspect-video h-auto w-full" />
@@ -177,14 +176,14 @@ export default function NoDogsAllowedPage() {
         <div className="mx-auto max-w-6xl px-6 pb-8">
           <span className="nda-eyebrow">The world</span>
           <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">
-            Painted by hand, built to be walked through.
+            The town below the Great Tree.
           </h2>
         </div>
         <div className="nda-glow">
           <Parallax base={A} />
         </div>
         <p className="mx-auto max-w-6xl px-6 pt-4 text-sm font-bold text-[var(--nda-cream-dim)]">
-          The town below the Great Tree, with Whiskers&apos; restaurant. Ten hand-painted layers; move your pointer.
+          Ten painted layers. Move the pointer.
         </p>
       </section>
 
@@ -192,15 +191,15 @@ export default function NoDogsAllowedPage() {
       <section className="py-24">
         <div className="mx-auto max-w-6xl px-6">
           <span className="nda-eyebrow">In-game</span>
-          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">A lived-in restaurant, and the world outside its door.</h2>
+          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">A lived-in restaurant is the player&apos;s refuge and point of return.</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             <figure className="nda-glow overflow-hidden rounded-3xl border border-white/10">
               <Image src={`${A}/ingame-dining.jpg`} alt="The restaurant's dining room: shelves of bottles, a red-curtained alcove, an upright piano, and Whiskers on the floorboards" width={1190} height={669} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
-              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">Dining with depth.</span> Seat and serve customers with dishes crafted upstairs in the kitchen.</figcaption>
+              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">The dining room.</span> Time at home is spent seating and serving customers with dishes made upstairs.</figcaption>
             </figure>
             <figure className="nda-glow overflow-hidden rounded-3xl border border-white/10">
               <Image src={`${A}/ingame-exterior.jpg`} alt="Outside the restaurant: a blue-tiled roof, a lantern on a carved bracket, a flower box, and Whiskers on the boardwalk" width={1150} height={647} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
-              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">Step outside.</span> Leave the restaurant and lose track of time in the scenery.</figcaption>
+              <figcaption className="px-5 py-4 text-sm font-bold text-[var(--nda-cream-dim)]"><span className="text-[var(--nda-cream)]">Outside.</span> You can leave the restaurant and explore the areas around it.</figcaption>
             </figure>
           </div>
         </div>
@@ -241,7 +240,7 @@ export default function NoDogsAllowedPage() {
           <div>
             <span className="nda-eyebrow">Cinematic supers</span>
             <h3 className="nda-display mt-4 text-[clamp(1.8rem,3.5vw,2.75rem)]">Moments of pure spectacle.</h3>
-            <p className="mt-4 font-semibold leading-relaxed text-[var(--nda-cream-dim)]">Allies and enemies alike wield hand-animated signature supers that turn the tide of a fight. Slick&apos;s involves both barrels and a pepper bandolier.</p>
+            <p className="mt-4 font-semibold leading-relaxed text-[var(--nda-cream-dim)]">Both allies and enemies have hand-animated signature supers that turn the tide of a fight. This one is Slick&apos;s.</p>
             <Image src={`${A}/super-slick.jpg`} alt="Slick mid-roar, eyepatch and fangs" width={1360} height={960} sizes="(max-width: 768px) 100vw, 33vw" className="mt-6 h-auto w-full rounded-2xl border border-white/10" />
           </div>
         </div>
@@ -251,7 +250,7 @@ export default function NoDogsAllowedPage() {
       <section className="border-y border-white/10 bg-[var(--nda-navy-2)] py-20">
         <div className="mx-auto max-w-6xl px-6">
           <span className="nda-eyebrow">The Dominion, west to east</span>
-          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">Six districts. Each defined by what it does to an ingredient.</h2>
+          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">Districts are defined by what they do to an ingredient: grow it, process it, cook it, or sell it.</h2>
         </div>
         <div className="mx-auto mt-10 max-w-6xl px-6">
           <ol className="nda-rail">
@@ -268,10 +267,10 @@ export default function NoDogsAllowedPage() {
       </section>
 
       {/* CAST */}
-      <section className="nda-stars py-24">
+      <section id="cast" className="nda-stars py-24">
         <div className="mx-auto max-w-6xl px-6">
           <span className="nda-eyebrow">The cast</span>
-          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">Everyone in this story will tell him to stop.</h2>
+          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">Every adult in this story will tell him to stop. None of it will take.</h2>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {cast.map((c) => (
               <li key={c.id} className="nda-cast">
@@ -287,8 +286,7 @@ export default function NoDogsAllowedPage() {
             ))}
           </ul>
           <p className="mt-6 text-sm font-bold text-[var(--nda-cream-dim)]">
-            Plus the Butler, the Farmer, Mango, Daisy, Hob, the Gate Wardens, and the Hyena — all on the{" "}
-            <a href={WIKI} target="_blank" rel="noopener noreferrer" className="text-[var(--nda-gold)] underline-offset-4 hover:underline">wiki</a>.
+            Also: the Butler, the Farmer, Mango, Daisy, Hob, the Gate Wardens, and the Hyena.
           </p>
         </div>
       </section>
@@ -297,7 +295,7 @@ export default function NoDogsAllowedPage() {
       <section id="under-the-hood" className="border-t border-white/10 bg-[#0e1429] py-24">
         <div className="mx-auto max-w-6xl px-6">
           <span className="nda-eyebrow">Under the hood</span>
-          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">AA scope, one lead engineer, and a dependency graph that only points down.</h2>
+          <h2 className="nda-display mt-4 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)]">How it&apos;s built.</h2>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2">
             {tech.map(([k, v]) => (
               <li key={k} className="rounded-2xl border border-white/10 bg-[var(--nda-navy-2)] p-5">
@@ -319,10 +317,10 @@ export default function NoDogsAllowedPage() {
         <div className="relative mx-auto max-w-3xl px-6">
           <Image src={`${A}/logo.png`} alt="No Dogs Allowed" width={1400} height={1388} sizes="(max-width: 640px) 60vw, 300px" className="mx-auto h-auto w-[min(60vw,300px)] drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]" />
           <h2 className="nda-display mt-8 text-[clamp(2.2rem,6vw,4.5rem)]">Follow the road to Highspice Row.</h2>
-          <p className="mt-4 text-lg font-semibold text-[var(--nda-cream-dim)]">Act One — the road to Highspice Row — is in production at Siphon Games. Press, playtesters, and publishers welcome.</p>
+          <p className="mt-4 text-lg font-semibold text-[var(--nda-cream-dim)]">Act One is in production at Siphon Games. If you&apos;re press, a playtester, or a publisher, write.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href={WIKI} target="_blank" rel="noopener noreferrer" className="nda-btn nda-btn-gold">Read the lore wiki</a>
-            <a href={CONTACT} className="nda-btn nda-btn-ghost">Press &amp; playtesting</a>
+            <a href={CONTACT} className="nda-btn nda-btn-gold">Write to Siphon Games</a>
+            <Link href="/" className="nda-btn nda-btn-ghost">More of my work</Link>
           </div>
         </div>
       </section>
