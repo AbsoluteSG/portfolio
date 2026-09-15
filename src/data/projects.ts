@@ -37,7 +37,7 @@ export const projects: Project[] = [
     description:
       "A server-authoritative bullet-hell MMO prototype on SpacetimeDB + Unity. Clients send intent at 20 Hz and render server truth; projectiles are written once and positioned analytically, so a bullet costs one insert and one delete.",
     longDescription:
-      "Started as the smallest thing that could be played — a player that moves and shoots, on a server — and grew into ~7,900 lines of C# server module: seeded realm generation with a reachability check, biomes, enemies with phases, loot pools and bag tiers, backpack and vault, character slots. Every layer was played before the next was added; the rules that came out of it are in the repo's CLAUDE.md.",
+      "It began as a player that moves and shoots, on a server, and nothing else. The server module and its realm generator are now about 7,900 lines of C#: seeded realm generation with a reachability check, biomes, enemies with phases, loot pools and bag tiers, a backpack and a vault, character slots. Each layer was played before the next one went in.",
     image: "/assets/projects/vrox.jpg",
     tags: ["C#", "Unity", "SpacetimeDB", "Multiplayer", "Netcode"],
     category: "game",
