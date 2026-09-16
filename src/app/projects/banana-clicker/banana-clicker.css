@@ -9,6 +9,9 @@
   --bc-coral: #e8535a;
   --bc-ink: #14161c;
   --bc-cream: #f6f1e7;
+  --bc-grape: #8a5cd6;
+  /* Tints for text on the navy panels — full-strength coral only reaches 1.9:1 there. */
+  --bc-coral-light: #ff9aa2;
   --bc-white: #ffffff;
   font-family: var(--font-bc-body), ui-rounded, system-ui, sans-serif;
   color: var(--bc-ink);
@@ -101,3 +104,66 @@
 @keyframes bc-float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(-2deg); } }
 .bc-float { animation: bc-float 5s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .bc-float { animation: none; } }
+
+/* ---------------------------------------------------------------------------
+   Concept-UI mockups. These rebuild the in-game window chrome in markup rather
+   than shipping more screenshots, so the panels stay crisp and reflow on phones.
+   --------------------------------------------------------------------------- */
+
+/* An in-game window: hard ink border, offset shadow, dark body. */
+.bc-window {
+  border: 4px solid var(--bc-ink);
+  border-radius: 16px;
+  box-shadow: 10px 12px 0 var(--bc-ink);
+  background: var(--bc-navy);
+  color: var(--bc-white);
+  overflow: hidden;
+}
+.bc-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 4px solid var(--bc-ink);
+  background: var(--bc-ink);
+}
+.bc-window-title {
+  font-family: var(--font-bc-display), "Impact", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bc-white);
+}
+
+/* Empty item slot, as in the inventory and upgrade boards. */
+.bc-slot {
+  position: relative;
+  border: 3px solid var(--bc-ink);
+  border-radius: 10px;
+  background: var(--bc-white);
+}
+
+/* Progress track. The fill is a child so the ink border never gets painted over. */
+.bc-meter {
+  overflow: hidden;
+  border: 3px solid var(--bc-ink);
+  border-radius: 999px;
+  background: var(--bc-white);
+}
+.bc-meter > span { display: block; height: 100%; }
+
+/* Rarity stamp, angled like a rubber stamp on the contract cards. */
+.bc-stamp {
+  display: inline-block;
+  transform: rotate(-5deg);
+  border: 3px solid currentColor;
+  border-radius: 6px;
+  padding: 0.05rem 0.45rem;
+  font-family: var(--font-bc-display), "Impact", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Readouts line up column-wise as numbers change. */
+.bc-num { font-variant-numeric: tabular-nums; }

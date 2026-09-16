@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Mechanics from "./mechanics";
 
 const STEAM = "https://store.steampowered.com/app/2322080/Banana_Clicker/";
 const SOURCE = "https://github.com/AbsoluteSG/banana-clicker-source";
@@ -182,7 +183,7 @@ export default function BananaClickerPage() {
       ))}
 
       {/* GALLERY */}
-      <section className="relative -mt-[4.5vw] bg-[var(--bc-ink)] pt-[9vw] pb-20 text-white bc-dots-light">
+      <section className="relative -mt-[4.5vw] bg-[var(--bc-ink)] pt-[9vw] pb-[9vw] text-white bc-dots-light bc-cut-bottom">
         <div className="mx-auto max-w-6xl px-6">
           <span className="bc-chip !bg-[var(--bc-yellow)] !text-[var(--bc-ink)]">
             <span>Screenshots</span>
@@ -199,6 +200,9 @@ export default function BananaClickerPage() {
           </ul>
         </div>
       </section>
+
+      {/* IN THE WORKS */}
+      <Mechanics />
 
       {/* UNDER THE HOOD */}
       <section className="relative bg-[var(--bc-navy-deep)] py-20 text-white">
