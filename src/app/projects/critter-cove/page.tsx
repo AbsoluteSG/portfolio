@@ -69,9 +69,9 @@ const tech = [
 
 export default function CritterCovePage() {
   return (
-    <main className="cc-root overflow-x-hidden">
-      {/* top bar */}
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 text-sm font-bold sm:px-6">
+    <main className="cc-root relative overflow-x-hidden">
+      {/* top bar — sits over the hero art only, so it never lands on the content below */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 text-sm font-bold sm:px-6">
         <Link href="/" className="pointer-events-auto rounded-full border border-black/15 bg-white/85 px-3 py-1 text-[var(--cc-ink)] backdrop-blur hover:bg-white">
           ← alex-zaalishvili
         </Link>
@@ -83,14 +83,14 @@ export default function CritterCovePage() {
       {/* HERO: the key art at its own aspect, title block below */}
       <section className="relative">
         <div className="relative">
-          <Image src={`${A}/hero-day.jpg`} alt="A painted zoo: a ranger capybara on a path between ponds, a horse, a fox, a lion, and balloons" width={1792} height={592} priority sizes="100vw" className="h-auto w-full" />
-          <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(to_top,var(--cc-cream),transparent)]" />
+          <Image src={`${A}/hero-day.jpg`} alt="A painted zoo: a ranger capybara on a path between ponds, a horse, a fox, a lion, and balloons" width={1792} height={592} priority sizes="100vw" className="h-[42vh] max-h-[380px] w-full object-cover object-center md:h-auto md:max-h-none md:object-fill" />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 cc-fade-cream md:h-48" />
         </div>
-        <div className="mx-auto -mt-6 max-w-6xl px-6 pb-16 md:-mt-10">
+        <div className="relative z-10 mx-auto -mt-6 max-w-6xl px-6 pb-16 md:-mt-10">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <div className="flex items-center gap-4">
-                <Image src={`${A}/mark.png`} alt="" width={600} height={600} className="h-16 w-16 md:h-20 md:w-20" />
+                <Image src={`${A}/mark.png`} alt="" width={350} height={360} className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20" />
                 <span className="cc-eyebrow">Siphon Games · In development · Rust</span>
               </div>
               <h1 className="cc-display mt-4 text-[clamp(2.8rem,7vw,5.5rem)] text-[var(--cc-ink)]">Critter Cove</h1>
@@ -227,7 +227,10 @@ export default function CritterCovePage() {
 
       {/* CTA */}
       <section className="relative overflow-hidden bg-[var(--cc-night)] text-[var(--cc-cream)]">
-        <Image src={`${A}/hero-night.jpg`} alt="The same zoo at night, under stars" width={1792} height={592} sizes="100vw" className="h-auto w-full opacity-90" />
+        <div className="relative">
+          <Image src={`${A}/hero-night.jpg`} alt="The same zoo at night, under stars" width={1792} height={592} sizes="100vw" className="h-[36vh] max-h-[340px] w-full object-cover object-center opacity-90 md:h-auto md:max-h-none md:object-fill" />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 cc-fade-night md:h-32" />
+        </div>
         <div className="mx-auto max-w-6xl px-6 py-16 text-center">
           <h2 className="cc-display text-[clamp(2.2rem,6vw,4.5rem)]">Catch the world. Build your cove. Bring your friends.</h2>
           <p className="mt-4 text-lg font-semibold text-[var(--cc-cream)]/75">In development at Siphon Games. Write if you want to play an early build.</p>
