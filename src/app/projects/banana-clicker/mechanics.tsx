@@ -7,6 +7,8 @@
  * are set dressing, so the caption and the prose beside it carry the meaning.
  */
 
+import { TIERS, type Tier } from "./tiers";
+
 type ElementKind = "solar" | "tidal" | "ember" | "void";
 
 const ELEMENTS: Record<ElementKind, { name: string; fill: string; ink: string }> = {
@@ -295,10 +297,9 @@ function FactionWar() {
 /* 3 — Contract Board                                                  */
 /* ------------------------------------------------------------------ */
 
-const CONTRACTS = [
+const CONTRACTS: { tier: Tier; title: string; objective: string; have: number; need: number; reward: string }[] = [
   {
-    tier: "Rare",
-    color: "var(--bc-sky)",
+    tier: "rare",
     title: "Peel Pressure",
     objective: "Land 500 clicks inside one Banana Storm",
     have: 341,
@@ -306,18 +307,15 @@ const CONTRACTS = [
     reward: "3× Dealer tokens",
   },
   {
-    tier: "Epic",
-    color: "var(--bc-grape)",
+    tier: "epic",
     title: "Sliced & Diced",
     objective: "Prestige twice without buying an upgrade",
     have: 1,
     need: 2,
     reward: "1× Epic artifact",
-    rewardInk: "var(--bc-white)",
   },
   {
-    tier: "Legendary",
-    color: "var(--bc-yellow)",
+    tier: "legendary",
     title: "Breakfast of Champions",
     objective: "Bank 40 quadrillion bananas before the reset",
     have: 11,
@@ -340,6 +338,7 @@ function ContractBoard() {
         <ul className="grid gap-3">
           {CONTRACTS.map((c) => {
             const pct = Math.round((c.have / c.need) * 100);
+            const t = TIERS[c.tier];
             return (
               <li
                 key={c.title}
@@ -347,22 +346,22 @@ function ContractBoard() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <span className="bc-stamp" style={{ color: c.color }}>
-                      {c.tier}
+                    <span className="bc-stamp" style={{ color: t.onDark }}>
+                      {t.name}
                     </span>
                     <div className="bc-display mt-1.5 text-base text-white">{c.title}</div>
                     <p className="text-xs font-bold text-white/60">{c.objective}</p>
                   </div>
                   <span
                     className="shrink-0 rounded-lg border-[3px] border-[var(--bc-ink)] px-2 py-1 text-center text-[0.7rem] font-extrabold"
-                    style={{ background: c.color, color: c.rewardInk ?? "var(--bc-ink)" }}
+                    style={{ background: t.fill, color: t.ink }}
                   >
                     {c.reward}
                   </span>
                 </div>
                 <div className="mt-2.5 flex items-center gap-2.5">
                   <div className="bc-meter h-3 flex-1">
-                    <span style={{ width: `${pct}%`, background: c.color }} />
+                    <span style={{ width: `${pct}%`, background: t.fill }} />
                   </div>
                   <span className="bc-num w-16 shrink-0 text-right text-[0.7rem] font-extrabold text-white/70">
                     {c.have} / {c.need}
@@ -417,7 +416,7 @@ export default function Mechanics() {
   return (
     <section
       id="in-the-works"
-      className="bc-dots relative -mt-[4.5vw] bg-[var(--bc-cream)] pt-[9vw] pb-20 text-[var(--bc-ink)]"
+      className="bc-dots bc-cut-bottom-alt relative -mt-[4.5vw] bg-[var(--bc-cream)] pt-[9vw] pb-[9vw] text-[var(--bc-ink)]"
     >
       <div className="mx-auto max-w-6xl px-6">
         <span className="bc-chip">

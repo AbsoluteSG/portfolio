@@ -12,6 +12,8 @@
   --bc-grape: #8a5cd6;
   /* Tints for text on the navy panels — full-strength coral only reaches 1.9:1 there. */
   --bc-coral-light: #ff9aa2;
+  --bc-grape-light: #b795ec;
+  --bc-stone: #cfd6e0;
   --bc-white: #ffffff;
   font-family: var(--font-bc-body), ui-rounded, system-ui, sans-serif;
   color: var(--bc-ink);
@@ -151,6 +153,9 @@
   background: var(--bc-white);
 }
 .bc-meter > span { display: block; height: 100%; }
+/* For data bars rather than progress bars: a white track out-shouts a 0.6% fill,
+   so the unfilled part recedes instead. */
+.bc-meter-dark { background: rgba(255, 255, 255, 0.14); }
 
 /* Rarity stamp, angled like a rubber stamp on the contract cards. */
 .bc-stamp {
@@ -167,3 +172,22 @@
 
 /* Readouts line up column-wise as numbers change. */
 .bc-num { font-variant-numeric: tabular-nums; }
+
+/* Prismatic burst behind an Ultimate pull. Static by design — a mockup of the
+   reveal frame, not the animation. */
+.bc-rays {
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.22) 0deg 7deg,
+    transparent 7deg 14deg
+  );
+  -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 78%);
+  mask-image: radial-gradient(closest-side, #000 35%, transparent 78%);
+}
+
+/* Empty loadout socket — dashed so it reads as "slot open", not "slot broken". */
+.bc-socket-empty {
+  border: 3px dashed rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
