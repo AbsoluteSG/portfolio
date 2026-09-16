@@ -14,6 +14,7 @@
   --bc-coral-light: #ff9aa2;
   --bc-grape-light: #b795ec;
   --bc-stone: #cfd6e0;
+  --bc-leaf: #8fdc6a;
   --bc-white: #ffffff;
   font-family: var(--font-bc-body), ui-rounded, system-ui, sans-serif;
   color: var(--bc-ink);
@@ -156,6 +157,9 @@
 /* For data bars rather than progress bars: a white track out-shouts a 0.6% fill,
    so the unfilled part recedes instead. */
 .bc-meter-dark { background: rgba(255, 255, 255, 0.14); }
+/* Roll bars are only a few px tall, and a 3px border on each edge eats the whole
+   fill. Thin the border so the bar still has an inside. */
+.bc-meter-thin { border-width: 2px; }
 
 /* Rarity stamp, angled like a rubber stamp on the contract cards. */
 .bc-stamp {
@@ -190,4 +194,13 @@
   border: 3px dashed rgba(255, 255, 255, 0.28);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
+}
+
+/* Gear tooltip. Narrow on purpose — it sits next to a cursor, not in a column. */
+.bc-tip {
+  overflow: hidden;
+  border: 3px solid var(--bc-ink);
+  border-radius: 12px;
+  background: var(--bc-navy-deep);
+  box-shadow: 7px 8px 0 var(--bc-ink);
 }

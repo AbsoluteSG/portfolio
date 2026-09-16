@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Mechanics from "./mechanics";
 import Screens from "./screens";
+import InventorySection from "./inventory";
 
 const STEAM = "https://store.steampowered.com/app/2322080/Banana_Clicker/";
 const SOURCE = "https://github.com/AbsoluteSG/banana-clicker-source";
@@ -207,6 +208,9 @@ export default function BananaClickerPage() {
 
       {/* REDESIGN PASS */}
       <Screens />
+
+      {/* INVENTORY & TOOLTIPS */}
+      <InventorySection />
 
       {/* UNDER THE HOOD */}
       <section className="relative bg-[var(--bc-navy-deep)] py-20 text-white">

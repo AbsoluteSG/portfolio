@@ -10,62 +10,12 @@
 
 import Image from "next/image";
 import { TIERS, ULTIMATE_SHEEN, type Tier } from "./tiers";
+import { A, ACTIVE_ICONS, IDLE_ICONS, ITEM } from "./catalog";
 
-const A = "/projects/banana-clicker";
 
-/* ------------------------------------------------------------------ */
-/* Icons                                                               */
-/* ------------------------------------------------------------------ */
-
-type IconName =
-  | "bolt"
-  | "flame"
-  | "surfboard"
-  | "clover"
-  | "coin"
-  | "shield"
-  | "sparkle"
-  | "clock"
-  | "crit"
-  | "gem";
-
-// Icon bodies rather than bare paths: at 32px a filled silhouette of a surfboard
-// or a fist turns to mush, so a few of these need to be stroked outlines.
-const ICONS: Record<IconName, React.ReactNode> = {
-  bolt: <path d="M13.5 2 4 13.2h5.6L8.9 22 19 10.3h-5.9z" />,
-  flame: <path d="M12 1.5c.6 4-2.1 5.3-4 8a7.6 7.6 0 1 0 12.2 1.9c-.5 1.4-1.6 2.3-2.8 2.3 1-3.9-1.6-9.4-5.4-12.2z" />,
-  surfboard: (
-    <g fill="none" stroke="currentColor" strokeLinecap="round">
-      <ellipse cx="12" cy="12" rx="4.6" ry="10" transform="rotate(-38 12 12)" strokeWidth="2.2" />
-      <path d="M10 14.8 14 8.6" strokeWidth="1.7" />
-    </g>
-  ),
-  clover: (
-    <g>
-      <circle cx="8.3" cy="8.3" r="3.5" />
-      <circle cx="15.7" cy="8.3" r="3.5" />
-      <circle cx="8.3" cy="15.7" r="3.5" />
-      <circle cx="15.7" cy="15.7" r="3.5" />
-    </g>
-  ),
-  coin: (
-    <path d="M12 2c5 0 9 2 9 4.5S17 11 12 11 3 9 3 6.5 7 2 12 2zM3 9.6C4.8 11.1 8.2 12 12 12s7.2-.9 9-2.4v3C21 15.1 17 17 12 17s-9-1.9-9-4.4zm0 6C4.8 17.1 8.2 18 12 18s7.2-.9 9-2.4v2.9C21 21 17 22 12 22s-9-1-9-3.5z" />
-  ),
-  shield: <path d="M12 1.8 3.5 5.4v6.2c0 5 3.6 9.3 8.5 10.6 4.9-1.3 8.5-5.6 8.5-10.6V5.4z" />,
-  sparkle: (
-    <path d="M12 1.5 14.3 9l7.2 2.4-7.2 2.4L12 22.5 9.7 13.8 2.5 11.4 9.7 9zM19.5 2l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9zM4.5 15l.9 2.6 2.6.9-2.6.9L4.5 22l-.9-2.6-2.6-.9 2.6-.9z" />
-  ),
-  clock: <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1.2 4.5v5.9l4.1 2.4-1.1 1.9-5-3V6.5z" />,
-  crit: <path d="M12 1.5 9.4 8.2l-7 .5 5.4 4.5-1.8 6.9L12 16.3l6 3.8-1.8-6.9 5.4-4.5-7-.5z" />,
-  gem: <path d="M12 1.5 21 12l-9 10.5L3 12z" />,
-};
-
-function Icon({ name, className = "h-1/2 w-1/2" }: { name: IconName; className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
-      {ICONS[name]}
-    </svg>
-  );
+/** Real game sprite, sized to its slot. */
+function Sprite({ src, className = "h-[78%] w-[78%]" }: { src: string; className?: string }) {
+  return <Image src={src} alt="" width={256} height={256} className={`${className} object-contain`} />;
 }
 
 /* Shared bits ------------------------------------------------------ */
@@ -106,20 +56,20 @@ const STATS = [
   { label: "Storm gain", value: "×3.1", delta: null },
 ];
 
-type Slot = { icon: IconName; tier: Tier; level: number; selected?: boolean } | { empty: true } | { locked: true };
+type Slot = { art: string; tier: Tier; level: number; selected?: boolean } | { empty: true } | { locked: true };
 
 const ACTIVES: Slot[] = [
-  { icon: "bolt", tier: "legendary", level: 4 },
-  { icon: "surfboard", tier: "epic", level: 1, selected: true },
-  { icon: "flame", tier: "rare", level: 2 },
+  { art: ACTIVE_ICONS.bananaUp, tier: "legendary", level: 4 },
+  { art: ACTIVE_ICONS.picnicBasket, tier: "epic", level: 1, selected: true },
+  { art: ACTIVE_ICONS.tongs, tier: "rare", level: 2 },
   { empty: true },
   { locked: true },
 ];
 
 const PASSIVES: Slot[] = [
-  { icon: "coin", tier: "legendary", level: 5 },
-  { icon: "clover", tier: "epic", level: 3 },
-  { icon: "shield", tier: "common", level: 1 },
+  { art: IDLE_ICONS.bananaTree, tier: "legendary", level: 5 },
+  { art: IDLE_ICONS.monkey, tier: "epic", level: 3 },
+  { art: IDLE_ICONS.strawHat, tier: "common", level: 1 },
   { empty: true },
   { empty: true },
 ];
@@ -150,7 +100,8 @@ function SlotRow({ slots }: { slots: Slot[] }) {
             }`}
             style={{ background: t.fill, color: t.ink }}
           >
-            <Icon name={s.icon} />
+            <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: t.plate }} />
+            <Sprite src={`${A}/upgrades/${s.art}.webp`} className="relative h-[72%] w-[72%]" />
             <span className="bc-num absolute -right-1 -bottom-1 rounded-md border-2 border-[var(--bc-ink)] bg-[var(--bc-ink)] px-1 text-[0.6rem] font-extrabold text-white">
               {s.level}
             </span>
@@ -242,15 +193,16 @@ function CharacterSheet() {
                 className="bc-slot grid h-16 w-16 shrink-0 place-items-center"
                 style={{ background: TIERS.epic.fill, color: TIERS.epic.ink }}
               >
-                <Icon name="surfboard" />
+                <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: TIERS.epic.plate }} />
+                <Sprite src={`${A}/upgrades/${ACTIVE_ICONS.picnicBasket}.webp`} className="relative h-[72%] w-[72%]" />
               </span>
               <div className="min-w-0">
                 <span className="bc-stamp" style={{ color: TIERS.epic.onDark }}>
                   Epic · Active
                 </span>
-                <div className="bc-display mt-1.5 text-lg text-white">Surfboard Smash</div>
+                <div className="bc-display mt-1.5 text-lg text-white">Beach Picnic</div>
                 <p className="text-xs font-bold text-white/60">
-                  Slam the board for 12s: every click counts twice and crits chain into the next one.
+                  Lay out the spread for 12s: every click counts twice and crits chain into the next one.
                 </p>
               </div>
             </div>
@@ -267,9 +219,7 @@ function CharacterSheet() {
 
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
               <span className="flex items-center gap-1.5">
-                <span className="grid h-6 w-6 place-items-center rounded-full border-2 border-[var(--bc-ink)] bg-[var(--bc-yellow)] text-[var(--bc-ink)]">
-                  <Icon name="coin" className="h-3.5 w-3.5" />
-                </span>
+                <Sprite src={`${A}/upgrades/currency-banana.webp`} className="h-6 w-6" />
                 <span className="bc-num text-sm font-extrabold text-white">4.2M</span>
               </span>
 
@@ -304,9 +254,9 @@ function CharacterSheet() {
 /* ------------------------------------------------------------------ */
 
 const BANNERS = [
-  { name: "Resonance Rush", ends: "4d 06h", fill: ULTIMATE_SHEEN, icon: "sparkle" as IconName, active: true },
-  { name: "House Blend", ends: "Always on", fill: "var(--bc-sky)", icon: "coin" as IconName },
-  { name: "Syndicate Vault", ends: "1d 22h", fill: "var(--bc-coral)", icon: "shield" as IconName },
+  { name: "Astro Drop", ends: "4d 06h", fill: ULTIMATE_SHEEN, art: "astro-helm", active: true },
+  { name: "House Blend", ends: "Always on", fill: "var(--bc-sky)", art: "plain-banana" },
+  { name: "Syndicate Vault", ends: "1d 22h", fill: "var(--bc-coral)", art: "void-blot" },
 ];
 
 const RATES: { tier: Tier; pct: number }[] = [
@@ -337,7 +287,7 @@ function GachaBanners() {
                 className="grid h-14 place-items-center border-b-[3px] border-[var(--bc-ink)] text-[var(--bc-ink)]"
                 style={{ background: b.fill }}
               >
-                <Icon name={b.icon} className="h-7 w-7" />
+                <Sprite src={`${A}/items/${b.art}.webp`} className="h-10 w-10" />
               </span>
               <span className="block px-2.5 py-2">
                 <span className="bc-display block text-sm text-white">{b.name}</span>
@@ -355,11 +305,11 @@ function GachaBanners() {
               className="mt-2 grid aspect-[4/3] place-items-center rounded-lg border-[3px] border-[var(--bc-ink)] text-[var(--bc-ink)]"
               style={{ background: ULTIMATE_SHEEN }}
             >
-              <Icon name="sparkle" className="h-14 w-14" />
+              <Sprite src={`${A}/items/astro-helm.webp`} className="h-[72%] w-[72%]" />
             </div>
             <div className="mt-2.5 flex items-center justify-between gap-2">
               <div className="min-w-0">
-                <div className="bc-display truncate text-base text-white">Prism Peel</div>
+                <div className="bc-display truncate text-base text-white">{ITEM["astro-helm"].name}</div>
                 <span className="bc-stamp" style={{ color: TIERS.ultimate.onDark }}>
                   Ultimate
                 </span>
@@ -429,17 +379,18 @@ function GachaBanners() {
 /* 3 — Reward reveal                                                   */
 /* ------------------------------------------------------------------ */
 
-const PULL: { tier: Tier; icon: IconName; dupe?: number }[] = [
-  { tier: "ultimate", icon: "sparkle" },
-  { tier: "legendary", icon: "bolt" },
-  { tier: "epic", icon: "clover", dupe: 40 },
-  { tier: "epic", icon: "surfboard" },
-  { tier: "epic", icon: "shield", dupe: 40 },
-  { tier: "rare", icon: "coin", dupe: 15 },
-  { tier: "rare", icon: "flame" },
-  { tier: "rare", icon: "clock", dupe: 15 },
-  { tier: "common", icon: "crit" },
-  { tier: "common", icon: "gem", dupe: 5 },
+// Slugs carry their own tier, so the strip can't drift out of sync with the catalog.
+const PULL: { slug: string; dupe?: number }[] = [
+  { slug: "astro-helm" },
+  { slug: "tide-trident" },
+  { slug: "crimson-drape", dupe: 40 },
+  { slug: "reef-skirt" },
+  { slug: "rubber-nana", dupe: 40 },
+  { slug: "teal-returner", dupe: 15 },
+  { slug: "frost-shards" },
+  { slug: "rivet-gauntlet", dupe: 15 },
+  { slug: "autumn-visor" },
+  { slug: "lucky-sock", dupe: 5 },
 ];
 
 function RewardReveal() {
@@ -458,7 +409,7 @@ function RewardReveal() {
                 className="grid h-36 w-28 place-items-center rounded-xl border-[4px] border-[var(--bc-ink)] text-[var(--bc-ink)] shadow-[8px_9px_0_var(--bc-ink)]"
                 style={{ background: ULTIMATE_SHEEN }}
               >
-                <Icon name="sparkle" className="h-14 w-14" />
+                <Sprite src={`${A}/items/astro-helm.webp`} className="h-[74%] w-[74%]" />
               </div>
               <span className="bc-display absolute -top-3 -right-4 rotate-[8deg] rounded-md border-[3px] border-[var(--bc-ink)] bg-[var(--bc-coral)] px-2 py-0.5 text-sm text-white">
                 New!
@@ -468,9 +419,9 @@ function RewardReveal() {
             <span className="bc-stamp mt-4" style={{ color: TIERS.ultimate.onDark }}>
               Ultimate
             </span>
-            <div className="bc-display mt-2 text-3xl text-white">Prism Peel</div>
+            <div className="bc-display mt-2 text-3xl text-white">{ITEM["astro-helm"].name}</div>
             <p className="mt-1 max-w-sm text-center text-xs font-bold text-white/65">
-              +250% resonance on Solar chains. Counts as every element at once.
+              +250% click power, and Banana Storms run six seconds longer. Counts as every set at once.
             </p>
           </div>
         </div>
@@ -481,14 +432,16 @@ function RewardReveal() {
         </Label>
         <ul className="mt-2 grid grid-cols-5 gap-2 sm:grid-cols-10">
           {PULL.map((p, i) => {
-            const t = TIERS[p.tier];
+            const item = ITEM[p.slug];
+            const t = TIERS[item.tier];
             return (
-              <li key={i} className="relative">
+              <li key={p.slug} className="relative">
                 <span
                   className={`bc-slot grid aspect-[3/4] place-items-center ${i === 0 ? "opacity-40" : ""}`}
-                  style={{ background: p.tier === "ultimate" ? ULTIMATE_SHEEN : t.fill, color: t.ink }}
+                  style={{ background: item.tier === "ultimate" ? ULTIMATE_SHEEN : t.fill, color: t.ink }}
                 >
-                  <Icon name={p.icon} className="h-1/2 w-1/2" />
+                  <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: t.plate }} />
+                  <Sprite src={`${A}/items/${p.slug}.webp`} className="relative h-[66%] w-[66%]" />
                 </span>
                 {/* Duplicates convert on the spot rather than in a second screen. */}
                 {p.dupe && (
@@ -545,7 +498,7 @@ const SCREENS = [
       "Slots carry tier and level, so the board reads at a glance",
       "Current → next and price both land before you commit",
     ],
-    caption: "Concept: the character sheet with Surfboard Smash selected.",
+    caption: "Concept: the character sheet with Beach Picnic selected; upgrade art is the game’s own.",
     panel: <CharacterSheet />,
   },
   {
@@ -558,7 +511,7 @@ const SCREENS = [
       "Pity reads as progress, with the guarantee named",
       "Cost and discount sit on the button that spends",
     ],
-    caption: "Concept: banner select with the featured rate-up and the full odds.",
+    caption: "Concept: banner select with the featured rate-up and the full odds. Gear art is the game’s own.",
     panel: <GachaBanners />,
   },
   {
@@ -580,7 +533,7 @@ export default function Screens() {
   return (
     <section
       id="screens"
-      className="bc-dots relative -mt-[4.5vw] bg-[var(--bc-sky)] pt-[9vw] pb-20 text-[var(--bc-ink)]"
+      className="bc-dots bc-cut-bottom relative -mt-[4.5vw] bg-[var(--bc-sky)] pt-[9vw] pb-[9vw] text-[var(--bc-ink)]"
     >
       <div className="mx-auto max-w-6xl px-6">
         <span className="bc-chip">
