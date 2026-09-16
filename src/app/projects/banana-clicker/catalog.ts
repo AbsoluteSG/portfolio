@@ -47,22 +47,36 @@ export const ITEMS: Item[] = [
 
 export const ITEM: Record<string, Item> = Object.fromEntries(ITEMS.map((i) => [i.slug, i]));
 
-/** Chad's board: actives from Purchase Icons/Actives, passives from /Idle. */
+/**
+ * Chad ships his own ability art in Characters/Chad, which beats the generic
+ * Purchase Icons on his sheet — Surfboard Smash is a real ability with a real
+ * icon. Generic actives and idles stay for the boards that aren't his.
+ */
+export const CHAD_ABILITIES = {
+  surfboardSmash: `${A}/abilities/chad-surfboard-smash.webp`,
+  crabAssistance: `${A}/abilities/chad-crab-assistance.webp`,
+  beachscanners: `${A}/abilities/chad-beachscanners.webp`,
+  bananaMills: `${A}/abilities/chad-banana-mills.webp`,
+  shellTrading: `${A}/abilities/chad-shell-trading.webp`,
+} as const;
+
 export const ACTIVE_ICONS = {
-  bananaUp: "act-banana-up",
-  picnicBasket: "act-picnic-basket",
-  tongs: "act-tongs",
-  bucket: "act-bucket",
-  rake: "act-rake",
-  briefcase: "act-briefcase",
-  bananaBunch: "act-banana-bunch",
+  bananaUp: `${A}/upgrades/act-banana-up.webp`,
+  picnicBasket: `${A}/upgrades/act-picnic-basket.webp`,
+  tongs: `${A}/upgrades/act-tongs.webp`,
+  bucket: `${A}/upgrades/act-bucket.webp`,
+  rake: `${A}/upgrades/act-rake.webp`,
+  briefcase: `${A}/upgrades/act-briefcase.webp`,
+  bananaBunch: `${A}/upgrades/act-banana-bunch.webp`,
 } as const;
 
 export const IDLE_ICONS = {
-  bananaTree: "idle-banana-tree",
-  monkey: "idle-monkey",
-  strawHat: "idle-straw-hat",
-  bank: "idle-bank",
-  pirate: "idle-pirate",
-  merchant: "idle-merchant",
+  bananaTree: `${A}/upgrades/idle-banana-tree.webp`,
+  monkey: `${A}/upgrades/idle-monkey.webp`,
+  strawHat: `${A}/upgrades/idle-straw-hat.webp`,
+  bank: `${A}/upgrades/idle-bank.webp`,
+  pirate: `${A}/upgrades/idle-pirate.webp`,
+  merchant: `${A}/upgrades/idle-merchant.webp`,
 } as const;
+
+export const CURRENCY = `${A}/upgrades/currency-banana.webp`;

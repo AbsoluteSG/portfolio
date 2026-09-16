@@ -10,40 +10,9 @@
 
 import Image from "next/image";
 import { TIERS, ULTIMATE_SHEEN, type Tier } from "./tiers";
-import { A, ACTIVE_ICONS, IDLE_ICONS, ITEM } from "./catalog";
+import { A, CHAD_ABILITIES, CURRENCY, IDLE_ICONS, ITEM } from "./catalog";
+import { Label, Sprite, WindowBar } from "./panel";
 
-
-/** Real game sprite, sized to its slot. */
-function Sprite({ src, className = "h-[78%] w-[78%]" }: { src: string; className?: string }) {
-  return <Image src={src} alt="" width={256} height={256} className={`${className} object-contain`} />;
-}
-
-/* Shared bits ------------------------------------------------------ */
-
-function WindowBar({ title, tag, tagFill = "var(--bc-yellow)", tagInk = "var(--bc-ink)" }: {
-  title: string;
-  tag: string;
-  tagFill?: string;
-  tagInk?: string;
-}) {
-  return (
-    <div className="bc-window-bar">
-      <span className="bc-window-title text-lg">{title}</span>
-      <span
-        className="bc-num shrink-0 rounded-md px-2 py-0.5 text-xs font-extrabold whitespace-nowrap"
-        style={{ background: tagFill, color: tagInk }}
-      >
-        {tag}
-      </span>
-    </div>
-  );
-}
-
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-[0.65rem] font-extrabold tracking-[0.16em] text-white/55 uppercase">{children}</div>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /* 1 — Character sheet                                                 */
@@ -59,16 +28,16 @@ const STATS = [
 type Slot = { art: string; tier: Tier; level: number; selected?: boolean } | { empty: true } | { locked: true };
 
 const ACTIVES: Slot[] = [
-  { art: ACTIVE_ICONS.bananaUp, tier: "legendary", level: 4 },
-  { art: ACTIVE_ICONS.picnicBasket, tier: "epic", level: 1, selected: true },
-  { art: ACTIVE_ICONS.tongs, tier: "rare", level: 2 },
+  { art: CHAD_ABILITIES.crabAssistance, tier: "legendary", level: 4 },
+  { art: CHAD_ABILITIES.surfboardSmash, tier: "epic", level: 1, selected: true },
+  { art: CHAD_ABILITIES.beachscanners, tier: "rare", level: 2 },
   { empty: true },
   { locked: true },
 ];
 
 const PASSIVES: Slot[] = [
-  { art: IDLE_ICONS.bananaTree, tier: "legendary", level: 5 },
-  { art: IDLE_ICONS.monkey, tier: "epic", level: 3 },
+  { art: CHAD_ABILITIES.bananaMills, tier: "legendary", level: 5 },
+  { art: CHAD_ABILITIES.shellTrading, tier: "epic", level: 3 },
   { art: IDLE_ICONS.strawHat, tier: "common", level: 1 },
   { empty: true },
   { empty: true },
@@ -101,7 +70,7 @@ function SlotRow({ slots }: { slots: Slot[] }) {
             style={{ background: t.fill, color: t.ink }}
           >
             <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: t.plate }} />
-            <Sprite src={`${A}/upgrades/${s.art}.webp`} className="relative h-[72%] w-[72%]" />
+            <Sprite src={s.art} className="relative h-[72%] w-[72%]" />
             <span className="bc-num absolute -right-1 -bottom-1 rounded-md border-2 border-[var(--bc-ink)] bg-[var(--bc-ink)] px-1 text-[0.6rem] font-extrabold text-white">
               {s.level}
             </span>
@@ -194,15 +163,15 @@ function CharacterSheet() {
                 style={{ background: TIERS.epic.fill, color: TIERS.epic.ink }}
               >
                 <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: TIERS.epic.plate }} />
-                <Sprite src={`${A}/upgrades/${ACTIVE_ICONS.picnicBasket}.webp`} className="relative h-[72%] w-[72%]" />
+                <Sprite src={CHAD_ABILITIES.surfboardSmash} className="relative h-[72%] w-[72%]" />
               </span>
               <div className="min-w-0">
                 <span className="bc-stamp" style={{ color: TIERS.epic.onDark }}>
                   Epic · Active
                 </span>
-                <div className="bc-display mt-1.5 text-lg text-white">Beach Picnic</div>
+                <div className="bc-display mt-1.5 text-lg text-white">Surfboard Smash</div>
                 <p className="text-xs font-bold text-white/60">
-                  Lay out the spread for 12s: every click counts twice and crits chain into the next one.
+                  Slam the board for 12s: every click counts twice and crits chain into the next one.
                 </p>
               </div>
             </div>
@@ -219,7 +188,7 @@ function CharacterSheet() {
 
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
               <span className="flex items-center gap-1.5">
-                <Sprite src={`${A}/upgrades/currency-banana.webp`} className="h-6 w-6" />
+                <Sprite src={CURRENCY} className="h-6 w-6" />
                 <span className="bc-num text-sm font-extrabold text-white">4.2M</span>
               </span>
 
@@ -253,10 +222,19 @@ function CharacterSheet() {
 /* 2 — Gacha banners                                                   */
 /* ------------------------------------------------------------------ */
 
+// Banner art is its own thing in a real build — key art per banner, not the
+// items inside it. Standing in with a mark on a colour field rather than
+// borrowing a gear sprite, which read as "this banner contains one helmet".
+const BANNER_MARKS = {
+  sparkle: "M12 1.5 14.3 9l7.2 2.4-7.2 2.4L12 22.5 9.7 13.8 2.5 11.4 9.7 9zM19.5 2l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9zM4.5 15l.9 2.6 2.6.9-2.6.9L4.5 22l-.9-2.6-2.6-.9 2.6-.9z",
+  coin: "M12 2c5 0 9 2 9 4.5S17 11 12 11 3 9 3 6.5 7 2 12 2zM3 9.6C4.8 11.1 8.2 12 12 12s7.2-.9 9-2.4v3C21 15.1 17 17 12 17s-9-1.9-9-4.4zm0 6C4.8 17.1 8.2 18 12 18s7.2-.9 9-2.4v2.9C21 21 17 22 12 22s-9-1-9-3.5z",
+  shield: "M12 1.8 3.5 5.4v6.2c0 5 3.6 9.3 8.5 10.6 4.9-1.3 8.5-5.6 8.5-10.6V5.4z",
+} as const;
+
 const BANNERS = [
-  { name: "Astro Drop", ends: "4d 06h", fill: ULTIMATE_SHEEN, art: "astro-helm", active: true },
-  { name: "House Blend", ends: "Always on", fill: "var(--bc-sky)", art: "plain-banana" },
-  { name: "Syndicate Vault", ends: "1d 22h", fill: "var(--bc-coral)", art: "void-blot" },
+  { name: "Astro Drop", ends: "4d 06h", fill: ULTIMATE_SHEEN, mark: "sparkle" as const, active: true },
+  { name: "House Blend", ends: "Always on", fill: "var(--bc-sky)", mark: "coin" as const },
+  { name: "Syndicate Vault", ends: "1d 22h", fill: "var(--bc-coral)", mark: "shield" as const },
 ];
 
 const RATES: { tier: Tier; pct: number }[] = [
@@ -287,7 +265,9 @@ function GachaBanners() {
                 className="grid h-14 place-items-center border-b-[3px] border-[var(--bc-ink)] text-[var(--bc-ink)]"
                 style={{ background: b.fill }}
               >
-                <Sprite src={`${A}/items/${b.art}.webp`} className="h-10 w-10" />
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7" aria-hidden>
+                  <path d={BANNER_MARKS[b.mark]} />
+                </svg>
               </span>
               <span className="block px-2.5 py-2">
                 <span className="bc-display block text-sm text-white">{b.name}</span>
@@ -498,7 +478,7 @@ const SCREENS = [
       "Slots carry tier and level, so the board reads at a glance",
       "Current → next and price both land before you commit",
     ],
-    caption: "Concept: the character sheet with Beach Picnic selected; upgrade art is the game’s own.",
+    caption: "Concept: the character sheet with Surfboard Smash selected; every icon is Chad’s own ability art.",
     panel: <CharacterSheet />,
   },
   {
@@ -511,7 +491,7 @@ const SCREENS = [
       "Pity reads as progress, with the guarantee named",
       "Cost and discount sit on the button that spends",
     ],
-    caption: "Concept: banner select with the featured rate-up and the full odds. Gear art is the game’s own.",
+    caption: "Concept: banner select with the featured rate-up and the full odds.",
     panel: <GachaBanners />,
   },
   {

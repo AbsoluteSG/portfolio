@@ -9,25 +9,14 @@
 import Image from "next/image";
 import { A, ITEM, ITEMS, SOCKETS, type Item } from "./catalog";
 import { TIERS, ULTIMATE_SHEEN, type Tier } from "./tiers";
+import { Label, Sprite } from "./panel";
 
 function tierFill(tier: Tier) {
   return tier === "ultimate" ? ULTIMATE_SHEEN : TIERS[tier].fill;
 }
 
-function Sprite({ slug, className = "h-[74%] w-[74%]" }: { slug: string; className?: string }) {
-  return (
-    <Image
-      src={`${A}/items/${slug}.webp`}
-      alt=""
-      width={256}
-      height={256}
-      className={`${className} object-contain`}
-    />
-  );
-}
-
-function Label({ children }: { children: React.ReactNode }) {
-  return <div className="text-[0.65rem] font-extrabold tracking-[0.16em] text-white/55 uppercase">{children}</div>;
+function Gear({ slug, className }: { slug: string; className?: string }) {
+  return <Sprite src={`${A}/items/${slug}.webp`} className={className} />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -47,7 +36,7 @@ function GearSlot({ item, state = {}, size = "grid" }: { item: Item; state?: Slo
     >
       {/* Tier is the frame; the sprite sits on a near-white plate so it stays legible. */}
       <span aria-hidden className="absolute inset-[3px] rounded-[7px]" style={{ background: t.plate }} />
-      <Sprite slug={item.slug} className={`relative ${size === "lg" ? "h-[68%] w-[68%]" : "h-[70%] w-[70%]"}`} />
+      <Gear slug={item.slug} className={`relative ${size === "lg" ? "h-[68%] w-[68%]" : "h-[70%] w-[70%]"}`} />
 
       {/* Equipped is a corner flag rather than a colour change — tier already owns colour. */}
       {state.equipped && (
@@ -285,7 +274,7 @@ function Tip({
         style={{ background: tierFill(item.tier), color: t.ink }}
       >
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border-2 border-[var(--bc-ink)] bg-white/35">
-          <Sprite slug={item.slug} className="h-[80%] w-[80%]" />
+          <Gear slug={item.slug} className="h-[80%] w-[80%]" />
         </span>
         <span className="min-w-0">
           <span className="bc-display block truncate text-sm">{item.name}</span>
@@ -427,7 +416,7 @@ export default function InventorySection() {
   return (
     <section
       id="inventory"
-      className="bc-dots relative -mt-[4.5vw] bg-[var(--bc-cream)] pt-[9vw] pb-20 text-[var(--bc-ink)]"
+      className="bc-dots bc-cut-bottom relative -mt-[4.5vw] bg-[var(--bc-cream)] pt-[9vw] pb-[9vw] text-[var(--bc-ink)]"
     >
       <div className="mx-auto max-w-6xl px-6">
         <span className="bc-chip">

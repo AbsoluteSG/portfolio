@@ -3,6 +3,8 @@ import Link from "next/link";
 import Mechanics from "./mechanics";
 import Screens from "./screens";
 import InventorySection from "./inventory";
+import FrontDoor from "./frontdoor";
+import Meta from "./meta";
 
 const STEAM = "https://store.steampowered.com/app/2322080/Banana_Clicker/";
 const SOURCE = "https://github.com/AbsoluteSG/banana-clicker-source";
@@ -211,6 +213,12 @@ export default function BananaClickerPage() {
 
       {/* INVENTORY & TOOLTIPS */}
       <InventorySection />
+
+      {/* MAIN MENU & DIALOGUE */}
+      <FrontDoor />
+
+      {/* META PROGRESSION */}
+      <Meta />
 
       {/* UNDER THE HOOD */}
       <section className="relative bg-[var(--bc-navy-deep)] py-20 text-white">
