@@ -6,7 +6,7 @@
 
 import Image from "next/image";
 import { A, CURRENCY } from "./catalog";
-import { Label, Sprite, WindowBar } from "./panel";
+import { Sprite, WindowBar } from "./panel";
 import { TIERS, ULTIMATE_SHEEN, type Tier } from "./tiers";
 
 const SLICE = (n: string) => `${A}/slices/${n}.webp`;
@@ -87,97 +87,111 @@ const TIERS_TRACK: { n: number; free: string; premium: string; state: State; pre
 function BattlePass() {
   return (
     <div className="bc-window" aria-hidden>
-      <WindowBar title="Battle Pass — Season 01" tag="12D LEFT" />
+      <WindowBar title="Battle Pass — Season 01" tag="FULL SCREEN" />
 
-      <div className="p-4 sm:p-5">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,15rem)]">
-          <div>
-            {/* Level and the distance to the next node, not just a bar. */}
-            <div className="flex items-end gap-3">
-              <span className="bc-display shrink-0 text-5xl text-[var(--bc-yellow)]">4</span>
-              <span className="min-w-0 flex-1">
-                <span className="flex items-baseline justify-between gap-2">
-                  <Label>Season level</Label>
-                  <span className="bc-num text-xs font-extrabold text-white/70">3,499 / 5,000 XP</span>
+      {/* Full screen, not a card: this is the whole viewport in game. */}
+      <div className="bc-dots-light relative aspect-[5/8] overflow-hidden bg-[var(--bc-navy)] sm:aspect-[16/10] lg:aspect-[16/9]">
+        <div className="absolute inset-0 flex flex-col gap-3 p-3 sm:gap-4 sm:p-5">
+          <div className="grid flex-1 items-center gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,1fr)] sm:gap-4">
+            {/* Left: where you are in the season */}
+            <div>
+              <h4 className="bc-display bc-outline text-[clamp(1.4rem,3.6vw,2.6rem)]">Battle Pass</h4>
+              <div className="mt-1 flex items-center gap-2.5">
+                <span className="bc-display text-[clamp(2rem,5vw,3.4rem)] leading-none text-[var(--bc-yellow)]">4</span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[0.6rem] font-extrabold tracking-[0.16em] text-white/55 uppercase">
+                    Season 01
+                  </span>
+                  <span className="bc-meter mt-1 block h-3.5">
+                    <span style={{ width: "70%", background: "var(--bc-yellow)" }} />
+                  </span>
+                  <span className="bc-num mt-0.5 block text-[0.65rem] font-extrabold text-white/70">
+                    3,499 / 5,000 XP
+                  </span>
                 </span>
-                <span className="bc-meter mt-1 block h-4">
-                  <span style={{ width: "70%", background: "var(--bc-yellow)" }} />
-                </span>
-                <span className="mt-1 block text-[0.7rem] font-bold text-white/55">
-                  Tier 5 in <span className="bc-num text-white">1,501</span> XP — about two Storms.
+              </div>
+              <p className="mt-1.5 text-[0.65rem] font-bold text-white/55">
+                Tier 5 in <span className="bc-num text-white">1,501</span> XP — about two Storms.
+              </p>
+
+              <span
+                className="mt-2.5 block rounded-lg border-[3px] border-[var(--bc-ink)] px-3 py-2 text-center text-[var(--bc-ink)]"
+                style={{ background: ULTIMATE_SHEEN }}
+              >
+                <span className="bc-display block text-sm">Unlock premium</span>
+                {/* The number that actually sells it. */}
+                <span className="bc-num block text-[0.62rem] font-extrabold opacity-80">
+                  Claim 4 held rewards at once
                 </span>
               </span>
             </div>
 
-            {/* Two lanes: free above, premium below, so the upsell is visible. */}
-            <div className="mt-4 overflow-hidden rounded-xl border-[3px] border-[var(--bc-ink)] bg-[var(--bc-navy-deep)] p-3">
-              <div className="grid grid-cols-[3.2rem_minmax(0,1fr)] gap-2">
-                <div className="grid content-around gap-2">
-                  <span className="rounded-md border-2 border-[var(--bc-ink)] bg-white/10 px-1 py-2 text-center text-[0.6rem] font-extrabold tracking-wider text-white/70 uppercase">
-                    Free
-                  </span>
-                  <span className="rounded-md border-2 border-[var(--bc-ink)] px-1 py-2 text-center text-[0.6rem] font-extrabold tracking-wider text-[var(--bc-ink)] uppercase"
-                    style={{ background: ULTIMATE_SHEEN }}>
-                    Premium
-                  </span>
-                </div>
-
-                <ol className="flex gap-2 overflow-hidden">
-                  {TIERS_TRACK.map((t) => (
-                    <li key={t.n} className="min-w-0 flex-1">
-                      <div
-                        className={`mb-1 rounded text-center text-[0.65rem] font-extrabold ${
-                          t.n === 4 ? "bg-[var(--bc-yellow)] text-[var(--bc-ink)]" : "text-white/45"
-                        }`}
-                      >
-                        {t.n}
-                      </div>
-                      <Reward art={t.free} state={t.state} />
-                      <div className="mt-2">
-                        <Reward art={t.premium} state={t.premiumState} />
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              <div className="bc-meter bc-meter-dark bc-meter-thin mt-3 h-2">
-                <span style={{ width: "48%", background: "var(--bc-sky)" }} />
-              </div>
-            </div>
-          </div>
-
-          {/* The selected-tier preview from the original, but it names what the reward does. */}
-          <div className="flex flex-col gap-2.5 rounded-xl border-[3px] border-[var(--bc-ink)] bg-[var(--bc-navy-deep)] p-3.5">
-            <Label>Tier 4 · Free</Label>
-            <div className="grid place-items-center rounded-lg border-[3px] border-[var(--bc-ink)] bg-[#f4f1e8] py-4">
+            {/* Centre: the reward itself, given the room a full screen allows */}
+            <div className="relative grid place-items-center">
+              <span aria-hidden className="bc-rays pointer-events-none absolute inset-0" />
               <Image
                 src={SLICE("chocolate-dipped-slice")}
                 alt=""
                 width={256}
                 height={256}
-                className="h-24 w-auto object-contain"
+                className="relative h-[min(26vw,9rem)] w-auto object-contain drop-shadow-[0_10px_0_rgba(0,0,0,0.3)]"
               />
             </div>
-            <div>
-              <div className="bc-display text-base text-white">Chocolate Slices</div>
-              <p className="text-xs font-bold text-white/60">
-                +12% offline rate, permanently. Stacks with every other slice you own.
+
+            {/* Right: what it is and what it does */}
+            <div className="text-right">
+              <h4 className="bc-display bc-outline text-[clamp(1.1rem,2.8vw,2rem)]">Chocolate Slices</h4>
+              <p className="mt-1 ml-auto max-w-[24ch] text-[0.7rem] font-bold text-white/70">
+                Unlock chocolate dipped banana slices.
               </p>
-            </div>
-            <span className="rounded-lg border-[3px] border-[var(--bc-ink)] bg-[var(--bc-yellow)] px-3 py-2 text-center text-sm font-extrabold text-[var(--bc-ink)]">
-              Redeem
-            </span>
-            <span
-              className="rounded-lg border-[3px] border-[var(--bc-ink)] px-3 py-2 text-center text-[var(--bc-ink)]"
-              style={{ background: ULTIMATE_SHEEN }}
-            >
-              <span className="bc-display block text-sm">Unlock premium</span>
-              {/* The number that actually sells it. */}
-              <span className="bc-num block text-[0.65rem] font-extrabold opacity-80">
-                Claim 4 held rewards at once
+              <ul className="mt-2 flex flex-wrap justify-end gap-1.5">
+                {["+12% offline rate", "Permanent", "Stacks"].map((t) => (
+                  <li
+                    key={t}
+                    className="bc-num rounded border-2 border-[var(--bc-ink)] bg-white/10 px-1.5 py-0.5 text-[0.6rem] font-extrabold text-white/80"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-3 block rounded-lg border-[3px] border-[var(--bc-ink)] bg-[var(--bc-yellow)] px-4 py-2 text-center text-sm font-extrabold text-[var(--bc-ink)] shadow-[4px_5px_0_var(--bc-ink)]">
+                Redeem
               </span>
-            </span>
+            </div>
           </div>
+
+          {/* Bottom: the track, running the full width the way yours does */}
+          <ol className="grid grid-cols-7 gap-1 sm:gap-1.5">
+            {TIERS_TRACK.map((t) => {
+              const current = t.n === 4;
+              const past = t.state === "claimed";
+              return (
+                <li
+                  key={t.n}
+                  className="overflow-hidden rounded-lg border-[3px] border-[var(--bc-ink)] p-1 sm:p-1.5"
+                  style={{
+                    background: current
+                      ? "var(--bc-yellow)"
+                      : past
+                        ? "linear-gradient(180deg, #f2b705, #b97f05)"
+                        : "var(--bc-navy-deep)",
+                  }}
+                >
+                  <div
+                    className={`bc-display text-center text-sm leading-none sm:text-lg ${
+                      current || past ? "text-[var(--bc-ink)]" : "text-white/40"
+                    }`}
+                  >
+                    {t.n}
+                  </div>
+                  <div className="mt-1 grid gap-1">
+                    <Reward art={t.free} state={t.state} />
+                    <Reward art={t.premium} state={t.premiumState} />
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </div>
@@ -451,7 +465,7 @@ const PANELS = [
     kicker: "Battle pass",
     title: "Two lanes, so the upsell argues for itself.",
     body:
-      "Your version stacks one lane of numbered tiers under a preview, which reads clearly but makes Unlock Premium an act of faith — you can't see what you'd be buying. Splitting the track into free and premium rows puts the locked lane directly under the one you're earning, and the button stops saying “unlock” and starts saying how many rewards are already waiting behind it.",
+      "The existing design stacks one lane of numbered tiers under a preview, which reads clearly but makes Unlock Premium an act of faith — you can't see what you'd be buying. Splitting the track into free and premium rows puts the locked lane directly under the one you're earning, and the button stops saying “unlock” and starts saying how many rewards are already waiting behind it.",
     changes: [
       "Free and premium as parallel lanes, not one track",
       "Nodes show the actual reward art and its state",
@@ -495,7 +509,7 @@ export default function Meta() {
   return (
     <section
       id="meta"
-      className="bc-dots relative -mt-[4.5vw] bg-[var(--bc-sky)] pt-[9vw] pb-20 text-[var(--bc-ink)]"
+      className="bc-dots bc-cut-bottom-alt relative -mt-[4.5vw] bg-[var(--bc-sky)] pt-[9vw] pb-[9vw] text-[var(--bc-ink)]"
     >
       <div className="mx-auto max-w-6xl px-6">
         <span className="bc-chip">
