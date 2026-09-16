@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Screens from "./screens";
 
 const A = "/projects/critter-cove";
 const CODE = "https://github.com/AbsoluteSG/cmd_zoo";
@@ -201,6 +202,9 @@ export default function CritterCovePage() {
           </div>
         </div>
       </section>
+
+      {/* INTERFACE CONCEPTS */}
+      <Screens />
 
       {/* UNDER THE HOOD */}
       <section id="under-the-hood" className="py-24">
