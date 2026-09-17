@@ -1,0 +1,121 @@
+/* Algorithms course — shares the linear-algebra palette and shell (linalg.css); this file is only the stages. */
+
+.al-stage { display: flex; flex-direction: column; gap: 1.25rem; padding: 1.5rem 1rem 1rem; outline: none; }
+.al-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--la-blue); border-radius: 1rem; }
+@media (min-width: 768px) { .al-stage { padding: 2.25rem 2rem 1.25rem; } }
+
+/* Rows of boxed cells */
+.al-cells { display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+.al-cells-label { font-family: var(--font-serif), Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--la-ink-soft); padding-left: 0.2rem; min-height: 1.4rem; }
+.al-cells-row { display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.25rem 0.2rem 0; max-width: 100%; }
+.al-cells-col { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; flex-shrink: 0; }
+.al-cell {
+  position: relative; width: 3.4rem; height: 3.1rem; display: grid; place-items: center;
+  border: 1.5px solid var(--la-line); border-radius: 0.6rem; background: var(--la-panel);
+  cursor: text; transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+@media (min-width: 640px) { .al-cell { width: 3.9rem; height: 3.4rem; } }
+.al-cells-sm .al-cell { width: 2.7rem; height: 2.6rem; }
+.al-cell:hover { border-color: var(--la-ink-faint); }
+.al-cell-static { cursor: default; }
+.al-cell-static:hover { border-color: var(--la-line); }
+.al-cell .la-num-display { font-size: 1.5rem; }
+@media (min-width: 640px) { .al-cell .la-num-display { font-size: 1.7rem; } }
+.al-val-sm { font-size: 1.15rem !important; }
+.al-cell-input { width: 2.9rem; height: 2rem; font-size: 1.3rem; }
+.al-idx { font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; color: var(--la-ink-faint); }
+
+/* cell states */
+.al-cell-hi { background: var(--la-blue-soft); border-color: var(--la-blue); }
+.al-cell-src { background: var(--la-amber-soft); border-color: var(--la-amber); }
+.al-cell-dst { background: var(--la-blue-soft); border-color: var(--la-blue); box-shadow: 0 0 0 3px var(--la-blue-soft); transform: translateY(-2px); }
+.al-cell-dim { opacity: 0.4; }
+.al-cell-good { background: rgba(47, 143, 91, 0.12); border-color: var(--la-green); }
+.al-cell-best { border-color: var(--la-green); box-shadow: 0 0 0 3px rgba(47, 143, 91, 0.16); }
+
+/* Scene: two rows with SVG arcs drawn between them */
+.al-scene { position: relative; display: flex; flex-direction: column; gap: 1.6rem; align-items: flex-start; }
+.al-arcs { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+.al-arcs path { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.al-arcs .arc-src { stroke: var(--la-amber); }
+.al-arcs .arc-dst { stroke: var(--la-blue); }
+.al-arcs .arc-best { stroke: var(--la-green); stroke-width: 2.2; }
+.al-arcs .arc-ghost { stroke: var(--la-ink-faint); stroke-dasharray: 3 5; opacity: 0.6; }
+
+/* Formula line and caption */
+.al-formula { font-family: var(--font-serif), Georgia, serif; font-size: 1.5rem; line-height: 1.5; min-height: 2.4rem; letter-spacing: 0.01em; }
+@media (min-width: 640px) { .al-formula { font-size: 1.75rem; } }
+.al-formula .la-mono { font-size: 0.72rem; }
+.al-caption { min-height: 3.6rem; font-size: 1rem; line-height: 1.55; color: var(--la-ink-soft); max-width: 46rem; }
+.al-caption b { color: var(--la-ink); font-weight: 500; }
+.al-code { font-family: var(--font-geist-mono), monospace; font-size: 0.85em; background: var(--la-line); padding: 0.05em 0.35em; border-radius: 0.3rem; color: var(--la-ink); }
+
+/* Range handles for the prefix-sum query */
+.al-handles { position: relative; height: 1.6rem; }
+.al-handle {
+  position: absolute; top: 0; width: 1.4rem; height: 1.4rem; margin-left: -0.7rem; border-radius: 999px;
+  background: var(--la-blue); border: 2px solid var(--la-panel); box-shadow: 0 1px 4px rgba(0,0,0,0.25); cursor: grab; touch-action: none;
+}
+.al-handle:active { cursor: grabbing; }
+.al-handle-label { position: absolute; top: 1.6rem; transform: translateX(-50%); font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; color: var(--la-blue); white-space: nowrap; }
+
+/* Recursion tree */
+.al-tree { width: 100%; height: auto; display: block; border-radius: 0.75rem; background: var(--la-bg-2); }
+.al-tree .edge { stroke: var(--la-ink-faint); stroke-width: 1.2; opacity: 0.55; }
+.al-tree .edge-skip { stroke: var(--la-green); stroke-dasharray: 3 4; opacity: 0.7; }
+.al-tree .node { fill: var(--la-panel); stroke: var(--la-line); stroke-width: 1.5; }
+.al-tree .node-active { stroke: var(--la-blue); stroke-width: 2.5; }
+.al-tree .node-done { stroke: var(--la-ink-faint); }
+.al-tree .node-hit { fill: rgba(47, 143, 91, 0.14); stroke: var(--la-green); }
+.al-tree .node-future { opacity: 0.22; }
+.al-tree text { font-family: var(--font-serif), Georgia, serif; font-size: 13px; fill: var(--la-ink); text-anchor: middle; dominant-baseline: central; }
+.al-tree .lbl-hit { fill: var(--la-green); }
+.al-tree .lbl-val { font-family: var(--font-geist-mono), monospace; font-size: 10px; fill: var(--la-ink-soft); }
+.al-tally { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-family: var(--font-geist-mono), monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--la-ink-soft); }
+.al-tally b { font-family: var(--font-serif), Georgia, serif; font-size: 1.35rem; letter-spacing: 0; text-transform: none; color: var(--la-ink); margin-right: 0.35rem; font-weight: 400; }
+.al-tally .al-good b { color: var(--la-green); }
+
+/* Cache strip beside the tree */
+.al-memo { display: flex; flex-direction: column; gap: 1rem; }
+.al-memo-side { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; align-items: flex-start; }
+.al-memo-side > * { min-width: 9rem; }
+.al-memo-cache { border: 1px solid var(--la-line); border-radius: 0.75rem; padding: 0.75rem 0.9rem; background: var(--la-panel); }
+.al-memo-cache-title { font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--la-ink-soft); margin-bottom: 0.5rem; }
+.al-memo-row { display: flex; justify-content: space-between; font-family: var(--font-serif), Georgia, serif; font-size: 1.05rem; padding: 0.15rem 0; }
+.al-memo-row .la-mono { color: var(--la-ink-faint); font-size: 0.7rem; }
+
+/* Toggle used by memo / DP stages */
+.al-toggle { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--la-ink-soft); cursor: pointer; user-select: none; }
+.al-toggle input { accent-color: var(--la-blue); width: 1rem; height: 1rem; }
+
+/* Chip row for picking inputs (coins, n) */
+.al-picks { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+.al-picks-label { font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--la-ink-faint); }
+
+/* ─── Code-driven stages: program on the left, picture on the right ─── */
+.al-codestage { padding-top: 1.25rem; }
+.al-split { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+@media (min-width: 900px) { .al-split { grid-template-columns: minmax(19rem, 23rem) minmax(0, 1fr); gap: 1.5rem; } }
+@media (min-width: 1200px) { .al-split { grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr); gap: 1.75rem; } }
+.al-code-panel {
+  margin: 0; padding: 0.75rem 0; border: 1px solid var(--la-line); border-radius: 0.75rem; background: var(--la-bg-2);
+  font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.74rem; line-height: 1.6; overflow-x: auto; white-space: pre;
+}
+.al-line { position: relative; display: flex; align-items: baseline; gap: 0.75rem; padding: 0.1rem 0.9rem 0.1rem 0.6rem; transition: opacity 260ms ease, background 200ms ease; }
+.al-line code { color: var(--la-ink); }
+.al-line-future { opacity: 0.28; }
+.al-line-cur { background: var(--la-blue-soft); }
+.al-line-cur code { color: var(--la-ink); }
+.al-ln { width: 1.4rem; flex-shrink: 0; text-align: right; font-size: 0.66rem; color: var(--la-ink-faint); user-select: none; }
+.al-cursor { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--la-blue); border-radius: 0 2px 2px 0; }
+.al-visual { min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+.al-vars { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; min-height: 2rem; }
+.al-var { display: inline-flex; align-items: baseline; gap: 0.4rem; border: 1px solid var(--la-line); border-radius: 999px; padding: 0.15rem 0.7rem 0.15rem 0.6rem; background: var(--la-panel); }
+.al-var-k { font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; letter-spacing: 0.08em; color: var(--la-ink-faint); }
+.al-var-v { font-family: var(--font-serif), Georgia, serif; font-size: 1.05rem; color: var(--la-ink); display: inline-block; min-width: 1ch; }
+
+/* Call stack (memo stage) */
+.al-stack { display: flex; flex-direction: column-reverse; gap: 0.25rem; }
+.al-stack-frame { font-family: var(--font-geist-mono), monospace; font-size: 0.72rem; padding: 0.3rem 0.6rem; border: 1px solid var(--la-line); border-radius: 0.4rem; background: var(--la-panel); color: var(--la-ink-soft); }
+.al-stack-frame:last-child { border-color: var(--la-blue); color: var(--la-ink); background: var(--la-blue-soft); }
+.al-stack-title { font-family: var(--font-geist-mono), monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--la-ink-soft); margin-bottom: 0.35rem; }
