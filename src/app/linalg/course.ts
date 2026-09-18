@@ -25,7 +25,7 @@ export const units: Unit[] = [
     question: "Given a handful of equations, what values satisfy all of them at once?",
     chapters: [
       { slug: "systems-of-equations", title: "Systems of linear equations", hook: "Every equation is a line, a plane, or a hyperplane; a solution is where they all meet.", status: "planned" },
-      { slug: "gaussian-elimination", title: "Gaussian elimination", hook: "Three moves that never change the answer, applied until the answer is obvious.", status: "draft" },
+      { slug: "gaussian-elimination", title: "Gaussian elimination", hook: "Three moves that never change the answer, applied until the answer is obvious.", status: "ready" },
       { slug: "echelon-forms", title: "Echelon forms and pivots", hook: "The staircase shape that elimination leaves behind, and what its steps tell you.", status: "planned" },
       { slug: "solution-sets", title: "Solution sets", hook: "No solution, one solution, or infinitely many: how to tell, and how to write them down.", status: "planned" },
     ],
@@ -46,10 +46,10 @@ export const units: Unit[] = [
     title: "Matrices as maps",
     question: "What does a matrix do to the whole plane?",
     chapters: [
-      { slug: "linear-transformations", title: "Linear transformations", hook: "A matrix is a rule for moving every point; the grid stays straight and evenly spaced.", status: "draft" },
+      { slug: "linear-transformations", title: "Linear transformations", hook: "A matrix is a rule for moving every point; the grid stays straight and evenly spaced.", status: "ready" },
       { slug: "composition", title: "Multiplication as composition", hook: "Do one warp, then another. The product is the single warp that does both. Order matters.", status: "planned" },
       { slug: "inverses", title: "Inverses", hook: "The warp that undoes a warp, and the matrices that can't be undone.", status: "planned" },
-      { slug: "lu", title: "Elementary matrices and LU", hook: "Elimination itself is a sequence of matrices; multiply them and you've factored A.", status: "draft" },
+      { slug: "lu", title: "Elementary matrices and LU", hook: "Elimination itself is a sequence of matrices; multiply them and you've factored A.", status: "ready" },
     ],
   },
   {
@@ -78,7 +78,7 @@ export const units: Unit[] = [
     title: "Eigenvalues and eigenvectors",
     question: "Which directions does a map leave alone, and what does it do along them?",
     chapters: [
-      { slug: "eigenvectors", title: "Eigenvalues and eigenvectors", hook: "Under a warp, most arrows turn. A few only stretch. Those are the ones that explain the warp.", status: "draft" },
+      { slug: "eigenvectors", title: "Eigenvalues and eigenvectors", hook: "Under a warp, most arrows turn. A few only stretch. Those are the ones that explain the warp.", status: "ready" },
       { slug: "diagonalization", title: "Diagonalization", hook: "In the eigenvector basis, the map is just scaling. Every power of A becomes easy.", status: "planned" },
       { slug: "dynamics", title: "Powers, dynamics, Markov chains", hook: "Apply the same map a thousand times and see what survives.", status: "planned" },
     ],

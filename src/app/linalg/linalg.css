@@ -322,3 +322,78 @@
 .la-inline-frac .la-frac-stack { font-size: 0.6em; }
 .la-vec { white-space: nowrap; }
 .la-lam { color: var(--la-ink-soft); }
+
+/* ─── Chapter prose ─── */
+.la-prose { color: var(--la-ink); }
+.la-prose > * + * { margin-top: 1.1em; }
+.la-prose h2 + p, .la-prose h2 + * { margin-top: 0; }
+.la-prose strong { font-weight: 600; }
+.la-prose em { font-style: italic; }
+.la-prose a { color: var(--la-blue); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.la-m { font-family: var(--font-serif), Georgia, serif; font-size: 1.08em; letter-spacing: 0.01em; white-space: nowrap; }
+.la-m em, .la-prose em.la-m { font-style: italic; }
+
+.la-display-eq { margin: 1.6em 0; text-align: center; }
+.la-display-eq .la-m { font-size: 1.5rem; line-height: 1.5; white-space: normal; }
+.la-display-eq-note {
+  margin-top: 0.6rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--la-ink-faint);
+}
+
+.la-key, .la-try, .la-note { margin: 1.8em 0; border-radius: 0.9rem; }
+.la-key {
+  border: 1px solid var(--la-line);
+  border-left: 3px solid var(--la-green);
+  background: var(--la-panel);
+  padding: 1.1rem 1.25rem;
+}
+.la-try {
+  border: 1px solid var(--la-line);
+  border-left: 3px solid var(--la-blue);
+  background: var(--la-blue-soft);
+  padding: 1.1rem 1.25rem;
+}
+.la-note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-top: 1px solid var(--la-line);
+  border-bottom: 1px solid var(--la-line);
+  border-radius: 0;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  color: var(--la-ink-soft);
+}
+.la-note-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--la-ink-faint);
+}
+
+.la-steps, .la-bullets { padding-left: 1.6rem; }
+.la-steps { list-style: decimal; }
+.la-bullets { list-style: disc; }
+.la-steps li, .la-bullets li { margin-top: 0.5em; padding-left: 0.3rem; }
+.la-steps li::marker, .la-bullets li::marker { color: var(--la-ink-faint); font-size: 0.9em; }
+
+/* Inline bracketed matrices in prose */
+.la-mx { display: inline-flex; align-items: stretch; gap: 0.1rem; vertical-align: middle; margin: 0 0.15em; }
+.la-mx-bracket {
+  width: 7px;
+  border: 1.5px solid var(--la-ink-soft);
+  border-right: 0;
+  border-radius: 4px 0 0 4px;
+}
+.la-mx-bracket-r { border: 1.5px solid var(--la-ink-soft); border-left: 0; border-radius: 0 4px 4px 0; }
+.la-mx-grid {
+  display: grid;
+  font-family: var(--font-serif), Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  padding: 0.15rem 0.1rem;
+}
+.la-mx-cell { min-width: 1.4rem; padding: 0.02rem 0.28rem; text-align: center; line-height: 1.35; }

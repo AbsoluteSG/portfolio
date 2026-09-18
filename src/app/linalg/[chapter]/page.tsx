@@ -7,6 +7,7 @@ import { EliminationStage } from "../stages/elimination-stage";
 import { TransformationStage } from "../stages/transformation-stage";
 import { LUStage } from "../stages/lu-stage";
 import { EigenStage } from "../stages/eigen-stage";
+import { bodies } from "../content";
 
 /** Each written chapter mounts its interactive here. */
 const stages: Record<string, React.ComponentType> = {
@@ -35,6 +36,7 @@ export default async function ChapterPage({ params }: Params) {
   if (!found) notFound();
   const { chapter, prev, next } = found;
   const Stage = stages[chapter.slug];
+  const Body = bodies[chapter.slug];
 
   return (
     <article className="px-6 py-12 md:px-12 md:py-16 lg:px-16">
@@ -60,10 +62,12 @@ export default async function ChapterPage({ params }: Params) {
       )}
 
       <div className="la-prose mt-10">
-        {chapter.status === "planned" ? (
-          <p className="text-[var(--la-ink-soft)]">This chapter isn&apos;t written yet.</p>
+        {Body ? (
+          <Body />
         ) : (
-          <p className="text-[var(--la-ink-soft)]">Draft in progress.</p>
+          <p className="text-[var(--la-ink-soft)]">
+            {chapter.status === "planned" ? "This chapter isn't written yet." : "Draft in progress."}
+          </p>
         )}
       </div>
 
