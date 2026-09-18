@@ -425,3 +425,18 @@
 .la-det-value.la-det-neg { color: var(--la-j); }
 .la-det-value.la-det-zero { color: var(--la-ink-faint); }
 .la-det-gloss { font-family: var(--font-geist-mono), monospace; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--la-ink-faint); max-width: 17rem; line-height: 1.5; }
+
+/* ─── Dot product stage ─── */
+.la-plane .la-projline { stroke: var(--la-ink-faint); stroke-width: 1; stroke-dasharray: 2 6; fill: none; }
+.la-plane .la-drop { stroke: var(--la-ink-faint); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.la-plane .la-shadow { stroke: var(--la-amber); stroke-width: 9; stroke-linecap: round; opacity: 0.8; }
+.la-plane .la-rightangle { fill: none; stroke: var(--la-ink-soft); stroke-width: 1.4; }
+.la-dot-readout { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; text-align: center; }
+.la-dot-eq { font-family: var(--font-serif), Georgia, serif; font-size: 1.15rem; color: var(--la-ink-soft); font-variant-numeric: tabular-nums; }
+.la-dot-value { font-family: var(--font-serif), Georgia, serif; font-size: 2.75rem; line-height: 1.1; color: var(--la-blue); font-variant-numeric: tabular-nums; }
+.la-dot-gloss { font-family: var(--font-geist-mono), monospace; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--la-ink-faint); max-width: 17rem; line-height: 1.5; }
+.la-dot-stats { display: grid; grid-template-columns: repeat(4, auto); gap: 0.15rem 1rem; margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--la-line); }
+.la-dot-stats dt { font-family: var(--font-geist-mono), monospace; font-size: 0.64rem; letter-spacing: 0.08em; color: var(--la-ink-faint); }
+.la-dot-stats dd { font-family: var(--font-serif), Georgia, serif; font-size: 1.15rem; margin: 0; font-variant-numeric: tabular-nums; }
+.la-dot-proj { font-family: var(--font-serif), Georgia, serif; font-size: 1.05rem; color: var(--la-amber); font-variant-numeric: tabular-nums; }
+.la-dot-proj sub { font-size: 0.6em; }

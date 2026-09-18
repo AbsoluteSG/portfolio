@@ -88,7 +88,7 @@ export const units: Unit[] = [
     title: "Orthogonality",
     question: "What does 'perpendicular' buy us, and how do we get it?",
     chapters: [
-      { slug: "dot-product", title: "Dot product, length, angle", hook: "One operation that measures both how long an arrow is and how aligned two arrows are.", status: "planned" },
+      { slug: "dot-product", title: "Dot product, length, angle", hook: "One operation that measures both how long an arrow is and how aligned two arrows are.", status: "ready" },
       { slug: "projections", title: "Orthogonal projections", hook: "The shadow one vector casts on another, and the closest point in a subspace.", status: "planned" },
       { slug: "gram-schmidt", title: "Gram–Schmidt and QR", hook: "Straighten a crooked basis one vector at a time.", status: "planned" },
       { slug: "least-squares", title: "Least squares", hook: "When Ax = b has no solution, find the x that misses by the least.", status: "planned" },
