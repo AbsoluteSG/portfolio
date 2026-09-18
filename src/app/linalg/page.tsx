@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { units, chapters } from "./course";
+import { Hero } from "./stages/hero";
 
 const BASE = "/linalg";
 
@@ -25,7 +26,9 @@ export default function LinalgHome() {
         </div>
       </div>
 
-      <div className="la-stage mt-14 aspect-[16/7] w-full max-w-5xl" aria-hidden />
+      <div className="la-stage mt-14 aspect-[16/7] w-full max-w-5xl" data-live>
+        <Hero />
+      </div>
 
       <ol className="mt-16 grid max-w-5xl gap-5 md:grid-cols-2">
         {units.map((unit, ui) => (
