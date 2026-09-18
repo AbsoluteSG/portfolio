@@ -397,3 +397,31 @@
   padding: 0.15rem 0.1rem;
 }
 .la-mx-cell { min-width: 1.4rem; padding: 0.02rem 0.28rem; text-align: center; line-height: 1.35; }
+
+/* ─── Determinant stage ─── */
+.la-plane .la-unitsq { fill: var(--la-ink-faint); fill-opacity: 0.12; stroke: var(--la-ink-faint); stroke-width: 1; stroke-dasharray: 4 4; }
+.la-plane .la-area {
+  fill: var(--la-blue);
+  fill-opacity: 0.22;
+  stroke: var(--la-blue);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.la-plane .la-area-flip { fill: var(--la-j); fill-opacity: 0.2; stroke: var(--la-j); }
+.la-plane .la-decomp line { stroke: var(--la-ink-faint); stroke-width: 1.2; stroke-dasharray: 5 5; }
+.la-plane .la-area-label {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 19px;
+  font-style: normal;
+  fill: var(--la-ink);
+  paint-order: stroke;
+  stroke: var(--la-bg-2);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.la-det-readout { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; text-align: center; min-height: 7rem; }
+.la-det-eq { font-family: var(--font-serif), Georgia, serif; font-size: 1.1rem; color: var(--la-ink-soft); font-variant-numeric: tabular-nums; }
+.la-det-value { font-family: var(--font-serif), Georgia, serif; font-size: 2.75rem; line-height: 1.1; color: var(--la-blue); font-variant-numeric: tabular-nums; }
+.la-det-value.la-det-neg { color: var(--la-j); }
+.la-det-value.la-det-zero { color: var(--la-ink-faint); }
+.la-det-gloss { font-family: var(--font-geist-mono), monospace; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--la-ink-faint); max-width: 17rem; line-height: 1.5; }

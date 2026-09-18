@@ -57,7 +57,7 @@ export const units: Unit[] = [
     title: "Determinants",
     question: "How much does a map stretch or squash space, and does it flip it?",
     chapters: [
-      { slug: "determinant-as-area", title: "The determinant as area", hook: "Watch the unit square get warped; the determinant is the area it ends up with.", status: "planned" },
+      { slug: "determinant-as-area", title: "The determinant as area", hook: "Watch the unit square get warped; the determinant is the area it ends up with.", status: "ready" },
       { slug: "determinant-properties", title: "Properties and cofactors", hook: "Why row operations change the determinant the way they do, and how to compute it for anything.", status: "planned" },
     ],
   },

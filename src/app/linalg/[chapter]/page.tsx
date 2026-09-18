@@ -7,6 +7,7 @@ import { EliminationStage } from "../stages/elimination-stage";
 import { TransformationStage } from "../stages/transformation-stage";
 import { LUStage } from "../stages/lu-stage";
 import { EigenStage } from "../stages/eigen-stage";
+import { DeterminantStage } from "../stages/determinant-stage";
 import { bodies } from "../content";
 
 /** Each written chapter mounts its interactive here. */
@@ -15,6 +16,7 @@ const stages: Record<string, React.ComponentType> = {
   "linear-transformations": TransformationStage,
   lu: LUStage,
   eigenvectors: EigenStage,
+  "determinant-as-area": DeterminantStage,
 };
 
 const BASE = "/linalg";
