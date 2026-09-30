@@ -1,3 +1,4 @@
+import { SystemSolver } from "../stages/system-solver";
 import { H, M, Eq, Key, Note, Method, Example, Given, Step, Op, Answer, Pitfall, Chain, To, Mx } from "./prose";
 
 export default function SolutionSets() {
@@ -105,6 +106,21 @@ export default function SolutionSets() {
           <M>(−4, 0, 2, 1, 0)</M>, with <M>s, t</M> ranging over all reals.
         </Answer>
       </Example>
+
+      <H>Check your own systems</H>
+      <p>
+        Answer boxes usually want the tuple, written with <M>s₁</M>, <M>s₂</M> for the free variables — exactly the
+        shape step 5 produces. Type a system in below and it will reduce it, name the free variables, and write the
+        answer out both ways. Work the problem yourself first, then use it to check.
+      </p>
+
+      <SystemSolver />
+
+      <Note label="Reading the output">
+        A variable with no <M>s</M> in it was pinned down by a pivot. A variable that is <em>just</em> <M>s₁</M> is the
+        free one that parameter was named for. If nothing has an <M>s</M>, there were no free variables and the
+        solution is unique — the &ldquo;use s₁, s₂ if necessary&rdquo; on an exam is often a red herring.
+      </Note>
 
       <H>The structure of every solution set</H>
       <p>

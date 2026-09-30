@@ -705,3 +705,53 @@
 .la-case-hint { font-size: 0.85rem; line-height: 1.55; color: var(--la-ink-faint); text-align: center; }
 .la-case-presets { justify-content: center; }
 .la-case-presets .la-chipbtn { font-family: var(--font-serif), Georgia, serif; font-size: 0.92rem; }
+
+/* ─── System solver ─── */
+.la-solver {
+  margin: 1.9em 0;
+  border: 1px solid var(--la-line);
+  border-radius: 0.9rem;
+  background: var(--la-panel);
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.la-solver-grid { display: grid; gap: 1.4rem; align-items: start; }
+@media (min-width: 820px) { .la-solver-grid { grid-template-columns: 1fr 1fr; } }
+.la-solver-matrix { display: flex; align-items: stretch; gap: 0.2rem; justify-content: flex-start; margin-top: 0.5rem; overflow-x: auto; }
+.la-solver-matrix .la-param-cell { min-width: 2.9rem; height: 2.6rem; font-size: 1.25rem; }
+.la-solver-matrix .la-param-cell.is-faint { color: var(--la-ink-faint); }
+.la-solver-matrix .la-num-display { font-size: 1.25rem; }
+.la-solver-rref .la-param-cell { cursor: default; }
+.la-solver-out { display: flex; flex-direction: column; }
+.la-solver-pivots { margin-top: 0.7rem; font-size: 0.85rem; line-height: 1.55; color: var(--la-ink-soft); }
+
+.la-solver-answer {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem;
+  border-radius: 0.7rem; padding: 0.9rem 1.1rem;
+  border: 1px solid var(--la-line); border-left: 3px solid var(--la-green);
+}
+.la-solver-answer.is-free { border-left-color: var(--la-amber); background: var(--la-amber-soft); }
+.la-solver-answer.is-none { border-left-color: var(--la-j); background: rgba(228, 85, 63, 0.08); }
+.la-solver-answer.is-unique { background: rgba(47, 143, 91, 0.09); }
+.la-solver-answer .la-eyebrow { width: 100%; }
+.la-solver-tuple {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.la-solver-copy { flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.la-solver-vector { display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--la-line); padding-top: 1rem; }
+.la-solver-vecrow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--font-serif), Georgia, serif; font-size: 1.1rem; }
+.la-solver-plus { display: inline-flex; align-items: center; gap: 0.3rem; }
+.la-solver-note { font-size: 0.82rem; color: var(--la-ink-faint); }
+
+.la-solver-work { display: flex; flex-direction: column; gap: 0.6rem; border-top: 1px solid var(--la-line); padding-top: 1rem; }
+.la-solver-work .la-chipbtn { align-self: flex-start; }
+.la-solver-steps { list-style: decimal; padding-left: 1.6rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.la-solver-steps li::marker { color: var(--la-ink-faint); font-size: 0.75em; }
