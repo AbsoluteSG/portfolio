@@ -1,6 +1,7 @@
 import SystemsOfEquations from "./systems-of-equations";
 import EchelonForms from "./echelon-forms";
 import SolutionSets from "./solution-sets";
+import Parameters from "./parameters";
 import Vectors from "./vectors";
 import Span from "./span";
 import MatrixEquation from "./matrix-equation";
@@ -17,6 +18,7 @@ export const bodies: Record<string, React.ComponentType> = {
   "systems-of-equations": SystemsOfEquations,
   "echelon-forms": EchelonForms,
   "solution-sets": SolutionSets,
+  parameters: Parameters,
   "vectors": Vectors,
   "span": Span,
   "matrix-equation": MatrixEquation,

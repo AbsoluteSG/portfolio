@@ -592,3 +592,33 @@
 .la-demo-eqs { display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-serif), Georgia, serif; font-size: 1.15rem; text-align: center; }
 .la-demo-eqs > div { padding: 0.5rem 0.75rem; border: 1px solid var(--la-line); border-radius: 0.6rem; color: var(--la-ink-faint); transition: color 300ms ease, border-color 300ms ease, background 300ms ease; }
 .la-demo-eqs > div.is-on { color: var(--la-ink); border-color: var(--la-blue); background: var(--la-blue-soft); }
+
+/* ─── Parameter (find k) stage ─── */
+.la-param-matrix { display: flex; align-items: stretch; gap: 0.2rem; justify-content: center; transition: opacity 120ms linear; }
+.la-param-row { display: flex; border-radius: 0.5rem; transition: background 300ms ease; }
+.la-param-row.is-changed { background: var(--la-blue-soft); }
+.la-param-row.is-dead { background: rgba(228, 85, 63, 0.16); }
+.la-param-cell {
+  width: 3.6rem; height: 3rem;
+  display: grid; place-items: center;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 640px) { .la-param-cell { width: 4.4rem; height: 3.3rem; font-size: 1.7rem; } }
+.la-param-cell.is-symbolic { color: var(--la-amber); font-style: italic; }
+.la-param-note { margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--la-ink-soft); max-width: 30rem; }
+.la-param { display: flex; flex-direction: column; gap: 0.8rem; }
+.la-param-slider { display: flex; align-items: center; gap: 0.6rem; }
+.la-param-k { font-family: var(--font-serif), Georgia, serif; font-size: 1.5rem; min-width: 2.6rem; text-align: right; font-variant-numeric: tabular-nums; }
+.la-param-k.is-dead { color: var(--la-j); }
+.la-param-verdict {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  border: 1px solid var(--la-line); border-left: 3px solid var(--la-green);
+  border-radius: 0.6rem; padding: 0.7rem 0.85rem;
+  transition: border-color 250ms ease;
+}
+.la-param-verdict .la-mono { font-size: 0.7rem; color: var(--la-ink-faint); }
+.la-param-verdict.is-dead { border-left-color: var(--la-j); background: rgba(228, 85, 63, 0.08); }
+.la-param-verdict.is-dead strong { color: var(--la-j); }
+.la-param-hint { font-size: 0.82rem; line-height: 1.55; color: var(--la-ink-faint); }

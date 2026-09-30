@@ -15,6 +15,7 @@ import { SpanDemo } from "../stages/span-demo";
 import { IndependenceDemo } from "../stages/independence-demo";
 import { MatrixEquationDemo } from "../stages/matrix-equation-demo";
 import { SolutionSetDemo } from "../stages/solution-set-demo";
+import { ParameterDemo } from "../stages/parameter-demo";
 import { bodies } from "../content";
 
 /** Each written chapter mounts its interactive here. */
@@ -31,6 +32,7 @@ const stages: Record<string, React.ComponentType> = {
   "linear-independence": IndependenceDemo,
   "matrix-equation": MatrixEquationDemo,
   "solution-sets": SolutionSetDemo,
+  parameters: ParameterDemo,
   // The echelon chapter is about the shape elimination leaves behind, so it mounts the elimination stage.
   "echelon-forms": EliminationStage,
 };

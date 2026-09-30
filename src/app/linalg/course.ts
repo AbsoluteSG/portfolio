@@ -28,6 +28,7 @@ export const units: Unit[] = [
       { slug: "gaussian-elimination", title: "Gaussian elimination", hook: "Three moves that never change the answer, applied until the answer is obvious.", status: "ready" },
       { slug: "echelon-forms", title: "Echelon forms and pivots", hook: "The staircase shape that elimination leaves behind, and what its steps tell you.", status: "ready" },
       { slug: "solution-sets", title: "Solution sets", hook: "No solution, one solution, or infinitely many: how to tell, and how to write them down.", status: "ready" },
+      { slug: "parameters", title: "Systems with a parameter", hook: "One entry is a letter. Find the value that makes the pivot vanish, and the system break.", status: "ready" },
     ],
   },
   {
