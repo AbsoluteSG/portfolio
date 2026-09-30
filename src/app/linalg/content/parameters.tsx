@@ -1,3 +1,4 @@
+import { CaseSplit } from "../stages/case-split";
 import { H, M, Eq, Key, Note, Try, Method, Example, Given, Step, Op, Answer, Pitfall, Bullets, Chain, To, Mx } from "./prose";
 
 export default function Parameters() {
@@ -84,6 +85,44 @@ export default function Parameters() {
         finds, and the slider tells you the verdict at any <M>k</M>: unique in green, infinitely many in amber, no
         solution in red. Paste your own homework problem in and step through it.
       </Try>
+
+      <H>What that last row is actually saying</H>
+      <p>
+        Everything above hinges on reading one row correctly, and that step deserves slowing down. Suppose elimination
+        leaves you with
+      </p>
+      <Eq>(k + 4)·x = 4</Eq>
+      <p>
+        The left side is <em>some number</em> times <M>x</M>, and which number depends on <M>k</M>. For most values
+        there is nothing to think about — at <M>k = 0</M> it is <M>4x = 4</M>, at <M>k = −3</M> it is <M>1x = 4</M>,
+        and each time you divide and get one value of <M>x</M>.
+      </p>
+      <p>
+        The interesting value is <M>k = −4</M>, where the coefficient becomes zero and the row reads <M>0x = 4</M>.
+        Now look at what that claims: <strong><M>0x</M> is zero for every <M>x</M> there is</strong>. Zero is never
+        4. No <M>x</M> can satisfy it, so the system has <strong>no solution</strong> — the row has become a lie.
+      </p>
+      <p>
+        Change only the right-hand side and the conclusion flips completely. If the row were <M>(k + 4)·x = 0</M>,
+        then at <M>k = −4</M> it reads <M>0 = 0</M>: still true, but it no longer constrains <M>x</M> at all.{" "}
+        <M>x</M> is <strong>free</strong>, and there are <strong>infinitely many solutions</strong>.
+      </p>
+      <Eq note="the same dead coefficient, two different meanings">
+        0 = 4 is false → no solution &nbsp;·&nbsp; 0 = 0 is empty → infinitely many
+      </Eq>
+      <p>
+        So pick a <M>k</M> and walk the row through three stages — substitute, see what it becomes, say what it
+        means. Try the critical value marked ★, then one either side of it, and compare the four rows below:
+      </p>
+
+      <CaseSplit />
+
+      <Note label="The order of the two questions">
+        Ask them this way round, always. <strong>First</strong>: what value of <M>k</M> makes the coefficient zero?
+        That is the only value worth discussing. <strong>Second</strong>, and only at that value: what is on the right?
+        Nonzero means no solution, zero means infinitely many. Checking the right-hand side first tells you nothing,
+        because while the coefficient is alive you can divide by it and the right side can be anything at all.
+      </Note>
 
       <H>When all three outcomes are possible</H>
       <p>
