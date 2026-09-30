@@ -9,6 +9,12 @@ import { LUStage } from "../stages/lu-stage";
 import { EigenStage } from "../stages/eigen-stage";
 import { DeterminantStage } from "../stages/determinant-stage";
 import { DotStage } from "../stages/dot-stage";
+import { VectorsDemo } from "../stages/vectors-demo";
+import { SystemsDemo } from "../stages/systems-demo";
+import { SpanDemo } from "../stages/span-demo";
+import { IndependenceDemo } from "../stages/independence-demo";
+import { MatrixEquationDemo } from "../stages/matrix-equation-demo";
+import { SolutionSetDemo } from "../stages/solution-set-demo";
 import { bodies } from "../content";
 
 /** Each written chapter mounts its interactive here. */
@@ -19,6 +25,14 @@ const stages: Record<string, React.ComponentType> = {
   eigenvectors: EigenStage,
   "determinant-as-area": DeterminantStage,
   "dot-product": DotStage,
+  vectors: VectorsDemo,
+  "systems-of-equations": SystemsDemo,
+  span: SpanDemo,
+  "linear-independence": IndependenceDemo,
+  "matrix-equation": MatrixEquationDemo,
+  "solution-sets": SolutionSetDemo,
+  // The echelon chapter is about the shape elimination leaves behind, so it mounts the elimination stage.
+  "echelon-forms": EliminationStage,
 };
 
 const BASE = "/linalg";
