@@ -61,3 +61,62 @@ export const Mx = ({ rows }: { rows: React.ReactNode[][] }) => (
     <span className="la-mx-bracket la-mx-bracket-r" aria-hidden />
   </span>
 );
+
+/* ── Worked problem-solving ── */
+
+/** A worked example: the problem, then every step, then the answer. */
+export const Example = ({ title, children }: { title: React.ReactNode; children: React.ReactNode }) => (
+  <section className="la-ex">
+    <p className="la-ex-title">{title}</p>
+    {children}
+  </section>
+);
+
+/** The problem statement, set apart at the top of an example. */
+export const Given = ({ children }: { children: React.ReactNode }) => <div className="la-ex-given">{children}</div>;
+
+/** One step of a solution: what you do, why, and the result. */
+export const Step = ({ do: label, children }: { do: React.ReactNode; children: React.ReactNode }) => (
+  <div className="la-ex-step">
+    <p className="la-ex-step-label">{label}</p>
+    <div className="la-ex-step-body">{children}</div>
+  </div>
+);
+
+/** The row operation being performed, e.g. R₂ → R₂ − 2R₁. */
+export const Op = ({ children }: { children: React.ReactNode }) => <span className="la-op">{children}</span>;
+
+/** The result line of an example. */
+export const Answer = ({ children }: { children: React.ReactNode }) => (
+  <div className="la-ex-answer">
+    <span className="la-ex-answer-label">Answer</span>
+    <div>{children}</div>
+  </div>
+);
+
+/** The recipe: the steps to follow on any problem of this type. */
+export const Method = ({ title = "The method", children }: { title?: string; children: React.ReactNode }) => (
+  <section className="la-method">
+    <p className="la-eyebrow">{title}</p>
+    <ol className="la-method-steps">{children}</ol>
+  </section>
+);
+
+/** Mistakes that cost marks. */
+export const Pitfall = ({ children }: { children: React.ReactNode }) => (
+  <aside className="la-pitfall">
+    <span className="la-pitfall-label">Where marks get lost</span>
+    <div>{children}</div>
+  </aside>
+);
+
+/** A row of matrices with arrows between them, for showing a reduction in one line. */
+export const Chain = ({ children }: { children: React.ReactNode }) => <div className="la-chain">{children}</div>;
+
+/** The arrow between two stages of a reduction, optionally labelled with the operation. */
+export const To = ({ label }: { label?: React.ReactNode }) => (
+  <span className="la-to">
+    <span className="la-to-arrow">→</span>
+    {label && <span className="la-to-label">{label}</span>}
+  </span>
+);

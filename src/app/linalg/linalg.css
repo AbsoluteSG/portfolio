@@ -448,3 +448,115 @@
 .la-hero .fg { stroke: var(--la-blue); stroke-opacity: 0.3; stroke-width: 1; fill: none; }
 .la-hero .fg-axis { stroke: var(--la-blue); stroke-opacity: 0.7; stroke-width: 1.5; fill: none; }
 .la-hero-coord { font-family: var(--font-serif), Georgia, serif; font-size: 16px; font-style: italic; fill: var(--la-ink-soft); }
+
+/* ─── Worked examples ─── */
+.la-ex {
+  margin: 1.9em 0;
+  border: 1px solid var(--la-line);
+  border-radius: 0.9rem;
+  background: var(--la-panel);
+  padding: 1.25rem 1.35rem 1.35rem;
+}
+.la-ex-title {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--la-blue);
+}
+.la-ex-given {
+  margin-top: 0.6rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--la-line);
+  font-size: 1.02rem;
+}
+.la-ex-given p + p { margin-top: 0.6em; }
+
+.la-ex-step { display: grid; gap: 0.15rem; padding: 1rem 0 0; }
+.la-ex-step + .la-ex-step { border-top: 1px dashed var(--la-line); margin-top: 0.9rem; }
+.la-ex-step-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--la-ink-soft);
+}
+.la-ex-step-body { font-size: 1rem; }
+.la-ex-step-body > * + * { margin-top: 0.7em; }
+.la-ex-step-body .la-display-eq { margin: 0.9em 0; }
+
+.la-op {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--la-amber);
+  white-space: nowrap;
+}
+
+.la-ex-answer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.85rem;
+  margin-top: 1.1rem;
+  border-top: 2px solid var(--la-ink);
+  padding-top: 0.85rem;
+  font-size: 1.05rem;
+}
+.la-ex-answer-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--la-green);
+}
+
+.la-method {
+  margin: 1.8em 0;
+  border: 1px solid var(--la-line);
+  border-left: 3px solid var(--la-amber);
+  border-radius: 0.9rem;
+  background: var(--la-amber-soft);
+  padding: 1.1rem 1.25rem;
+}
+.la-method-steps { list-style: decimal; padding-left: 1.4rem; margin-top: 0.6rem; }
+.la-method-steps li { margin-top: 0.45em; padding-left: 0.25rem; }
+.la-method-steps li::marker { font-family: var(--font-geist-mono), monospace; font-size: 0.8em; color: var(--la-amber); }
+
+.la-pitfall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 1.8em 0;
+  border: 1px solid var(--la-line);
+  border-left: 3px solid var(--la-j);
+  border-radius: 0.9rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.97rem;
+}
+.la-pitfall-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--la-j);
+}
+.la-pitfall ul { list-style: disc; padding-left: 1.3rem; }
+.la-pitfall li + li { margin-top: 0.45em; }
+
+.la-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.2rem;
+  margin: 1.2em 0;
+}
+.la-to { display: inline-flex; flex-direction: column; align-items: center; padding: 0 0.5rem; }
+.la-to-arrow { font-size: 1.15rem; color: var(--la-ink-faint); line-height: 1; }
+.la-to-label {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.64rem;
+  color: var(--la-amber);
+  white-space: nowrap;
+  margin-top: 0.2rem;
+}

@@ -60,9 +60,12 @@ export default async function ChapterPage({ params }: Params) {
           <Stage />
         </div>
       ) : (
-        <div className="la-stage mt-10 aspect-[16/9] w-full max-w-5xl md:aspect-[2/1]">
-          <span className="la-mono absolute top-4 left-4 text-xs text-[var(--la-ink-faint)]">stage · {chapter.slug}</span>
-        </div>
+        /* Only hold space for a stage on chapters that have nothing written yet. */
+        !Body && (
+          <div className="la-stage mt-10 aspect-[16/9] w-full max-w-5xl md:aspect-[2/1]">
+            <span className="la-mono absolute top-4 left-4 text-xs text-[var(--la-ink-faint)]">stage · {chapter.slug}</span>
+          </div>
+        )
       )}
 
       <div className="la-prose mt-10">

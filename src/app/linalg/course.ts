@@ -24,10 +24,10 @@ export const units: Unit[] = [
     title: "Solving systems",
     question: "Given a handful of equations, what values satisfy all of them at once?",
     chapters: [
-      { slug: "systems-of-equations", title: "Systems of linear equations", hook: "Every equation is a line, a plane, or a hyperplane; a solution is where they all meet.", status: "planned" },
+      { slug: "systems-of-equations", title: "Systems of linear equations", hook: "Every equation is a line, a plane, or a hyperplane; a solution is where they all meet.", status: "ready" },
       { slug: "gaussian-elimination", title: "Gaussian elimination", hook: "Three moves that never change the answer, applied until the answer is obvious.", status: "ready" },
-      { slug: "echelon-forms", title: "Echelon forms and pivots", hook: "The staircase shape that elimination leaves behind, and what its steps tell you.", status: "planned" },
-      { slug: "solution-sets", title: "Solution sets", hook: "No solution, one solution, or infinitely many: how to tell, and how to write them down.", status: "planned" },
+      { slug: "echelon-forms", title: "Echelon forms and pivots", hook: "The staircase shape that elimination leaves behind, and what its steps tell you.", status: "ready" },
+      { slug: "solution-sets", title: "Solution sets", hook: "No solution, one solution, or infinitely many: how to tell, and how to write them down.", status: "ready" },
     ],
   },
   {
@@ -35,10 +35,10 @@ export const units: Unit[] = [
     title: "Vectors",
     question: "What are the objects we're actually solving for?",
     chapters: [
-      { slug: "vectors", title: "Vectors and arithmetic", hook: "Arrows you can add and stretch; the two operations everything else is built from.", status: "planned" },
-      { slug: "span", title: "Linear combinations and span", hook: "Everywhere you can reach by stretching and adding a set of arrows.", status: "planned" },
-      { slug: "matrix-equation", title: "The matrix equation Ax = b", hook: "A system of equations, a combination of columns, and a matrix times a vector are the same sentence.", status: "planned" },
-      { slug: "linear-independence", title: "Linear independence", hook: "When does a new arrow actually add a new direction?", status: "planned" },
+      { slug: "vectors", title: "Vectors and arithmetic", hook: "Arrows you can add and stretch; the two operations everything else is built from.", status: "ready" },
+      { slug: "span", title: "Linear combinations and span", hook: "Everywhere you can reach by stretching and adding a set of arrows.", status: "ready" },
+      { slug: "matrix-equation", title: "The matrix equation Ax = b", hook: "A system of equations, a combination of columns, and a matrix times a vector are the same sentence.", status: "ready" },
+      { slug: "linear-independence", title: "Linear independence", hook: "When does a new arrow actually add a new direction?", status: "ready" },
     ],
   },
   {
