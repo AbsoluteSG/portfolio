@@ -78,9 +78,11 @@ export default function Parameters() {
         </Answer>
       </Example>
       <Try>
-        Slide <M>k</M> on the stage above and watch the bottom-right coefficient. Away from <M>−33</M> it is a live
-        pivot; at <M>−33</M> the row collapses to <M>0 = 1</M> and turns red. Nothing else on the page changes — that
-        one entry decides the whole problem.
+        The stage above runs this method on <em>any</em> matrix. Click any entry and type over it — plain numbers,
+        fractions like <M>−1/2</M>, or expressions in <M>k</M> such as <M>2k−1</M> — and add or drop equations and
+        variables with the controls beneath. It reduces symbolically, lists every <strong>critical value</strong> it
+        finds, and the slider tells you the verdict at any <M>k</M>: unique in green, infinitely many in amber, no
+        solution in red. Paste your own homework problem in and step through it.
       </Try>
 
       <H>When all three outcomes are possible</H>

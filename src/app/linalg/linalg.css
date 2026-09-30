@@ -594,21 +594,28 @@
 .la-demo-eqs > div.is-on { color: var(--la-ink); border-color: var(--la-blue); background: var(--la-blue-soft); }
 
 /* ─── Parameter (find k) stage ─── */
-.la-param-matrix { display: flex; align-items: stretch; gap: 0.2rem; justify-content: center; transition: opacity 120ms linear; }
-.la-param-row { display: flex; border-radius: 0.5rem; transition: background 300ms ease; }
-.la-param-row.is-changed { background: var(--la-blue-soft); }
-.la-param-row.is-dead { background: rgba(228, 85, 63, 0.16); }
+.la-param-matrix { display: flex; align-items: stretch; gap: 0.2rem; justify-content: center; }
+.la-param-row { display: flex; border-radius: 0.5rem; }
 .la-param-cell {
-  width: 3.6rem; height: 3rem;
+  min-width: 3.4rem; height: 3rem; padding: 0 0.4rem;
   display: grid; place-items: center;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border-radius: 0.4rem;
 }
-@media (min-width: 640px) { .la-param-cell { width: 4.4rem; height: 3.3rem; font-size: 1.7rem; } }
+@media (min-width: 640px) { .la-param-cell { min-width: 4rem; height: 3.2rem; font-size: 1.55rem; } }
+.la-param-cell.is-editable { cursor: text; transition: background 150ms ease; }
+.la-param-cell.is-editable:hover { background: var(--la-line); }
 .la-param-cell.is-symbolic { color: var(--la-amber); font-style: italic; }
-.la-param-note { margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--la-ink-soft); max-width: 30rem; }
-.la-param { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.la-param-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1rem; margin-top: 1.1rem; }
+.la-param-size { display: flex; align-items: center; gap: 0.3rem; }
+.la-param-size .la-mono { font-size: 0.68rem; color: var(--la-ink-faint); padding: 0 0.15rem; }
+.la-param-size .la-ctl { width: 1.7rem; height: 1.7rem; }
+
+.la-param { display: flex; flex-direction: column; gap: 0.9rem; }
 .la-param-slider { display: flex; align-items: center; gap: 0.6rem; }
 .la-param-k { font-family: var(--font-serif), Georgia, serif; font-size: 1.5rem; min-width: 2.6rem; text-align: right; font-variant-numeric: tabular-nums; }
 .la-param-k.is-dead { color: var(--la-j); }
@@ -616,9 +623,13 @@
   display: flex; flex-direction: column; gap: 0.25rem;
   border: 1px solid var(--la-line); border-left: 3px solid var(--la-green);
   border-radius: 0.6rem; padding: 0.7rem 0.85rem;
-  transition: border-color 250ms ease;
+  transition: border-color 250ms ease, background 250ms ease;
 }
-.la-param-verdict .la-mono { font-size: 0.7rem; color: var(--la-ink-faint); }
+.la-param-verdict .la-mono { font-size: 0.68rem; color: var(--la-ink-faint); letter-spacing: 0.06em; }
 .la-param-verdict.is-dead { border-left-color: var(--la-j); background: rgba(228, 85, 63, 0.08); }
 .la-param-verdict.is-dead strong { color: var(--la-j); }
-.la-param-hint { font-size: 0.82rem; line-height: 1.55; color: var(--la-ink-faint); }
+.la-param-verdict.is-many { border-left-color: var(--la-amber); background: var(--la-amber-soft); }
+.la-param-verdict.is-many strong { color: var(--la-amber); }
+.la-param-crit { display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--la-line); padding-top: 0.8rem; }
+.la-param-crit .la-chips { justify-content: flex-start; }
+.la-param-hint { font-size: 0.8rem; line-height: 1.5; color: var(--la-ink-faint); }
