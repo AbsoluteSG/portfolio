@@ -27,23 +27,7 @@ export function CaseSplit() {
   // The k that kills the coefficient, when there is one.
   const critical = isZero(coef.b) ? null : neg(div(coef.c, coef.b));
 
-  const a = lAt(coef, k);  // the coefficient's value
-  const b = lAt(rhs, k);   // the right side's value
-  const dead = isZero(a);
-  const reading: Reading = !dead ? "unique" : isZero(b) ? "free" : "none";
-
-  const x = !dead ? div(b, a) : null;
   const num = (f: Frac) => fmtFrac(f).replace("-", "−");
-
-  const meaning =
-    reading === "unique"
-      ? <>A real number times <em>x</em> equals a real number, so divide. <strong>x = {num(x!)}</strong> — one value, pinned down.</>
-      : reading === "none"
-        ? <>But <strong>0·x is zero for every x</strong>. Zero cannot equal {num(b)}, so no <em>x</em> exists. The row is a lie.</>
-        : <>This is true for <strong>every</strong> x — a row that survived but says nothing. <em>x</em> is <strong>free</strong>.</>;
-
-  const verdict =
-    reading === "unique" ? "unique solution" : reading === "none" ? "no solution" : "infinitely many solutions";
 
   const kChips = critical
     ? [frac(0), critical, frac(critical.n / critical.d + 1)]
@@ -100,37 +84,7 @@ export function CaseSplit() {
         />
       </div>
 
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.ol
-          key={`${fmtLin(coef)}|${fmtLin(rhs)}|${fmtFrac(k)}`}
-          className="la-case-chain"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
-        >
-          <li>
-            <span className="la-case-step">substitute</span>
-            <span className="la-case-math">
-              ({fmtLin(coef)}) → <strong className={dead ? "is-dead" : ""}>{num(a)}</strong>
-              {!isZero(rhs.b) && <>, ({fmtLin(rhs)}) → <strong>{num(b)}</strong></>}
-            </span>
-          </li>
-          <li>
-            <span className="la-case-step">the row reads</span>
-            <span className={`la-case-math la-case-big ${dead ? "is-dead" : ""}`}>
-              {num(a)}x = {num(b)}
-              {dead && <span className="la-case-collapse"> → {num(frac(0))} = {num(b)}</span>}
-            </span>
-          </li>
-          <li>
-            <span className="la-case-step">meaning</span>
-            <span className="la-case-math">{meaning}</span>
-          </li>
-        </motion.ol>
-      </AnimatePresence>
-
-      <div className={`la-case-verdict is-${reading}`} aria-live="polite">{verdict}</div>
+      <CaseChain coef={coef} rhs={rhs} k={k} />
 
       <p className="la-case-hint">
         {critical ? (
@@ -179,3 +133,62 @@ function Field({ value, onCommit, label }: { value: Lin; onCommit: (v: Lin) => v
   );
 }
 
+
+/**
+ * One row, read at a chosen k: substitute, see what it becomes, say what it means.
+ * Shared by the inline widget and the chapter's main stage.
+ */
+export function CaseChain({ coef, rhs, k, varName = "x" }: { coef: Lin; rhs: Lin; k: Frac; varName?: string }) {
+  const a = lAt(coef, k);
+  const b = lAt(rhs, k);
+  const dead = isZero(a);
+  const reading: Reading = !dead ? "unique" : isZero(b) ? "free" : "none";
+  const num = (f: Frac) => fmtFrac(f).replace("-", "−");
+  const x = !dead ? div(b, a) : null;
+
+  const meaning =
+    reading === "unique"
+      ? <>A real number times <em>{varName}</em> equals a real number, so divide. <strong>{varName} = {num(x!)}</strong> — one value, pinned down.</>
+      : reading === "none"
+        ? <>But <strong>0·{varName} is zero for every {varName}</strong>. Zero cannot equal {num(b)}, so no <em>{varName}</em> exists. The row is a lie.</>
+        : <>This is true for <strong>every</strong> {varName} — a row that survived but says nothing. <em>{varName}</em> is <strong>free</strong>.</>;
+
+  const verdict =
+    reading === "unique" ? "unique solution" : reading === "none" ? "no solution" : "infinitely many solutions";
+
+  return (
+    <>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.ol
+          key={`${fmtLin(coef)}|${fmtLin(rhs)}|${fmtFrac(k)}`}
+          className="la-case-chain"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
+        >
+          <li>
+            <span className="la-case-step">substitute</span>
+            <span className="la-case-math">
+              ({fmtLin(coef)}) → <strong className={dead ? "is-dead" : ""}>{num(a)}</strong>
+              {!isZero(rhs.b) && <>, ({fmtLin(rhs)}) → <strong>{num(b)}</strong></>}
+            </span>
+          </li>
+          <li>
+            <span className="la-case-step">the row reads</span>
+            <span className={`la-case-math la-case-big ${dead ? "is-dead" : ""}`}>
+              {num(a)}{varName} = {num(b)}
+              {dead && <span className="la-case-collapse"> → 0 = {num(b)}</span>}
+            </span>
+          </li>
+          <li>
+            <span className="la-case-step">meaning</span>
+            <span className="la-case-math">{meaning}</span>
+          </li>
+        </motion.ol>
+      </AnimatePresence>
+
+      <div className={`la-case-verdict is-${reading}`} aria-live="polite">{verdict}</div>
+    </>
+  );
+}

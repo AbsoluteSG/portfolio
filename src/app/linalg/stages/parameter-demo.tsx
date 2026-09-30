@@ -1,11 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Plus, Minus } from "lucide-react";
-import { frac, fmt as fmtFrac, eq as fEq } from "../lib/fraction";
+import { Plus, Minus, Sigma } from "lucide-react";
+import { frac, fmt as fmtFrac, eq as fEq, neg, isZero } from "../lib/fraction";
 import {
-  type LinMatrix, type Lin, parseLin, fmtLin, eliminateLin, criticalValues, classifyAt, linNum,
+  type LinMatrix, type Lin, type LinStep, parseLin, fmtLin, eliminateLin, criticalValues, classifyAt, linNum,
+  lScale, LZERO,
 } from "../lib/param";
+import { CaseChain } from "./case-split";
 import { Demo, useBeats } from "./demo";
 
 const PRESETS: { name: string; rows: string[][] }[] = [
@@ -24,9 +26,17 @@ export function ParameterDemo() {
 
   const elim = useMemo(() => eliminateLin(m), [m]);
   const criticals = useMemo(() => criticalValues(elim), [elim]);
-  const frames = useMemo(() => [{ matrix: m, op: "the matrix as given" }, ...elim.steps], [m, elim]);
-  const { step, t, playing, setPlaying, goTo, reset } = useBeats(frames.length, 0.9);
+  const frames = useMemo(
+    () => [{ matrix: m, op: "the matrix as given", detail: null as LinStep["detail"] | null }, ...elim.steps],
+    [m, elim],
+  );
+  /** One more beat after the last operation: read the row that decides the answer. */
+  const total = frames.length + 1;
+  const decideStep = frames.length;
+  const { step, t, playing, setPlaying, goTo, reset } = useBeats(total, 0.9);
+  const [showWork, setShowWork] = useState(false);
 
+  const deciding = step >= decideStep;
   const at = Math.min(step, frames.length - 1);
   const frame = frames[at];
   const kf = frac(k);
@@ -46,12 +56,31 @@ export function ParameterDemo() {
     });
 
   const vars = m[0].length - 1;
+
+  /**
+   * The row the answer turns on: the last one of the reduced matrix. Its first nonzero coefficient
+   * is what may vanish; if every coefficient is already zero, the row is 0 = (right-hand side).
+   */
+  const decide = useMemo(() => {
+    const row = elim.ref[elim.ref.length - 1];
+    const idx = row.slice(0, vars).findIndex((x) => !isZero(x.c) || !isZero(x.b));
+    return {
+      coef: idx >= 0 ? row[idx] : LZERO,
+      rhs: row[vars],
+      varName: idx >= 0 ? `x${sub(idx + 1)}` : "x",
+    };
+  }, [elim, vars]);
   const verdictText =
     verdict.verdict === "none" ? "no solution"
       : verdict.verdict === "unique" ? "unique solution"
         : `infinitely many · ${verdict.free} free variable${verdict.free === 1 ? "" : "s"}`;
 
-  const caption = elim.blockedAt !== null && at === frames.length - 1 ? (
+  const caption = deciding ? (
+    <>
+      Everything now rests on the last row. Pick a value for <strong>k</strong> on the right and read what the row
+      becomes — the coefficient either survives, or it dies and leaves the right-hand side to decide.
+    </>
+  ) : elim.blockedAt !== null && at === frames.length - 1 ? (
     <>
       Elimination stops here: every remaining entry in column <strong>{elim.blockedAt + 1}</strong> contains the
       parameter, and pivoting would mean dividing by something that might be zero. Split into cases by hand from this
@@ -107,8 +136,8 @@ export function ParameterDemo() {
   return (
     <Demo
       label="Elimination carrying a parameter, on a matrix you can edit"
-      labels={frames.map((_, i) => (i === 0 ? "as given" : `step ${i}`))}
-      step={at}
+      labels={[...frames.map((_, i) => (i === 0 ? "as given" : `step ${i}`)), "decide"]}
+      step={step}
       t={t}
       playing={playing}
       onPlay={() => setPlaying((p) => !p)}
@@ -120,14 +149,14 @@ export function ParameterDemo() {
       <div className="la-param-matrix">
         <div className="la-bracket" style={{ marginLeft: 0 }} aria-hidden />
         <div>
-          {frame.matrix.map((row, r) => (
-            <div key={r} className="la-param-row">
+          {(deciding ? elim.ref : frame.matrix).map((row, r) => (
+            <div key={r} className={`la-param-row ${deciding && r === elim.ref.length - 1 ? "is-deciding" : ""}`}>
               {row.map((x, c) => (
                 <ParamCell
                   key={c}
                   x={x}
                   aug={c === row.length - 1}
-                  editable={at === 0}
+                  editable={!deciding && at === 0}
                   onCommit={(v) => edit(r, c, v)}
                   label={`Row ${r + 1}, column ${c + 1}`}
                 />
@@ -138,6 +167,16 @@ export function ParameterDemo() {
         <div className="la-bracket la-bracket-r" aria-hidden />
       </div>
 
+      {deciding && (
+        <div className="la-param-decide">
+          <CaseChain coef={decide.coef} rhs={decide.rhs} k={kf} varName={decide.varName} />
+        </div>
+      )}
+
+      {showWork && !deciding && frame.detail && (
+        <Work detail={frame.detail} before={frames[at - 1].matrix} after={frame.matrix} vars={vars} />
+      )}
+
       <div className="la-param-tools">
         <div className="la-chips" role="group" aria-label="Presets">
           {PRESETS.map((p) => (
@@ -146,6 +185,16 @@ export function ParameterDemo() {
             </button>
           ))}
         </div>
+        <button
+          type="button"
+          className={`la-ctl ${showWork ? "la-ctl-on" : ""}`}
+          aria-pressed={showWork}
+          onClick={() => setShowWork((w) => !w)}
+          aria-label="Show the work"
+          title="Show the work"
+        >
+          <Sigma className="size-4" />
+        </button>
         <div className="la-param-size">
           <span className="la-mono">{m.length} eq</span>
           <button type="button" className="la-ctl" onClick={() => resize(-1, 0)} disabled={m.length <= 2} aria-label="Remove an equation"><Minus className="size-3.5" /></button>
@@ -190,6 +239,61 @@ function ParamCell({ x, aug, editable, onCommit, label }: {
       ) : (
         shown
       )}
+    </div>
+  );
+}
+
+const SUBS = "₀₁₂₃₄₅₆₇₈₉";
+function sub(n: number) { return String(n).replace(/\d/g, (d) => SUBS[Number(d)]); }
+const Rname = (i: number) => `R${sub(i + 1)}`;
+
+/** One line of the worked arithmetic, with parameter entries kept symbolic. */
+function WorkLine({ label, values, vars, tone, delay = 0 }: {
+  label: React.ReactNode; values: Lin[]; vars: number; tone?: "muted" | "changed"; delay?: number;
+}) {
+  return (
+    <div className="la-work-line">
+      <span className="la-mono la-work-label">{label}</span>
+      {values.map((v, c) => (
+        <span
+          key={c}
+          className={`la-work-cell ${c === vars ? "la-cell-aug" : ""} ${v.b.n !== 0 ? "is-symbolic" : ""} ${tone === "muted" ? "is-muted" : tone === "changed" ? "is-changed" : ""}`}
+          style={{ animationDelay: `${delay + c * 0.03}s` }}
+        >
+          {fmtLin(v)}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** The arithmetic behind one step, laid out like long addition — as in the elimination stage. */
+function Work({ detail, before, after, vars }: {
+  detail: NonNullable<LinStep["detail"]>; before: LinMatrix; after: LinMatrix; vars: number;
+}) {
+  if (detail.kind === "swap") {
+    return (
+      <div className="la-work la-param-work">
+        <p className="la-mono text-xs text-[var(--la-ink-soft)]">Nothing to compute.</p>
+        <p className="mt-2 text-sm text-[var(--la-ink-soft)]">
+          {Rname(detail.i)} and {Rname(detail.j)} trade places so the pivot is a number, not the parameter.
+        </p>
+      </div>
+    );
+  }
+  const f = detail.f;
+  const scaled = before[detail.j].map((x) => lScale(x, neg(f)));
+  const sign = f.n < 0 ? "+" : "−";
+  const mag = Math.abs(f.n) === f.d ? "" : `${Math.abs(f.n)}${f.d === 1 ? "" : `/${f.d}`}·`;
+  return (
+    <div className="la-work la-param-work">
+      <WorkLine vars={vars} label={Rname(detail.i)} values={before[detail.i]} tone="muted" />
+      <WorkLine vars={vars} label={<>{sign}{mag}{Rname(detail.j)}</>} values={scaled} delay={0.15} />
+      <div className="la-work-rule" />
+      <WorkLine vars={vars} label={`= ${Rname(detail.i)}`} values={after[detail.i]} tone="changed" delay={0.35} />
+      <p className="la-param-work-note">
+        Each column is added straight down. The parameter entry adds like any other — nothing is divided by it.
+      </p>
     </div>
   );
 }

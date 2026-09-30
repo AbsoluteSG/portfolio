@@ -75,10 +75,17 @@ export function fmtLin(x: Lin, symbol = "k"): string {
   return `${minus(coeff)} ${sign} ${fmtFrac(frac(Math.abs(x.c.n), x.c.d))}`;
 }
 
+/** What a step did, in a form the work panel can lay out as arithmetic. */
+export type LinOp =
+  | { kind: "swap"; i: number; j: number }
+  /** R_i → R_i − f·R_j */
+  | { kind: "add"; i: number; j: number; f: Frac };
+
 export interface LinStep {
   matrix: LinMatrix;
   /** e.g. "R₂ → R₂ − 2R₁" */
   op: string;
+  detail: LinOp;
 }
 
 const SUB = "₀₁₂₃₄₅₆₇₈₉";
@@ -119,7 +126,7 @@ export function eliminateLin(start: LinMatrix, augmented = 1): LinElimination {
     }
     if (p !== r) {
       [m[r], m[p]] = [m[p], m[r]];
-      steps.push({ matrix: m.map((x) => x.slice()), op: `${rowName(r)} ↔ ${rowName(p)}` });
+      steps.push({ matrix: m.map((x) => x.slice()), op: `${rowName(r)} ↔ ${rowName(p)}`, detail: { kind: "swap", i: r, j: p } });
     }
     for (let i = r + 1; i < rows; i++) {
       if (lIsZero(m[i][c])) continue;
@@ -131,6 +138,7 @@ export function eliminateLin(start: LinMatrix, augmented = 1): LinElimination {
       steps.push({
         matrix: m.map((x) => x.slice()),
         op: `${rowName(i)} → ${rowName(i)} ${sign} ${mag}${rowName(r)}`,
+        detail: { kind: "add", i, j: r, f },
       });
     }
     pivots.push(c);
