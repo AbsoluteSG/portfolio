@@ -5,12 +5,13 @@ import "./vrox.css";
 const pixel = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-vx-pixel" });
 const body = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vx-body" });
 
-const url = "https://alex-zaalishvili.vercel.app/projects/vrox";
+const url = "/projects/vrox";
 
 export const metadata: Metadata = {
   title: { absolute: "Vrox — a player that moves and shoots, on a server" },
   description:
     "A server-authoritative bullet-hell MMO prototype on SpacetimeDB and Unity. Clients send intent; the server decides; projectiles are written once and positioned analytically. Seeded realm generation, enemies with phases, loot bags, vaults.",
+  alternates: { canonical: url },
   openGraph: {
     title: "Vrox",
     description: "Server-authoritative bullet hell on SpacetimeDB + Unity. Written once, never updated.",

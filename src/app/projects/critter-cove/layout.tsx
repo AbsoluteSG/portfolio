@@ -5,12 +5,13 @@ import "./critter-cove.css";
 const display = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-cc-display" });
 const body = Nunito({ subsets: ["latin"], weight: ["500", "700", "800"], variable: "--font-cc-body" });
 
-const url = "https://alex-zaalishvili.vercel.app/projects/critter-cove";
+const url = "/projects/critter-cove";
 
 export const metadata: Metadata = {
   title: { absolute: "Critter Cove — a cozy co-op zoo builder with bite" },
   description:
     "Explore a procedurally generated wilderness, catch the critters that roam it, and raise them into a zoo — solo, or with up to three friends over Steam. Written in Rust.",
+  alternates: { canonical: url },
   openGraph: {
     title: "Critter Cove",
     description: "A cozy co-op zoo builder with bite. Written in Rust.",

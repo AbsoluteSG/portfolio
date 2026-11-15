@@ -5,12 +5,13 @@ import "./vision-bots.css";
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-vb-display" });
 const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-vb-mono" });
 
-const url = "https://alex-zaalishvili.vercel.app/projects/vision-bots";
+const url = "/projects/vision-bots";
 
 export const metadata: Metadata = {
   title: { absolute: "Vision Bots — playing games through the screen" },
   description:
     "Two studies in playing games from pixels alone: a YOLO-driven navigator for Celtic Heroes, and a PPO agent for Rocket Rats. Screen capture in, synthetic input out. Python, YOLOv8, Stable-Baselines3.",
+  alternates: { canonical: url },
   openGraph: {
     title: "Vision Bots",
     description: "Playing games through the screen: YOLO detectors, a landmark navigator, and a PPO agent.",

@@ -5,12 +5,13 @@ import "./no-dogs-allowed.css";
 const display = Baloo_2({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-nda-display" });
 const body = Nunito({ subsets: ["latin"], weight: ["500", "700", "800"], variable: "--font-nda-body" });
 
-const url = "https://alex-zaalishvili.vercel.app/projects/no-dogs-allowed";
+const url = "/projects/no-dogs-allowed";
 
 export const metadata: Metadata = {
   title: { absolute: "No Dogs Allowed — a cooking Metroidvania" },
   description:
     "Whiskers is fifteen. He walks out of a burning kitchen with his father's handkerchief and nothing else. The Dog Mafia has his parents. A 2D Metroidvania about cooking, fighting, and a supply chain, in development at Siphon Games.",
+  alternates: { canonical: url },
   openGraph: {
     title: "No Dogs Allowed",
     description: "A 2D Metroidvania about cooking, fighting, and a supply chain. In development at Siphon Games.",

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Parallax } from "./parallax";
-import { AutoVideo } from "./auto-video";
+import { Parallax } from "./_components/parallax";
+import { AutoVideo } from "./_components/auto-video";
 
 const A = "/projects/no-dogs-allowed";
 const CONTACT = "mailto:alex.zvili01@gmail.com?subject=No%20Dogs%20Allowed";

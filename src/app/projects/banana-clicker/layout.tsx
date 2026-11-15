@@ -5,12 +5,13 @@ import "./banana-clicker.css";
 const display = Luckiest_Guy({ weight: "400", subsets: ["latin"], variable: "--font-bc-display" });
 const body = Nunito({ subsets: ["latin"], weight: ["500", "700", "800"], variable: "--font-bc-body" });
 
-const url = "https://alex-zaalishvili.vercel.app/projects/banana-clicker";
+const url = "/projects/banana-clicker";
 
 export const metadata: Metadata = {
   title: { absolute: "Banana Clicker — Click. Upgrade. Conquer." },
   description:
     "Build a banana empire, unlock powerful upgrades, and uncover a wild banana-fueled conspiracy. An absurdist idle/clicker RPG on Steam by Siphon Games.",
+  alternates: { canonical: url },
   openGraph: {
     title: "Banana Clicker — Click. Upgrade. Conquer.",
     description: "An absurdist idle/clicker RPG on Steam. Factions, gacha, Banana Storms, and a lore that goes way too hard.",

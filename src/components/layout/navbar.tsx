@@ -4,16 +4,17 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Menu } from "lucide-react";
 import { useState } from "react";
-import { navLinks } from "@/data/navigation";
+import { navLinks } from "@/config/navigation";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/config/site";
+import { externalLinkProps } from "@/lib/links";
 
-const sectionIds = ["about", "projects", "experience", "contact"];
+const sectionIds = navLinks.filter((l) => l.href.startsWith("/#")).map((l) => l.href.slice(2));
 
 export function Navbar() {
   const scrolled = useScrollProgress(50);
@@ -35,17 +36,15 @@ export function Navbar() {
         {/* Desktop navigation */}
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => {
-            const isSection = link.href.startsWith("#");
-            const sectionId = link.href.replace("#", "");
+            const isSection = link.href.startsWith("/#");
+            const sectionId = link.href.slice(2);
             const isActive = isSection && activeSection === sectionId;
 
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                {...(/^https?:\/\//.test(link.href) || /\.[a-z0-9]{2,4}$/i.test(link.href)
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                {...externalLinkProps(link.href)}
                 className={cn(
                   "relative px-3 py-2 text-sm font-medium transition-colors",
                   isActive
@@ -72,10 +71,10 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             className="size-9 md:hidden"
+            aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
           >
             <Menu className="size-4" />
-            <span className="sr-only">Open menu</span>
           </Button>
         </div>
       </nav>

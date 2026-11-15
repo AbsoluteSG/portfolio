@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ProjectCard } from "@/components/shared/project-card";
 import { projects } from "@/data/projects";

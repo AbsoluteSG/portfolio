@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { experiences } from "@/data/experience";

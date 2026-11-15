@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { navLinks } from "@/data/navigation";
+import { navLinks } from "@/config/navigation";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/config/site";
+import { externalLinkProps } from "@/lib/links";
 
 interface MobileNavProps {
   open: boolean;
@@ -27,9 +28,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
             <Link
               key={link.href}
               href={link.href}
-              {...(/^https?:\/\//.test(link.href) || /\.[a-z0-9]{2,4}$/i.test(link.href)
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
+              {...externalLinkProps(link.href)}
               onClick={() => onOpenChange(false)}
               className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
             >

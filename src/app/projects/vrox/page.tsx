@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Hero } from "./hero";
+import { Hero } from "./_components/hero";
 
 /** Unlisted until the art is real. Flip to false to publish. */
 const HIDDEN = true;

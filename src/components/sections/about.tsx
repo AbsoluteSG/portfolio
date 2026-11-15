@@ -1,13 +1,13 @@
-"use client";
-
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { skills } from "@/data/skills";
+import { siteConfig } from "@/config/site";
+import type { SkillCategory } from "@/types";
 
-const categories = [
-  { key: "language" as const, label: "Languages" },
-  { key: "gamedev" as const, label: "Games" },
-  { key: "tool" as const, label: "Web & tools" },
+const categories: { key: SkillCategory; label: string }[] = [
+  { key: "language", label: "Languages" },
+  { key: "gamedev", label: "Games" },
+  { key: "tool", label: "Web, desktop & tools" },
 ];
 
 export function About() {
@@ -21,9 +21,9 @@ export function About() {
             <div className="space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
               <p>
                 I&apos;m finishing a CS degree at CUNY College of Staten Island (December 2026) and I run
-                a small indie studio, Siphon Games. I shipped a commercial game on Steam, built a
-                bookkeeping app that a tutoring studio runs on every day, and I&apos;m leading
-                engineering on No Dogs Allowed, a 2D cooking Metroidvania.
+                a small indie studio, Siphon Games. I shipped a commercial game on Steam and later rebuilt
+                it with its own online service, built a bookkeeping app that a tutoring studio runs on
+                every day, and I&apos;m leading engineering on No Dogs Allowed, a 2D cooking Metroidvania.
               </p>
               <p>
                 What I like most is owning a system end to end: requirements, data model, the code, the
@@ -50,7 +50,7 @@ export function About() {
               <div>
                 <dt className="text-sm font-medium tracking-[0.18em] text-primary uppercase">Education</dt>
                 <dd className="mt-2 text-base leading-relaxed text-muted-foreground md:text-lg">
-                  B.S. Computer Science, CUNY College of Staten Island, expected December 2026
+                  {siteConfig.education.degree}, {siteConfig.education.school}, expected {siteConfig.education.graduation}
                 </dd>
               </div>
             </dl>

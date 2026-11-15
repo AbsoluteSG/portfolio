@@ -1,13 +1,7 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-import { socialLinks } from "@/data/social-links";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig, socialLinks } from "@/config/site";
+import { externalLinkProps } from "@/lib/links";
+import { SocialIcon } from "@/components/shared/social-icon";
 import { Separator } from "@/components/ui/separator";
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  GitHub: Github,
-  LinkedIn: Linkedin,
-  Email: Mail,
-};
 
 export function Footer() {
   return (
@@ -20,21 +14,17 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            {socialLinks.map((link) => {
-              const Icon = iconMap[link.name];
-              return (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
-                  aria-label={link.name}
-                >
-                  {Icon && <Icon className="size-5" />}
-                </a>
-              );
-            })}
+            {socialLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                {...externalLinkProps(link.href)}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+                aria-label={link.id === "email" ? "Email" : link.label}
+              >
+                <SocialIcon id={link.id} className="size-5" />
+              </a>
+            ))}
           </div>
         </div>
 

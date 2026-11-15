@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Screens from "./screens";
+import Screens from "./_components/screens";
 
 const A = "/projects/critter-cove";
 const CODE = "https://github.com/AbsoluteSG/cmd_zoo";

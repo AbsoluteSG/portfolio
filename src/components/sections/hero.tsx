@@ -2,9 +2,10 @@
 
 import { motion } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig } from "@/config/site";
+import { externalLinkProps } from "@/lib/links";
 
-const facts = ["Software engineer", "Brooklyn, NY", "B.S. CS, CUNY · Dec 2026"];
+const facts = [siteConfig.jobTitle, "Brooklyn, NY", "B.S. CS, CUNY · Dec 2026"];
 
 export function Hero() {
   return (
@@ -36,9 +37,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl"
         >
-          I shipped Banana Clicker on Steam, run a small studio called Siphon Games, and built the
-          bookkeeping app a tutoring studio uses every day. I write C# and TypeScript most days, Rust
-          and C++ when the problem calls for it. I&apos;m looking for an entry-level software engineering role: full-time from
+          I run a small studio, Siphon Games: I shipped Banana Clicker on Steam and rebuilt it with an
+          online backend, wrote our game launcher in Rust, and built the bookkeeping app a tutoring
+          studio uses every day. TypeScript, C# and Rust most days; Java and Python when the problem
+          calls for it. I&apos;m looking for an entry-level software engineering role: full-time from
           January 2027, and internship or part-time work now.
         </motion.p>
 
@@ -51,13 +53,13 @@ export function Hero() {
           <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-primary">
             See the work <ArrowDown className="size-4" />
           </a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
+          <a href={siteConfig.resumePath} {...externalLinkProps(siteConfig.resumePath)} className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
             Resume <ArrowUpRight className="size-4" />
           </a>
-          <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
+          <a href={siteConfig.links.github} {...externalLinkProps(siteConfig.links.github)} className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
             GitHub <ArrowUpRight className="size-4" />
           </a>
-          <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
+          <a href={siteConfig.links.linkedin} {...externalLinkProps(siteConfig.links.linkedin)} className="inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
             LinkedIn <ArrowUpRight className="size-4" />
           </a>
         </motion.div>

@@ -1,23 +1,20 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
 import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
 import { Contact } from "@/components/sections/contact";
+import { JsonLd } from "@/components/shared/json-ld";
+import { buildHomeJsonLd } from "@/lib/seo/json-ld";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Projects />
-        <About />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
+      <JsonLd data={buildHomeJsonLd()} />
+      <Hero />
+      <Projects />
+      <About />
+      <Experience />
+      <Contact />
     </>
   );
 }
